@@ -1,0 +1,12 @@
+
+========== SEMANTIC ANALYSIS ERRORS (9) ==========
+  1. Line 15: Semantic Error: Duplicate declaration 'duplicate_func' in scope GLOBAL_Line_1 (first declared at line 12).
+  2. Line 19: Semantic Error : 'undefined_function' is not defined.
+  3. Line 19: Semantic Error : 'undefined_var' is not defined.
+  4. Line 23: Semantic Error : Infinite recursion — function 'infinite_rec' calls itself directly.
+  5. Line 29: Semantic Error : Wrong argument count in call to 'add'. Expected 2, got 1.
+  6. Line 34: Semantic Error : Unreachable code after return statement at line 33.
+  7. Line 38: Semantic Error : 'z' is not defined.
+  8. Line 44: Semantic Error : Type mismatch — cannot concatenate string and number in arithmetic expression.
+  9. Semantic Error : Template 'nonexistent.html' not found. Checked: C:\Users\pc\Desktop\psychic-broccoli-main\flask_project_all_errors\nonexistent.html, C:\Users\pc\Desktop\psychic-broccoli-main\flask_project_all_errors\templates\nonexistent.html
+===========================================================

@@ -1,0 +1,16 @@
+========== JINJA SYMBOL TABLE ==========
+
+--- Template Extends ---
+  Line 1: extends "base.html"
+
+--- Blocks ---
+  Line 2: content
+
+--- Loop Variables ---
+  Line 5: p
+
+--- Variables Referenced ---
+  Line 5: products
+  Line 8: p.name
+  Line 9: total
+

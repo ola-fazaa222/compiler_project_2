@@ -1,0 +1,92 @@
+Program [Line: 1]
+|   ImportStatement [Line: 1], ( module_name :  )
+|   |   Imported [Line: 1], ( name : Flask )
+|   |   Imported [Line: 1], ( name : render_template )
+|   |   Imported [Line: 1], ( name : request )
+|   |   Imported [Line: 1], ( name : redirect )
+|   |   Imported [Line: 1], ( name : url_for )
+|   PythonExpressionAssignStatement [Line: 3]
+|   |   SimpleVariable [Line: 3] ( app  )  = 
+|   |   ObjectCreation [Line: 3] ( Flask __name__ ) 
+|   PythonExpressionAssignStatement [Line: 6]
+|   |   SimpleVariable [Line: 6] ( products  )  = 
+|   |   ListLiteral [Line: 6] ( [  ] ) 
+|   TemplateLiteralAssignmentStatement [Line: 8]
+|   |   SimpleVariable [Line: 8] ( multi  )  = 
+|   |   TemplateLiteral [Line: 8]
+|   |   |   hello world ) 
+|   FunctionDefinition [Line: 12]( duplicate_func() ) 
+|   |   return SimpleVariable [Line: 13] ( 1  ) 
+|   FunctionDefinition [Line: 15]( duplicate_func() ) 
+|   |   return SimpleVariable [Line: 16] ( 2  ) 
+|   FunctionCall [Line: 19] ( undefined_function ( undefined_var )
+|   FunctionDefinition [Line: 22]( infinite_rec() ) 
+|   |   return FunctionCall [Line: 23] ( infinite_rec (  )
+|   FunctionDefinition [Line: 26]( add(a,b) ) 
+|   |   return SimpleVariable [Line: 27] ( 1  ) 
+|   PythonExpressionAssignStatement [Line: 29]
+|   |   SimpleVariable [Line: 29] ( result  )  = 
+|   |   FunctionCall [Line: 29] ( add ( 5 )
+|   FunctionDefinition [Line: 32]( unreachable() ) 
+|   |   return SimpleVariable [Line: 33] ( 1  ) 
+|   FunctionCall [Line: 34] ( print ( "test" )
+|   FunctionDefinition [Line: 37]( before_init() ) 
+|   |   FunctionCall [Line: 38] ( print ( z )
+|   PythonExpressionAssignStatement [Line: 39]
+|   |   SimpleVariable [Line: 39] ( z  )  = 
+|   |   SimpleVariable [Line: 39] ( 10  ) 
+|   FunctionDefinition [Line: 42]( type_mismatch() ) 
+|   |   PythonExpressionAssignStatement [Line: 43]
+|   |   SimpleVariable [Line: 43] ( age  )  = 
+|   |   SimpleVariable [Line: 43] ( "20"  ) 
+|   SimpleVariable [Line: 44] ( age  ) +SimpleVariable [Line: 44] ( 5  ) 
+|   FunctionDefinition [Line: 47]( template_error() ) 
+|   |   return FunctionCall [Line: 48] ( render_template ( "nonexistent.html" )
+|   FunctionDefinition [Line: 50]( index() ) 
+|   |   return FunctionCall [Line: 52] ( render_template ( SimpleVariable [Line: 52] ( "index.html"  ) , products = SimpleVariable [Line: 52] ( products  )  )
+|   FunctionDefinition [Line: 55]( add_product() ) 
+|   |   IfStatement [Line: 57], ( ComparisonExpression [Line: 57]
+|   |   |   AttributeAccess [Line: 57] ( request .method ) 
+|   |   |   == SimpleVariable [Line: 57] ( "POST"  )  )
+|   |   PythonExpressionAssignStatement [Line: 58]
+|   |   SimpleVariable [Line: 58] ( name  )  = 
+|   |   MethodAccess [Line: 58] ( request .MethodAccess [Line: 58] ( form .FunctionCall [Line: 58] ( get ( "name" ) )  ) 
+|   PythonExpressionAssignStatement [Line: 59]
+|   |   SimpleVariable [Line: 59] ( price  )  = 
+|   |   MethodAccess [Line: 59] ( request .MethodAccess [Line: 59] ( form .FunctionCall [Line: 59] ( get ( "price" ) )  ) 
+|   PythonExpressionAssignStatement [Line: 60]
+|   |   SimpleVariable [Line: 60] ( description  )  = 
+|   |   MethodAccess [Line: 60] ( request .MethodAccess [Line: 60] ( form .FunctionCall [Line: 60] ( get ( "description" ) )  ) 
+|   PythonExpressionAssignStatement [Line: 61]
+|   |   SimpleVariable [Line: 61] ( specification  )  = 
+|   |   MethodAccess [Line: 61] ( request .MethodAccess [Line: 61] ( form .FunctionCall [Line: 61] ( get ( "specification" ) )  ) 
+|   ComparisonAssignStmt [Line: 62]
+|   |   SimpleVariable [Line: 62] ( img  )  = 
+|   |   ComparisonExpression [Line: 62]
+|   |   |   MethodAccess [Line: 62] ( request .MethodAccess [Line: 62] ( form .FunctionCall [Line: 62] ( get ( "img" ) )  ) 
+|   |   |   or SimpleVariable [Line: 62] ( "static/images/default.png"  )  ) 
+|   PythonExpressionAssignStatement [Line: 64]
+|   |   SimpleVariable [Line: 64] ( product  )  = 
+|   |   DictionaryLiteral [Line: 65] { "id" : FunctionCall [Line: 65] ( len ( products )+SimpleVariable [Line: 65] ( 1  ) , "name" : name, "price" : price, "description" : description, "specification" : specification, "img" : img }
+|   MethodAccess [Line: 73] ( products .FunctionCall [Line: 73] ( append ( product ) ) 
+|   return FunctionCall [Line: 74] ( redirect ( FunctionCall [Line: 74] ( url_for ( "index" ) )
+|   return FunctionCall [Line: 76] ( render_template ( "add.html" )
+|   FunctionDefinition [Line: 79]( detail(product_id) ) 
+|   |   PythonExpressionAssignStatement [Line: 81]
+|   |   SimpleVariable [Line: 81] ( product  )  = 
+|   |   FunctionCall [Line: 81] ( next ( Generator [Line: 81] ( ForLoop [Line: 81] ( p in SimpleVariable [Line: 81] ( products  ) ComparisonExpression [Line: 81]
+|   |   |   DictionaryAccess [Line: 81] ( p ["id"] ) 
+|   |   |   == SimpleVariable [Line: 81] ( product_id  )  )  ) , SimpleVariable [Line: 81] ( None  )  )
+|   return FunctionCall [Line: 82] ( render_template ( SimpleVariable [Line: 82] ( "detail.html"  ) , product = SimpleVariable [Line: 82] ( product  )  )
+|   FunctionDefinition [Line: 85]( delete(product_id) ) 
+|   |   GlobalStatement [Line: 87]( products ) 
+|   PythonExpressionAssignStatement [Line: 88]
+|   |   SimpleVariable [Line: 88] ( products  )  = 
+|   |   ListComprehension [Line: 88] ( ForLoop [Line: 88] ( p in SimpleVariable [Line: 88] ( products  ) ComparisonExpression [Line: 88]
+|   |   |   DictionaryAccess [Line: 88] ( p ["id"] ) 
+|   |   |   != SimpleVariable [Line: 88] ( product_id  )  )  ) 
+|   return FunctionCall [Line: 89] ( redirect ( FunctionCall [Line: 89] ( url_for ( "index" ) )
+|   IfStatement [Line: 92], ( ComparisonExpression [Line: 92]
+|   |   |   SimpleVariable [Line: 92] ( __name__  ) 
+|   |   |   == SimpleVariable [Line: 92] ( "__main__"  )  )
+|   |   MethodAccess [Line: 93] ( app .FunctionCall [Line: 93] ( run ( debug = SimpleVariable [Line: 93] ( True  )  ) ) 

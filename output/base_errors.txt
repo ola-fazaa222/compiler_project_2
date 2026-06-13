@@ -1,0 +1,8 @@
+========== SYNTAX ERRORS (1) ==========
+  1. Line 8: Syntax Error: extraneous input '=' expecting {TAG_CLOSE, '/>', '/', TAG_NAME} (token: '=')
+===============================================================
+
+========== HTML SEMANTIC ANALYSIS ERRORS (2) ==========
+  1. Line 15: HTML Error: <a> tag is missing required 'href' attribute.
+  2. Line 21: HTML Error: Tag <div> cannot be nested inside <p>.
+===============================================================

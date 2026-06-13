@@ -1,0 +1,144 @@
+===== FINAL SYMBOL TABLE (HIERARCHICAL TREE) =====
+Scope: [Global] | Parent: [None (Root)]
+------------------------------------------------------------------------------------------
+ Symbol Name          | Type            | Attributes
+------------------------------------------------------------------------------------------
+ redirect             | Imported        | From
+ app                  | Variable        | ObjectCreation
+ add                  | Function        | Defined at line 26
+ request              | Imported        | From
+ add_product          | Function        | Defined at line 55
+ unreachable          | Function        | Defined at line 32
+ before_init          | Function        | Defined at line 37
+ template_error       | Function        | Defined at line 47
+ index                | Function        | Defined at line 50
+ delete               | Function        | Defined at line 85
+ products             | Variable        | ListComprehension
+ multi                | Variable        | TemplateLiteral
+ duplicate_func       | Function        | Defined at line 15
+ type_mismatch        | Function        | Defined at line 42
+ result               | Variable        | FunctionCall
+ infinite_rec         | Function        | Defined at line 22
+ render_template      | Imported        | From
+ url_for              | Imported        | From
+ detail               | Function        | Defined at line 79
+ Flask                | Imported        | From
+
+  Scope: [Function_Scope_duplicate_func] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_duplicate_func] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_infinite_rec] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_add] | Parent: [Global]
+  ------------------------------------------------------------------------------------------
+   Symbol Name          | Type            | Attributes
+  ------------------------------------------------------------------------------------------
+   a                    | Parameter       | Positional
+   b                    | Parameter       | Positional
+
+  Scope: [Function_Scope_unreachable] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_before_init] | Parent: [Global]
+  ------------------------------------------------------------------------------------------
+   Symbol Name          | Type            | Attributes
+  ------------------------------------------------------------------------------------------
+   z                    | Variable        | SimpleVariable
+
+  Scope: [Function_Scope_type_mismatch] | Parent: [Global]
+  ------------------------------------------------------------------------------------------
+   Symbol Name          | Type            | Attributes
+  ------------------------------------------------------------------------------------------
+   age                  | Variable        | SimpleVariable
+
+  Scope: [Function_Scope_template_error] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_index] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_add_product] | Parent: [Global]
+  (Empty Scope)
+    Scope: [If_Block_Line_57] | Parent: [Function_Scope_add_product]
+    ------------------------------------------------------------------------------------------
+     Symbol Name          | Type            | Attributes
+    ------------------------------------------------------------------------------------------
+     img                  | Variable        | request.form.get ( "img" )  or "static/images/default.png"
+     product              | Variable        | DictionaryLiteral
+     price                | Variable        | MethodAccess
+     name                 | Variable        | MethodAccess
+     description          | Variable        | MethodAccess
+     specification        | Variable        | MethodAccess
+
+  Scope: [Function_Scope_detail] | Parent: [Global]
+  ------------------------------------------------------------------------------------------
+   Symbol Name          | Type            | Attributes
+  ------------------------------------------------------------------------------------------
+   product              | Variable        | FunctionCall
+   product_id           | Parameter       | Positional
+
+  Scope: [Function_Scope_delete] | Parent: [Global]
+  ------------------------------------------------------------------------------------------
+   Symbol Name          | Type            | Attributes
+  ------------------------------------------------------------------------------------------
+   product_id           | Parameter       | Positional
+
+  Scope: [If_Block_Line_92] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_duplicate_func] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_duplicate_func] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_infinite_rec] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_add] | Parent: [Global]
+  ------------------------------------------------------------------------------------------
+   Symbol Name          | Type            | Attributes
+  ------------------------------------------------------------------------------------------
+   a                    | Parameter       | Positional
+   b                    | Parameter       | Positional
+
+  Scope: [Function_Scope_unreachable] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_before_init] | Parent: [Global]
+  ------------------------------------------------------------------------------------------
+   Symbol Name          | Type            | Attributes
+  ------------------------------------------------------------------------------------------
+   z                    | Variable        | SimpleVariable
+
+  Scope: [Function_Scope_type_mismatch] | Parent: [Global]
+  ------------------------------------------------------------------------------------------
+   Symbol Name          | Type            | Attributes
+  ------------------------------------------------------------------------------------------
+   age                  | Variable        | SimpleVariable
+
+  Scope: [Function_Scope_template_error] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_index] | Parent: [Global]
+  (Empty Scope)
+  Scope: [Function_Scope_add_product] | Parent: [Global]
+  (Empty Scope)
+    Scope: [If_Block_Line_57] | Parent: [Function_Scope_add_product]
+    ------------------------------------------------------------------------------------------
+     Symbol Name          | Type            | Attributes
+    ------------------------------------------------------------------------------------------
+     img                  | Variable        | request.form.get ( "img" )  or "static/images/default.png"
+     product              | Variable        | DictionaryLiteral
+     price                | Variable        | MethodAccess
+     name                 | Variable        | MethodAccess
+     description          | Variable        | MethodAccess
+     specification        | Variable        | MethodAccess
+
+  Scope: [Function_Scope_detail] | Parent: [Global]
+  ------------------------------------------------------------------------------------------
+   Symbol Name          | Type            | Attributes
+  ------------------------------------------------------------------------------------------
+   product              | Variable        | FunctionCall
+   product_id           | Parameter       | Positional
+
+  Scope: [Function_Scope_delete] | Parent: [Global]
+  ------------------------------------------------------------------------------------------
+   Symbol Name          | Type            | Attributes
+  ------------------------------------------------------------------------------------------
+   product_id           | Parameter       | Positional
+
+  Scope: [If_Block_Line_92] | Parent: [Global]
+  (Empty Scope)

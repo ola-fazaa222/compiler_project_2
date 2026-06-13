@@ -1,0 +1,93 @@
+StyleSheet [Line: 1]
+|   |   |   |   |   RuleSet [Line: 1] ( SelectorDeclaration [Line: 1] ( [ CssSelectorList [Line: 1] ( [ CssSelector [Line: 1]
+|   |   |   |   |   |   |   body ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 2]( [ CssDeclaration [Line: 2] ( text-align ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 2] ( center )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 6] ( SelectorDeclaration [Line: 6] ( [ CssSelectorList [Line: 6] ( [ CssSelector [Line: 6]
+|   |   |   |   |   |   |   .product-grid ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 7]( [ CssDeclaration [Line: 7] ( display ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 7] ( grid )  ] ) , CssDeclaration [Line: 8] ( grid-template-columns ) 
+|   |   |   |   |   |   |    [ Function [Line: 8] ( repeat ) 
+|   |   |   Identifier [Line: 8] ( auto-fit ) , Function [Line: 8] ( minmax ) 
+|   |   |   UnitNumber [Line: 8] ( 250 px ) , UnitNumber [Line: 8] ( 1 fr )  ] ) , CssDeclaration [Line: 9] ( gap ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 9] ( 20 px )  ] ) , CssDeclaration [Line: 10] ( padding ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 10] ( 20 px )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 14] ( SelectorDeclaration [Line: 14] ( [ CssSelectorList [Line: 14] ( [ CssSelector [Line: 14]
+|   |   |   |   |   |   |   .product-card ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 15]( [ CssDeclaration [Line: 15] ( width ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 15] ( white )  ] ) , CssDeclaration [Line: 16] ( background ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 16] ( white )  ] ) , CssDeclaration [Line: 17] ( padding ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 17] ( 15 px )  ] ) , CssDeclaration [Line: 18] ( border-radius ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 18] ( 8 px )  ] ) , CssDeclaration [Line: 19] ( text-align ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 19] ( center )  ] ) , CssDeclaration [Line: 20] ( box-shadow ) 
+|   |   |   |   |   |   |    [ Number [Line: 20] ( 0 ) , Number [Line: 20] ( 0 ) , UnitNumber [Line: 20] ( 8 px ) , Color [Line: 20] ( #ccc )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 23] ( SelectorDeclaration [Line: 23] ( [ CssSelectorList [Line: 23] ( [ CssSelector [Line: 23]
+|   |   |   |   |   |   |   .nav-link ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 24]( [ CssDeclaration [Line: 24] ( color ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 24] ( blue )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 28] ( SelectorDeclaration [Line: 28] ( [ CssSelectorList [Line: 28] ( [ CssSelector [Line: 28]
+|   |   |   |   |   |   |   .nav-link ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 29]( [ CssDeclaration [Line: 29] ( font-size ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 29] ( 16 px )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 34] ( SelectorDeclaration [Line: 34] ( [ CssSelectorList [Line: 34] ( [ CssSelector [Line: 34]
+|   |   |   |   |   |   |   .card-title ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 36]( [  ] ) 
+|   |   |   |   |   RuleSet [Line: 38] ( SelectorDeclaration [Line: 38] ( [ CssSelectorList [Line: 38] ( [ CssSelector [Line: 38]
+|   |   |   |   |   |   |   .product-card.img ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 39]( [ CssDeclaration [Line: 39] ( width ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 39] ( 250 px )  ] ) , CssDeclaration [Line: 40] ( height ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 40] ( 200 px )  ] ) , CssDeclaration [Line: 41] ( object-fit ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 41] ( cover )  ] ) , CssDeclaration [Line: 42] ( border-radius ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 42] ( 8 px )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 46] ( SelectorDeclaration [Line: 46] ( [ CssSelectorList [Line: 46] ( [ CssSelector [Line: 46]
+|   |   |   |   |   |   |   .price ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 47]( [ CssDeclaration [Line: 47] ( colr ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 47] ( green )  ] ) , CssDeclaration [Line: 48] ( font-weight ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 48] ( bold )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 52] ( SelectorDeclaration [Line: 52] ( [ CssSelectorList [Line: 52] ( [ CssSelector [Line: 52]
+|   |   |   |   |   |   |   .btn ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 53]( [ CssDeclaration [Line: 53] ( display ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 53] ( inline-block )  ] ) , CssDeclaration [Line: 54] ( padding ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 54] ( 8 px ) , UnitNumber [Line: 54] ( 15 px )  ] ) , CssDeclaration [Line: 55] ( background ) 
+|   |   |   |   |   |   |    [ Color [Line: 55] ( #333 )  ] ) , CssDeclaration [Line: 56] ( color ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 56] ( white )  ] ) , CssDeclaration [Line: 57] ( text-decoration ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 57] ( none )  ] ) , CssDeclaration [Line: 58] ( margin-top ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 58] ( 10 px )  ] ) , CssDeclaration [Line: 59] ( border-radius ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 59] ( 5 px )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 63] ( SelectorDeclaration [Line: 63] ( [ CssSelectorList [Line: 63] ( [ CssSelector [Line: 63]
+|   |   |   |   |   |   |   .btn.delete ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 64]( [ CssDeclaration [Line: 64] ( background ) 
+|   |   |   |   |   |   |    [ Color [Line: 64] ( #b30000 )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 68] ( SelectorDeclaration [Line: 68] ( [ CssSelectorList [Line: 68] ( [ CssSelector [Line: 68]
+|   |   |   |   |   |   |   .form ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 69]( [ CssDeclaration [Line: 69] ( width ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 69] ( 400 px )  ] ) , CssDeclaration [Line: 70] ( margin ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 70] ( auto )  ] ) , CssDeclaration [Line: 71] ( background ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 71] ( white )  ] ) , CssDeclaration [Line: 72] ( padding ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 72] ( 20 px )  ] ) , CssDeclaration [Line: 73] ( border-radius ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 73] ( 8 px )  ] ) , CssDeclaration [Line: 74] ( box-shadow ) 
+|   |   |   |   |   |   |    [ Number [Line: 74] ( 0 ) , Number [Line: 74] ( 0 ) , UnitNumber [Line: 74] ( 8 px ) , Color [Line: 74] ( #ccc )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 78] ( SelectorDeclaration [Line: 78] ( [ CssSelectorList [Line: 78] ( [ CssSelector [Line: 78]
+|   |   |   |   |   |   |   .form.input ] ) , CssSelectorList [Line: 79] ( [ CssSelector [Line: 79]
+|   |   |   |   |   |   |   .form.textarea ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 80]( [ CssDeclaration [Line: 80] ( width ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 80] ( 100 % )  ] ) , CssDeclaration [Line: 81] ( padding ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 81] ( 8 px )  ] ) , CssDeclaration [Line: 82] ( margin-bottom ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 82] ( 15 px )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 86] ( SelectorDeclaration [Line: 86] ( [ CssSelectorList [Line: 86] ( [ CssSelector [Line: 86]
+|   |   |   |   |   |   |   .detail-container ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 87]( [ CssDeclaration [Line: 87] ( display ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 87] ( flex )  ] ) , CssDeclaration [Line: 88] ( gap ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 88] ( 30 px )  ] ) , CssDeclaration [Line: 89] ( padding ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 89] ( 30 px )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 93] ( SelectorDeclaration [Line: 93] ( [ CssSelectorList [Line: 93] ( [ CssSelector [Line: 93]
+|   |   |   |   |   |   |   .big-img ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 94]( [ CssDeclaration [Line: 94] ( height ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 94] ( 200 px )  ] ) , CssDeclaration [Line: 95] ( object-fit ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 95] ( cover )  ] ) , CssDeclaration [Line: 96] ( width ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 96] ( 300 px )  ] ) , CssDeclaration [Line: 97] ( border-radius ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 97] ( 8 px )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 101] ( SelectorDeclaration [Line: 101] ( [ CssSelectorList [Line: 101] ( [ CssSelector [Line: 101]
+|   |   |   |   |   |   |   .info ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 102]( [ CssDeclaration [Line: 102] ( max-width ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 102] ( 600 px )  ] )  ] ) 

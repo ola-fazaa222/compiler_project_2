@@ -1,0 +1,67 @@
+HtmlContent [Line: 2]
+|   |   |   |   TagElement [Line: 2]
+|   |   |   Tag [ 2 ] html
+|   |   |   Tag [ 2 ] lang = "en"
+|   |   |   |   TagElement [Line: 4]
+|   |   |   Tag [ 4 ] head
+|   |   |   |   TagElement [Line: 5]
+|   |   |   Tag [ 5 ] meta
+|   |   |   Tag [ 5 ] charset = "UTF-8"
+|   |   |   |   TagElement [Line: 6]
+|   |   |   Tag [ 6 ] meta
+|   |   |   Tag [ 6 ] name = "viewport"
+|   |   |   Tag [ 6 ] content = "width=device-width, initial-scale=1.0"
+|   |   |   |   TagElement [Line: 7]
+|   |   |   Tag [ 7 ] title
+|   |   |   |   HtmlTextItem [Line: 7] ( Product Manager ) 
+|   |   |   |   TagElement [Line: 7]
+|   |   |   Tag [ 7 ] title
+|   |   |   |   TagElement [Line: 8]
+|   |   |   Tag [ 8 ] link
+|   |   |   Tag [ 8 ] rel = "stylesheet"
+|   |   |   |   TagElement [Line: 9]
+|   |   |   Tag [ 9 ] head
+|   |   |   |   TagElement [Line: 11]
+|   |   |   Tag [ 11 ] body
+|   |   |   |   TagElement [Line: 12]
+|   |   |   Tag [ 12 ] header
+|   |   |   |   TagElement [Line: 13]
+|   |   |   Tag [ 13 ] h1
+|   |   |   |   HtmlTextItem [Line: 13] ( Product Manager ) 
+|   |   |   |   TagElement [Line: 13]
+|   |   |   Tag [ 13 ] h1
+|   |   |   |   TagElement [Line: 14]
+|   |   |   Tag [ 14 ] nav
+|   |   |   |   TagElement [Line: 15]
+|   |   |   Tag [ 15 ] a = "{{ url_for('index') }}"
+|   |   |   |   HtmlTextItem [Line: 15] ( Home ) 
+|   |   |   |   TagElement [Line: 15]
+|   |   |   Tag [ 15 ] a
+|   |   |   |   TagElement [Line: 16]
+|   |   |   Tag [ 16 ] a
+|   |   |   Tag [ 16 ] href = "{{ url_for('add_product') }}"
+|   |   |   |   HtmlTextItem [Line: 16] ( Add Product ) 
+|   |   |   |   TagElement [Line: 16]
+|   |   |   Tag [ 16 ] a
+|   |   |   |   TagElement [Line: 17]
+|   |   |   Tag [ 17 ] nav
+|   |   |   |   TagElement [Line: 18]
+|   |   |   Tag [ 18 ] header
+|   |   |   |   TagElement [Line: 20]
+|   |   |   Tag [ 20 ] p
+|   |   |   |   TagElement [Line: 21]
+|   |   |   Tag [ 21 ] div
+|   |   |   |   TagElement [Line: 21]
+|   |   |   Tag [ 21 ] div
+|   |   |   |   TagElement [Line: 22]
+|   |   |   Tag [ 22 ] p
+|   |   |   |   TagElement [Line: 23]
+|   |   |   Tag [ 23 ] main
+|   |   |   |   JinjaBlockStatement [Line: 24] ( content
+|   |   |   HtmlContent [Line: 24]
+|   |   |   |   TagElement [Line: 25]
+|   |   |   Tag [ 25 ] main
+|   |   |   |   TagElement [Line: 26]
+|   |   |   Tag [ 26 ] body
+|   |   |   |   TagElement [Line: 28]
+|   |   |   Tag [ 28 ] html
