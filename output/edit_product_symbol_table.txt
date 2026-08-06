@@ -1,0 +1,34 @@
+========== JINJA SYMBOL TABLE (SCOPE-BASED) ==========
+
+--- Template Extends ---
+  Line 1: extends "base.html"
+
+--- Blocks ---
+  Line 3: title
+  Line 5: content
+
+--- Loop Variables ---
+  Line 22: error
+
+--- Variables Referenced ---
+  Line 3: product.name
+  Line 21: form.name.errors
+  Line 23: error
+  Line 31: form.price.errors
+  Line 41: form.details.errors
+  Line 48: product.image_filename
+
+--- Scope Tree ---
+Scope[TEMPLATE_Line_-1] symbols=[]
+  Scope[JINJA_BLOCK_Line_3] symbols=[product]
+    product [TEMPLATE_VAR] decl:L3 uninit
+  Scope[JINJA_BLOCK_Line_5] symbols=[form, product]
+    form [TEMPLATE_VAR] decl:L21 uninit
+    product [TEMPLATE_VAR] decl:L48 uninit
+    Scope[JINJA_FOR_Line_22] symbols=[error]
+      error [LOOP_VAR] decl:L22
+    Scope[JINJA_FOR_Line_32] symbols=[error]
+      error [LOOP_VAR] decl:L32
+    Scope[JINJA_FOR_Line_42] symbols=[error]
+      error [LOOP_VAR] decl:L42
+

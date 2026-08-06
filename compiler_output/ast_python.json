@@ -1,0 +1,239 @@
+{
+  "type": "Program",
+  "line": 1,
+  "statements": [{
+      "type": "Statement",
+      "line": 1,
+      "compoundStatements": [{
+          "type": "ImportStatement",
+          "line": 1,
+          "module": "uuid"
+        }, {
+          "type": "ImportStatement",
+          "line": 2,
+          "module": "os"
+        }, {
+          "type": "ImportStatement",
+          "line": 3,
+          "module": "datetime"
+        }, {
+          "type": "ClassDefinition",
+          "line": 5,
+          "name": "Product",
+          "body": {
+            "type": "Statement",
+            "line": 5,
+            "compoundStatements": [{
+                "type": "SimpleVariable",
+                "line": 6
+              }, {
+                "type": "PythonExpressionAssignStatement",
+                "line": 8,
+                "target": {
+                  "type": "Variable",
+                  "name": "products",
+                  "line": 8
+                },
+                "value": {
+                  "type": "DictionaryLiteral",
+                  "line": -1
+                }
+              }, {
+                "type": "FunctionDefinition",
+                "line": 10,
+                "name": "__init__",
+                "body": {
+                  "type": "Statement",
+                  "line": 10,
+                  "compoundStatements": [{
+                      "type": "PythonExpressionAssignStatement",
+                      "line": 11,
+                      "target": {
+                        "type": "MethodAccess",
+                        "line": 11
+                      },
+                      "value": {
+                        "type": "Subscript",
+                        "line": 11
+                      }
+                    }, {
+                      "type": "PythonExpressionAssignStatement",
+                      "line": 12,
+                      "target": {
+                        "type": "MethodAccess",
+                        "line": 12
+                      },
+                      "value": {
+                        "type": "Variable",
+                        "name": "name",
+                        "line": 12
+                      }
+                    }, {
+                      "type": "PythonExpressionAssignStatement",
+                      "line": 13,
+                      "target": {
+                        "type": "MethodAccess",
+                        "line": 13
+                      },
+                      "value": {
+                        "type": "FunctionCall",
+                        "name": "float",
+                        "line": 13
+                      }
+                    }, {
+                      "type": "PythonExpressionAssignStatement",
+                      "line": 14,
+                      "target": {
+                        "type": "MethodAccess",
+                        "line": 14
+                      },
+                      "value": {
+                        "type": "Variable",
+                        "name": "details",
+                        "line": 14
+                      }
+                    }, {
+                      "type": "PythonExpressionAssignStatement",
+                      "line": 15,
+                      "target": {
+                        "type": "MethodAccess",
+                        "line": 15
+                      },
+                      "value": {
+                        "type": "Variable",
+                        "name": "image_filename",
+                        "line": 15
+                      }
+                    }, {
+                      "type": "PythonExpressionAssignStatement",
+                      "line": 16,
+                      "target": {
+                        "type": "MethodAccess",
+                        "line": 16
+                      },
+                      "value": {
+                        "type": "MethodAccess",
+                        "line": 16
+                      }
+                    }]
+                }
+              }, {
+                "type": "FunctionDefinition",
+                "line": 18,
+                "name": "to_dict",
+                "body": {
+                  "type": "Statement",
+                  "line": 18,
+                  "compoundStatements": [{
+                      "type": "SimpleVariable",
+                      "line": 19
+                    }, {
+                      "type": "ConditionReturnStatement",
+                      "line": 20
+                    }]
+                }
+              }, {
+                "type": "FunctionDefinition",
+                "line": 29,
+                "name": "save",
+                "body": {
+                  "type": "Statement",
+                  "line": 30,
+                  "compoundStatements": [{
+                      "type": "SimpleVariable",
+                      "line": 31
+                    }, {
+                      "type": "PythonExpressionAssignStatement",
+                      "line": 32,
+                      "target": {
+                        "type": "Subscript",
+                        "line": 32
+                      },
+                      "value": {
+                        "type": "MethodAccess",
+                        "line": 32
+                      }
+                    }, {
+                      "type": "ConditionReturnStatement",
+                      "line": 33
+                    }]
+                }
+              }, {
+                "type": "FunctionDefinition",
+                "line": 35,
+                "name": "get_all",
+                "body": {
+                  "type": "Statement",
+                  "line": 36,
+                  "compoundStatements": [{
+                      "type": "SimpleVariable",
+                      "line": 37
+                    }, {
+                      "type": "ConditionReturnStatement",
+                      "line": 38
+                    }]
+                }
+              }, {
+                "type": "FunctionDefinition",
+                "line": 40,
+                "name": "get_by_id",
+                "body": {
+                  "type": "Statement",
+                  "line": 41,
+                  "compoundStatements": [{
+                      "type": "SimpleVariable",
+                      "line": 42
+                    }, {
+                      "type": "ConditionReturnStatement",
+                      "line": 43
+                    }]
+                }
+              }, {
+                "type": "FunctionDefinition",
+                "line": 45,
+                "name": "delete",
+                "body": {
+                  "type": "Statement",
+                  "line": 46,
+                  "compoundStatements": [{
+                      "type": "SimpleVariable",
+                      "line": 47
+                    }, {
+                      "type": "IfStatement",
+                      "line": 48,
+                      "condition": {
+                        "type": "ComparisonExpression",
+                        "line": 48
+                      }
+                    }, {
+                      "type": "ConditionReturnStatement",
+                      "line": 60
+                    }]
+                }
+              }, {
+                "type": "FunctionDefinition",
+                "line": 62,
+                "name": "update",
+                "body": {
+                  "type": "Statement",
+                  "line": 63,
+                  "compoundStatements": [{
+                      "type": "SimpleVariable",
+                      "line": 64
+                    }, {
+                      "type": "IfStatement",
+                      "line": 65,
+                      "condition": {
+                        "type": "ComparisonExpression",
+                        "line": 65
+                      }
+                    }, {
+                      "type": "ConditionReturnStatement",
+                      "line": 70
+                    }]
+                }
+              }]
+          }
+        }]
+    }]
+}

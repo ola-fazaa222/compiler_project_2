@@ -32,7 +32,7 @@ public class ForLoop extends CompoundStatement {
     public String symbolTablePrint() {
         return "for " +
                 var.toString() + " in " +
-                iter.symbolTablePrint() + (condition == null ? ""
+                (iter == null ? "?" : iter.symbolTablePrint()) + (condition == null ? ""
                 : " if " + condition.symbolTablePrint());
     }
 
@@ -40,7 +40,7 @@ public class ForLoop extends CompoundStatement {
     public String toString() {
         return super.toString() +
                 " ( " + var.toString() + " in " +
-                iter.toString() + (condition == null ? ""
+                (iter == null ? "?" : iter.toString()) + (condition == null ? ""
                 : condition.toString()) + " ) ";
     }
 }

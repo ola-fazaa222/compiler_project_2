@@ -7,10 +7,6 @@ options {
     superClass = JinjaFlaskLexerBase;
 }
 
-@lexer::header {
-package antlr;
-}
-
 // =================== LEXER RULES (Hybrid Indentation) ===================
 
 
@@ -31,6 +27,7 @@ ELSE: 'else';
 FOR: 'for';
 IN: 'in';
 GLOBAL: 'global';
+CLASS: 'class';
 AND: 'and';
 OR: 'or';
 NOT: 'not';
@@ -200,6 +197,8 @@ CSS_ID         : [a-zA-Z] [a-zA-Z0-9\-]* ;
 CSS_Space      : [ \t\r\n]+ -> skip ;
 CSS_Comment    : '/*' .*? '*/' -> skip ;
 CSS_TILDE      : '~';
+CSS_UNIVERSAL  : '*';
+CSS_IMPORTANT  : '!important';
 // =================== JINJA MODE (Unified Jinja Logic) ===================
 
 mode JINJA_MODE;
@@ -213,6 +212,8 @@ J_ENDBLOCK   : 'endblock' ;
 J_FOR        : 'for'      ;
 J_ENDFOR     : 'endfor'   ;
 J_IF         : 'if'       ;
+J_ELIF       : 'elif'     ;
+J_ELSE       : 'else'     ;
 J_ENDIF      : 'endif'    ;
 J_IN         : 'in'       ;
 J_LENGTH     : 'length'   ;
@@ -227,8 +228,11 @@ J_NONE       : 'none'     ;
 
 J_LPAREN     : '(' ;
 J_RPAREN     : ')' ;
+J_LBRACK     : '[' ;
+J_RBRACK     : ']' ;
 J_COMMA      : ',' ;
 J_DOT        : '.' ;
+J_COLON      : ':' ;
 J_PIPE       : '|' ;
 J_EQ         : '==' ;
 J_NEQ        : '!=' ;

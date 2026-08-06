@@ -1,21 +1,21 @@
 package ast.complexExp;
 
-import ast.atom.Atom;
+import ast.atomExpression.AtomExpression;
 
 import java.util.List;
 
 public class ListItems extends ComplexExpression {
-    private List<Atom> atomList;
+    private List<AtomExpression> items;
 
     public ListItems(int line_number) {
         super("ExpressionList", line_number);
     }
 
-    public void setAtomList(List<Atom> atomList) {
-        this.atomList = atomList;
+    public void setItems(List<AtomExpression> items) {
+        this.items = items;
     }
 
-    public List<Atom> getAtomList() {
-        return atomList;
+    public List<AtomExpression> getItems() {
+        return items;
     }
 }

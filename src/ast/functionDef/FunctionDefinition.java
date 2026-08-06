@@ -34,7 +34,7 @@ public class FunctionDefinition extends CompoundStatement {
     public String toString() {
         return super.toString() + "( " + (decorator == null ? "" : decorator.toString())
                 + functionName + "(" + functionParameters.toString() + ") ) "
-                + Consts.printIndent(2) + functionBody.toString()
+                + (functionBody == null ? "" : Consts.printIndent(2) + functionBody.toString())
                 ;
     }
 }

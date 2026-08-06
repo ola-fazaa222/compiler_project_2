@@ -4,8 +4,10 @@ import ast.Consts;
 import ast.HtmlContent;
 import ast.jinja.jinjaExpression.JinjaExpression;
 
+import java.util.List;
+
 public class JinjaForStatement extends JinjaStatement {
-    public String id;
+    public List<String> ids;
     public HtmlContent htmlContent;
     public JinjaExpression iterable;
 
@@ -13,8 +15,8 @@ public class JinjaForStatement extends JinjaStatement {
         super("JinjaForStatement", line_number);
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIds(List<String> ids) {
+        this.ids = ids;
     }
 
     public void setHtmlContent(HtmlContent htmlContent) {
@@ -27,8 +29,9 @@ public class JinjaForStatement extends JinjaStatement {
 
     @Override
     public String toString() {
-        return super.toString() + " ( " + id +
-                " in " + iterable.toString() + " ) " +
-                Consts.printIndent(3) + htmlContent.toString();
+        return super.toString() + " ( " +
+                (ids != null ? String.join(", ", ids) : "?") +
+                " in " + (iterable != null ? iterable.toString() : "?") + " ) " +
+                (htmlContent != null ? Consts.printIndent(3) + htmlContent.toString() : "");
     }
 }

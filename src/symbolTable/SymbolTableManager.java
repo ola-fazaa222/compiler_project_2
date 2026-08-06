@@ -55,6 +55,11 @@ public enum SymbolTableManager {
         currentScope = root;
     }
 
+    public void reset() {
+        root = new SymbolTable(null, "Global");
+        currentScope = root;
+    }
+
     public SymbolEntry insert(String name) {
         return currentScope.insert(name);
     }

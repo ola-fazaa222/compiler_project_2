@@ -11,9 +11,13 @@ import ast.argsList.ComplexArguments;
 import ast.argument.Argument;
 import ast.argument.KeywordArgument;
 import ast.argument.PositionalArgument;
+import ast.compundStmt.ClassDefinition;
 import ast.compundStmt.CompoundStatement;
+import ast.compundStmt.PythonExpression;
+import ast.condition.ComparisonExpression;
 import ast.functionDef.FunctionDefinition;
 import ast.returnStmt.ComplexReturnStatement;
+import ast.returnStmt.ConditionReturnStatement;
 import ast.returnStmt.ReturnStatement;
 
 import java.util.*;
@@ -33,7 +37,18 @@ public class TemplateVariableChecker {
             for (CompoundStatement cs : stmt.compoundStatements) {
                 if (cs instanceof FunctionDefinition fd) {
                     collectFromFunction(fd);
+                } else if (cs instanceof ClassDefinition cd) {
+                    collectFromClass(cd);
                 }
+            }
+        }
+    }
+
+    private static void collectFromClass(ClassDefinition cd) {
+        if (cd.classBody == null || cd.classBody.compoundStatements == null) return;
+        for (CompoundStatement cs : cd.classBody.compoundStatements) {
+            if (cs instanceof FunctionDefinition fd) {
+                collectFromFunction(fd);
             }
         }
     }
@@ -48,8 +63,17 @@ public class TemplateVariableChecker {
     }
 
     private static void collectFromReturn(ReturnStatement rs) {
-        if (!(rs instanceof ComplexReturnStatement crs)) return;
-        if (!(crs.pythonExpression instanceof FunctionCall fc)) return;
+        PythonExpression expr = null;
+
+        if (rs instanceof ComplexReturnStatement crs) {
+            expr = crs.pythonExpression;
+        } else if (rs instanceof ConditionReturnStatement crs) {
+            if (crs.condition instanceof ComparisonExpression ce) {
+                expr = ce.baseExpr;
+            }
+        }
+
+        if (!(expr instanceof FunctionCall fc)) return;
         if (!"render_template".equals(fc.getVarName())) return;
 
         String templateName = null;

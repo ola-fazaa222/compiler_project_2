@@ -1,0 +1,16 @@
+========== SEMANTIC ANALYSIS REPORT ==========
+
+Undefined Variables: 0
+
+Duplicate Functions: 0
+
+Scope Errors: 0
+
+Type Errors: 0
+
+Warnings: 0
+
+Other Errors: 0
+
+Total Errors: 0
+==============================================

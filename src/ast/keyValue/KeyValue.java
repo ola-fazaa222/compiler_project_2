@@ -14,6 +14,10 @@ public abstract class KeyValue extends ASTNode {
         this.key = key;
     }
 
+    public Atom getKey() {
+        return key;
+    }
+
 
     @Override
     public String symbolTablePrint() {

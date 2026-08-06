@@ -12,6 +12,10 @@ public class AtomKeyValue extends KeyValue{
         this.value = value;
     }
 
+    public Atom getAtomValue() {
+        return value;
+    }
+
 
     @Override
     public String symbolTablePrint() {

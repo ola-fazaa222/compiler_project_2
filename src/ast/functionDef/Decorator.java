@@ -19,8 +19,16 @@ public class Decorator extends ASTNode {
         this.arguments = arguments;
     }
 
+    public String getDecoratorName() {
+        return decoratorName;
+    }
+
+    public ArgumentsList getArguments() {
+        return arguments;
+    }
+
     @Override
     public String toString() {
-        return super.toString() + " ( @" + decoratorName + "( " + arguments.toString() + ") ";
+        return super.toString() + " ( @" + decoratorName + (arguments == null ? "" : "( " + arguments.toString() + ")") + " ";
     }
 }

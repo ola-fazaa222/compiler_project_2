@@ -1,6 +1,2 @@
 
 [HTML Semantic Analyzer] No semantic errors found. ✓
-
-========== FLASK/JINJA ERRORS (1) ==========
-  1. Line 9: Flask Error: Variable 'total' was not passed from the route via render_template().
-===============================================================

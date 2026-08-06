@@ -1,4 +1,4 @@
-// Generated from C:/Users/Yousef Razzouk/IdeaProjects/compiler_project/grammars/HtmlParser.g4 by ANTLR 4.13.2
+// Generated from /home/ghifar/Downloads/Telegram Desktop/compiler/psychic-broccoli-main/grammars/HtmlParser.g4 by ANTLR 4.13.2
 package antlr.html;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -60,6 +60,13 @@ public interface HtmlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStyleElement(HtmlParser.StyleElementContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ScriptElement}
+	 * labeled alternative in {@link HtmlParser#htmlElement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScriptElement(HtmlParser.ScriptElementContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code HtmlAttribute}
 	 * labeled alternative in {@link HtmlParser#tag_content}.
 	 * @param ctx the parse tree
@@ -102,6 +109,13 @@ public interface HtmlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCssSelectorList(HtmlParser.CssSelectorListContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code CssDescendantSelector}
+	 * labeled alternative in {@link HtmlParser#css_selector_list}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCssDescendantSelector(HtmlParser.CssDescendantSelectorContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code QualifiedSelector}
 	 * labeled alternative in {@link HtmlParser#css_selector}.
 	 * @param ctx the parse tree
@@ -123,6 +137,13 @@ public interface HtmlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTypeAndIdSelector(HtmlParser.TypeAndIdSelectorContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code UniversalSelector}
+	 * labeled alternative in {@link HtmlParser#css_selector}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUniversalSelector(HtmlParser.UniversalSelectorContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code TypeSelector}
 	 * labeled alternative in {@link HtmlParser#css_selector}.
 	 * @param ctx the parse tree
@@ -143,6 +164,12 @@ public interface HtmlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCssDeclaration(HtmlParser.CssDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HtmlParser#css_value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCss_value(HtmlParser.Css_valueContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code FunctionArguments}
 	 * labeled alternative in {@link HtmlParser#css_function_args}.
@@ -200,6 +227,20 @@ public interface HtmlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIdentifierTerm(HtmlParser.IdentifierTermContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code CssAtKeyframes}
+	 * labeled alternative in {@link HtmlParser#css_at_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCssAtKeyframes(HtmlParser.CssAtKeyframesContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CssAtKeyframeBlock}
+	 * labeled alternative in {@link HtmlParser#css_at_rule_body}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCssAtKeyframeBlock(HtmlParser.CssAtKeyframeBlockContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code JinjaStmtBlock}
 	 * labeled alternative in {@link HtmlParser#jinjaStatementBlock}.
 	 * @param ctx the parse tree
@@ -241,6 +282,20 @@ public interface HtmlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJinjaIfStmt(HtmlParser.JinjaIfStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code JinjaWithStmt}
+	 * labeled alternative in {@link HtmlParser#jStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJinjaWithStmt(HtmlParser.JinjaWithStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code JinjaWithStmtDef}
+	 * labeled alternative in {@link HtmlParser#j_with_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJinjaWithStmtDef(HtmlParser.JinjaWithStmtDefContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code JinjaExtendsStmtDef}
 	 * labeled alternative in {@link HtmlParser#j_extends_stmt}.
@@ -284,12 +339,12 @@ public interface HtmlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJinjaSimpleExpr(HtmlParser.JinjaSimpleExprContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code JinjaFilteredExpr}
+	 * Visit a parse tree produced by the {@code JinjaVarAccessOnly}
 	 * labeled alternative in {@link HtmlParser#j_call_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitJinjaFilteredExpr(HtmlParser.JinjaFilteredExprContext ctx);
+	T visitJinjaVarAccessOnly(HtmlParser.JinjaVarAccessOnlyContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code JinjaFunctionCall}
 	 * labeled alternative in {@link HtmlParser#j_call_expr}.
@@ -298,19 +353,39 @@ public interface HtmlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJinjaFunctionCall(HtmlParser.JinjaFunctionCallContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code JinjaVarAccessOnly}
-	 * labeled alternative in {@link HtmlParser#j_call_expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJinjaVarAccessOnly(HtmlParser.JinjaVarAccessOnlyContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code JinjaAtomOnly}
 	 * labeled alternative in {@link HtmlParser#j_call_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitJinjaAtomOnly(HtmlParser.JinjaAtomOnlyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code JinjaFilteredExpr}
+	 * labeled alternative in {@link HtmlParser#j_call_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJinjaFilteredExpr(HtmlParser.JinjaFilteredExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code JinjaMethodCall}
+	 * labeled alternative in {@link HtmlParser#j_call_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJinjaMethodCall(HtmlParser.JinjaMethodCallContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code JinjaSliceAccess}
+	 * labeled alternative in {@link HtmlParser#j_call_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJinjaSliceAccess(HtmlParser.JinjaSliceAccessContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HtmlParser#j_slice}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJ_slice(HtmlParser.J_sliceContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code JinjaVarAccessOnlyDef}
 	 * labeled alternative in {@link HtmlParser#j_var_access}.
@@ -381,4 +456,11 @@ public interface HtmlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJinjaNameAtom(HtmlParser.JinjaNameAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code JinjaLengthAtom}
+	 * labeled alternative in {@link HtmlParser#j_atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJinjaLengthAtom(HtmlParser.JinjaLengthAtomContext ctx);
 }

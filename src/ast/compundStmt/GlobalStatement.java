@@ -13,6 +13,10 @@ public class GlobalStatement extends CompoundStatement{
         this.globals = globals;
     }
 
+    public List<String> getGlobals() {
+        return globals;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

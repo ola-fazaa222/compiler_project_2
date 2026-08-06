@@ -1,6 +1,6 @@
 parser grammar PythonParser;
 
-@header {package antlr.python;}
+@header {}
 
 
 options { tokenVocab=PythonLexer; }
@@ -10,8 +10,13 @@ prog
     ;
 
 statement
-    : (NEWLINE INDENT)? compound_stmt+ DEDENT?        # CompoundStatement
-    | (NEWLINE INDENT)? PASS DEDENT?                  # PassStatement
+    : compound_stmt+                          # SimpleStatement
+    ;
+
+suite
+    : compound_stmt+                          # SimpleSuite
+    | NEWLINE INDENT compound_stmt+ DEDENT    # CompoundSuite
+    | NEWLINE INDENT PASS DEDENT              # PassSuite
     ;
 
 compound_stmt
@@ -22,14 +27,40 @@ compound_stmt
     | for_loop     NEWLINE?      # ForLoopStatement
     | python_expr  NEWLINE?      # PythonExpression
     | func_def     NEWLINE?      # FunctionDefinition
+    | class_def    NEWLINE?      # ClassDefinition
     | return_stmt  NEWLINE?      # ReturnStatement
-    | import_from  NEWLINE?      # ImportStatement
+    | import_stmt  NEWLINE?      # ImportStatement
+    | import_from  NEWLINE?      # ImportFromStatement
     | global_stmt  NEWLINE?      # GlobalStatement
+    | del_stmt     NEWLINE?      # DeleteStatement
+    | try_stmt     NEWLINE?      # TryStatement
+    | PASS         NEWLINE?      # PassStatement
+    | NEWLINE                    # BlankStatement
+    ;
+
+import_stmt
+    : IMPORT NAME (DOT NAME)* (AS NAME)?   # ImportDef
+    ;
+
+del_stmt
+    : DEL atom_expr                        # DelDef
+    ;
+
+try_stmt
+    : TRY COLON suite except_clause+ (ELSE COLON suite)? (FINALLY COLON suite)?  # TryExceptDef
+    ;
+
+except_clause
+    : EXCEPT (atom (AS NAME)?)? COLON suite  # ExceptClauseDef
+    ;
+
+class_def
+    : CLASS (NAME | CLASS_NAME) (LP arglist? RP)? COLON suite
     ;
 
 return_stmt
-    : RETURN python_expr      # ComplexReturn
-    | RETURN atom             # SimpleReturn
+    : RETURN condition        # ConditionReturn
+    | RETURN python_expr      # ComplexReturn
     ;
 
 global_stmt
@@ -45,15 +76,17 @@ imptd
     ;
 
 if_stmt
-    : IF condition COLON statement
-     ( ELIF condition COLON statement )*
-     ( ELSE COLON statement )? # IfStatementDef
+    : IF condition COLON suite
+     ( ELIF condition COLON suite )*
+     ( ELSE COLON suite )? # IfStatementDef
     ;
 
 condition
-    : bool_exp                               # BooleanCondition
-    | NOT python_expr                        # NotExpression
-    | python_expr (comp_op python_expr)*     # ComparisonExpression
+    : NOT condition                        # NotExpression
+    | condition AND condition              # AndCondition
+    | condition OR condition               # OrCondition
+    | bool_exp                             # BooleanCondition
+    | python_expr (comp_op python_expr)*   # ComparisonExpression
     ;
 
 python_expr
@@ -62,19 +95,18 @@ python_expr
     ;
 
 atom_expr
-    : atom LBRACK NUMBER RBRACK         # ListAccess
-    | atom LBRACK STRING RBRACK         # DictionaryAccess
-    | atom (DOT atom)+                  # AttributeAccess
-    | atom (DOT atom_expr)+             # MethodAccess
-    | CLASS_NAME LP arglist? RP         # ObjectCreation
-    | NAME LP arglist? RP               # FunctionCall
-    | atom                              # SimpleVar
+    : atom                                          # SimpleVar
+    | atom_expr LP arglist? RP                      # FunctionCall
+    | atom_expr DOT atom_expr                       # MethodAccess
+    | atom_expr LBRACK python_expr RBRACK           # Subscript
+    | atom_expr LBRACK python_expr? COLON python_expr? (COLON python_expr?)? RBRACK  # Slice
     ;
 
 complex_expr
     : LP for_loop RP               # Generator
     | LBRACK for_loop RBRACK       # ListComprehension
     | LKBRACE dict_maker? RKBRACE  # DictionaryLiteral
+    | LKBRACE NEWLINE* atom_expr (COMMA NEWLINE* atom_expr)* COMMA? NEWLINE* RKBRACE  # SetLiteral
     | LBRACK list_items? RBRACK    # ListLiteral
     ;
 
@@ -98,18 +130,22 @@ assign_stmt
     | python_expr ASSIGN condition NEWLINE?          # ComparisonAssignStmt
     | python_expr ASSIGN arithmetic_expr NEWLINE?    # ArithmeticAssignStmt
     | python_expr ASSIGN template_literal NEWLINE?    # TemplateLiteralAssignStmt
+    | python_expr PLUS_ASSIGN python_expr NEWLINE?   # AugmentedAddStmt
+    | python_expr MINUS_ASSIGN python_expr NEWLINE?  # AugmentedSubStmt
+    | python_expr STAR_ASSIGN python_expr NEWLINE?   # AugmentedMulStmt
+    | python_expr SLASH_ASSIGN python_expr NEWLINE?  # AugmentedDivStmt
     ;
 
 template_literal
     : TRIPLE_QUOTE_STRING  # TemplateLiteral;
 
 for_loop
-    : FOR atom IN python_expr statement                  # SimpleForLoop
+    : FOR atom IN python_expr COLON? suite                  # SimpleForLoop
     | atom FOR atom IN python_expr (IF condition)?       # ComplexForLoop
     ;
 
 func_def
-    : dec? DEF NAME parameters COLON statement      # FunctionDefDef
+    : dec? DEF NAME parameters COLON suite      # FunctionDefDef
     ;
 
 dec
@@ -121,8 +157,8 @@ parameters
     ;
 
 fun_params
-    : NAME ASSIGN atom (COMMA NAME ASSIGN atom)* # KeywordParams
-    | NAME (COMMA NAME)*                         # PositionalParams
+    : NAME (COMMA NAME)* (COMMA NAME ASSIGN atom)*  # MixedParams
+    | NAME ASSIGN atom (COMMA NAME ASSIGN atom)*     # KeywordParams
     ;
 
 atom
@@ -130,6 +166,8 @@ atom
     | CLASS_NAME  # ClassAtom
     | NUMBER # NumberAtom
     | STRING # StringAtom
+    | TRIPLE_QUOTE_STRING # TripleQuoteStringAtom
+    | FSTRING # FStringAtom
     | NONE   # NoneAtom
     | bool_exp # BooleanAtom
     ;
@@ -140,16 +178,17 @@ bool_exp:
     ;
 
 list_items
-    : atom (COMMA atom)* COMMA? # ListItems
+    : NEWLINE* atom_expr (COMMA NEWLINE* atom_expr)* COMMA? NEWLINE* # ListItems
     ;
 
 dict_maker
-   : key_value ( COMMA key_value )* COMMA? # KeyValuePairs
+   : NEWLINE* key_value ( COMMA NEWLINE* key_value )* COMMA? NEWLINE* # KeyValuePairs
    ;
 
 key_value
    : atom COLON atom        # AtomKeyValue
    | atom COLON simple_expr # SimpleKeyValue
+   | python_expr COLON python_expr  # ExprKeyValue
    ;
 
 simple_expr
@@ -165,8 +204,8 @@ arithmetic_expr
     ;
 
 arglist
-    : atom (COMMA atom )* COMMA?            # AtomArgs
-    | argument (COMMA argument )* COMMA?    # ComplexArgs
+    : NEWLINE* atom (COMMA NEWLINE* atom)* COMMA? NEWLINE*            # AtomArgs
+    | NEWLINE* argument (COMMA NEWLINE* argument)* COMMA? NEWLINE*    # ComplexArgs
     ;
 
 argument

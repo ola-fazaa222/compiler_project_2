@@ -9,6 +9,9 @@ import antlr.python.PythonParser;
 import ast.ASTNode;
 import ast.HtmlContent;
 import ast.Program;
+import codegen.AstToTac;
+import codegen.PythonCodeGenerator;
+import codegen.ir.TacProgram;
 import listener.CustomErrorListener;
 import semantic.CssSemanticAnalyzer;
 import semantic.HtmlSemanticAnalyzer;
@@ -37,9 +40,27 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class App {
+
+    private static final Set<String> SKIP_DIRS = Set.of(
+        "venv", "env", ".venv", ".git", "__pycache__",
+        "node_modules", ".mypy_cache", ".pytest_cache",
+        "egg-info", "dist", "build", ".idea", ".vscode"
+    );
+
+    private static Set<String> localModules = new HashSet<>();
+
+    private static boolean shouldSkip(Path path) {
+        for (int i = 0; i < path.getNameCount(); i++) {
+            if (SKIP_DIRS.contains(path.getName(i).toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
 
@@ -71,14 +92,28 @@ public class App {
 
                 // Pass 1: Collect render_template info from Python files
                 try (Stream<Path> paths = Files.walk(startPath)) {
-                    paths.filter(Files::isRegularFile)
+                    paths.filter(p -> !shouldSkip(p))
+                            .filter(Files::isRegularFile)
                             .filter(p -> p.toString().endsWith(".py"))
                             .forEach(path -> collectTemplateVars(path.toString()));
                 }
 
+                // Collect local Python module names for import resolution
+                localModules = new HashSet<>();
+                try (Stream<Path> modulePaths = Files.walk(startPath)) {
+                    modulePaths.filter(p -> !shouldSkip(p))
+                            .filter(Files::isRegularFile)
+                            .filter(p -> p.toString().endsWith(".py"))
+                            .forEach(path -> {
+                                String fn = path.getFileName().toString();
+                                localModules.add(fn.substring(0, fn.lastIndexOf('.')));
+                            });
+                }
+
                 // Pass 2: Process all files
                 try (Stream<Path> paths = Files.walk(startPath)) {
-                    paths.filter(Files::isRegularFile)
+                    paths.filter(p -> !shouldSkip(p))
+                            .filter(Files::isRegularFile)
                             .forEach(path -> {
                                 String fileName = path.toString();
                                 System.out.println("\n--- Processing: " + fileName + " ---");
@@ -91,8 +126,11 @@ public class App {
             else {
 
                 // Single file mode
+                localModules = new HashSet<>();
                 if (startPath.toString().endsWith(".py")) {
                     collectTemplateVars(startPath.toString());
+                    String fn = startPath.getFileName().toString();
+                    localModules.add(fn.substring(0, fn.lastIndexOf('.')));
                 }
 
                 System.out.println("\n--- Processing: " + startPath + " ---");
@@ -113,6 +151,7 @@ public class App {
 
             // ================= PYTHON =================
             if (fileName.endsWith(".py")) {
+                SymbolTableManager.INSTANCE.reset();
 
                 PythonLexer lexer =
                         new PythonLexer(CharStreams.fromFileName(fileName));
@@ -135,7 +174,7 @@ public class App {
                 // Write AST to file
                 try (PrintStream ps = new PrintStream("output/" + pureFileName + "_ast.txt")) {
                     System.setOut(ps);
-                      System.out.println(program);
+                    System.out.println(program);
                 }
 
                 // Write symbol table to file
@@ -145,19 +184,53 @@ public class App {
                 }
 
                 // Write errors to file (syntax + semantic)
+                boolean hasSemanticErrors = false;
                 try (PrintStream ps = new PrintStream("output/" + pureFileName + "_errors.txt")) {
                     System.setOut(ps);
                     writeSyntaxErrors(errorListener);
                     SemanticAnalyzer analyzer = new SemanticAnalyzer();
-                    analyzer.analyze(program, fileName);
+                    hasSemanticErrors = !analyzer.analyze(program, fileName);
                 }
 
-                System.setOut(originalOut);
-                if (errorListener.hasErrors()) {
-                    System.out.println("[SYNTAX ERRORS] " + pureFileName + " -> output/");
+                boolean hasSyntaxErrors = errorListener.hasErrors();
+                boolean canGenerate = !hasSyntaxErrors && !hasSemanticErrors;
+
+                if (canGenerate) {
+                    // Write generated TAC IR to file
+                    try (PrintStream ps = new PrintStream("output/" + pureFileName + "_ir.txt")) {
+                        System.setOut(ps);
+                        AstToTac astToTac = new AstToTac();
+                        TacProgram tac = astToTac.translate(program);
+                        System.out.println(tac.toString());
+                    }
+
+                    // Write generated Python code to file
+                    try (PrintStream ps = new PrintStream("output/" + pureFileName + "_generated.py")) {
+                        System.setOut(ps);
+                        PythonCodeGenerator pyGen = new PythonCodeGenerator(localModules);
+                        String generatedCode = pyGen.generate(program);
+                        System.out.println(generatedCode);
+                    }
+
+                    // Validate generated Python syntax
+                    String generatedFilePath = "output/" + pureFileName + "_generated.py";
+                    boolean syntaxValid = validateGeneratedPython(generatedFilePath);
+                    System.setOut(originalOut);
+                    if (syntaxValid) {
+                        System.out.println("[OK] " + pureFileName + " -> output/   (run: python3 output/" + pureFileName + "_generated.py)");
+                    } else {
+                        System.out.println("[CODEGEN WARNING] " + pureFileName + " -> output/   (generated Python has syntax errors)");
+                    }
                 } else {
-                    System.out.println("[OK] " + pureFileName + " -> output/");
+                    System.setOut(originalOut);
+                    if (hasSyntaxErrors) {
+                        System.out.println("[SYNTAX ERRORS] " + pureFileName + " -> output/   (codegen skipped due to syntax errors)");
+                    } else if (hasSemanticErrors) {
+                        System.out.println("[SEMANTIC ERRORS] " + pureFileName + " -> output/   (codegen skipped due to semantic errors)");
+                    }
                 }
+
+                // end of Python file processing
             }
 
             // ================= HTML / J2 =================
@@ -296,6 +369,28 @@ public class App {
             }
             System.out.println("===============================================================");
         }
+    }
+
+    private static boolean validateGeneratedPython(String filePath) {
+        // Try multiple Python commands (python on Windows, python3 on Unix, py on Windows launcher)
+        String[][] attempts = {
+            {"python", "-m", "py_compile", filePath},
+            {"python3", "-m", "py_compile", filePath},
+            {"py", "-m", "py_compile", filePath}
+        };
+        for (String[] cmd : attempts) {
+            try {
+                ProcessBuilder pb = new ProcessBuilder(cmd);
+                Process process = pb.start();
+                int exitCode = process.waitFor();
+                if (exitCode == 0) return true;
+            } catch (IOException e) {
+                // Command not found, try next
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return false;
     }
 
     private static String deriveBaseName(String filePath) {

@@ -15,6 +15,10 @@ public class AttributeAccess extends AtomExpression {
         this.attributes = attributes;
     }
 
+    public List<Atom> getAttributes() {
+        return attributes;
+    }
+
     @Override
     public String symbolTablePrint() {
         StringBuilder stringBuilder = new StringBuilder();

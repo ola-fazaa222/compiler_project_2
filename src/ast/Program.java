@@ -15,8 +15,12 @@ public class Program extends ASTNode{
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(super.toString());
-        for(Statement s : this.statements){
-            stringBuilder.append(Consts.printIndent(1)).append(s.toString());
+        if (this.statements != null) {
+            for (Statement s : this.statements) {
+                if (s != null) {
+                    stringBuilder.append(Consts.printIndent(1)).append(s.toString());
+                }
+            }
         }
         return stringBuilder.toString();
     }

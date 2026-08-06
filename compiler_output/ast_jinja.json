@@ -1,0 +1,695 @@
+{
+  "templates_count": 5,
+  "templates": [
+    {
+      "name": "edit_product.html",
+      "ast": {
+  "type": "HtmlContent",
+  "line": 1,
+  "items": [{
+      "type": "JinjaExtendStatement",
+      "line": 1,
+      "extends": "\"base.html\""
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 3,
+      "blockName": "title"
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 5,
+      "blockName": "content"
+    }]
+}
+    },
+    {
+      "name": "add_product.html",
+      "ast": {
+  "type": "HtmlContent",
+  "line": 1,
+  "items": [{
+      "type": "JinjaExtendStatement",
+      "line": 1,
+      "extends": "\"base.html\""
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 3,
+      "blockName": "title"
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 5,
+      "blockName": "content"
+    }]
+}
+    },
+    {
+      "name": "index.html",
+      "ast": {
+  "type": "HtmlContent",
+  "line": 1,
+  "items": [{
+      "type": "JinjaExtendStatement",
+      "line": 1,
+      "extends": "\"base.html\""
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 3,
+      "blockName": "title"
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 5,
+      "blockName": "content"
+    }]
+}
+    },
+    {
+      "name": "product_detail.html",
+      "ast": {
+  "type": "HtmlContent",
+  "line": 1,
+  "items": [{
+      "type": "JinjaExtendStatement",
+      "line": 1,
+      "extends": "\"base.html\""
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 3,
+      "blockName": "title"
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 5,
+      "blockName": "content"
+    }]
+}
+    },
+    {
+      "name": "base.html",
+      "ast": {
+  "type": "HtmlContent",
+  "line": 2,
+  "items": [{
+      "type": "TagElement",
+      "line": 2,
+      "tagName": "html",
+      "attributes": [{
+          "name": "html",
+          "value": null
+        }, {
+          "name": "lang",
+          "value": "\"ar\""
+        }, {
+          "name": "dir",
+          "value": "\"rtl\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 3,
+      "tagName": "head",
+      "attributes": [{
+          "name": "head",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 4,
+      "tagName": "meta",
+      "attributes": [{
+          "name": "meta",
+          "value": null
+        }, {
+          "name": "charset",
+          "value": "\"UTF-8\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 5,
+      "tagName": "meta",
+      "attributes": [{
+          "name": "meta",
+          "value": null
+        }, {
+          "name": "name",
+          "value": "\"viewport\""
+        }, {
+          "name": "content",
+          "value": "\"width=device-width, initial-scale=1.0\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 6,
+      "tagName": "title",
+      "attributes": [{
+          "name": "title",
+          "value": null
+        }]
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 6,
+      "blockName": "title"
+    }, {
+      "type": "TagElement",
+      "line": 6,
+      "tagName": "title",
+      "attributes": [{
+          "name": "title",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 9,
+      "tagName": "link",
+      "attributes": [{
+          "name": "link",
+          "value": null
+        }, {
+          "name": "href",
+          "value": "\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\""
+        }, {
+          "name": "rel",
+          "value": "\"stylesheet\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 11,
+      "tagName": "link",
+      "attributes": [{
+          "name": "link",
+          "value": null
+        }, {
+          "name": "rel",
+          "value": "\"stylesheet\""
+        }, {
+          "name": "href",
+          "value": "\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 13,
+      "tagName": "link",
+      "attributes": [{
+          "name": "link",
+          "value": null
+        }, {
+          "name": "href",
+          "value": "\"https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap\""
+        }, {
+          "name": "rel",
+          "value": "\"stylesheet\""
+        }]
+    }, {
+      "type": "StyleSheet",
+      "line": 16
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 114,
+      "blockName": "extra_css"
+    }, {
+      "type": "TagElement",
+      "line": 115,
+      "tagName": "head",
+      "attributes": [{
+          "name": "head",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 116,
+      "tagName": "body",
+      "attributes": [{
+          "name": "body",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 118,
+      "tagName": "nav",
+      "attributes": [{
+          "name": "nav",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"navbar navbar-expand-lg navbar-dark\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 119,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"container\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 120,
+      "tagName": "a",
+      "attributes": [{
+          "name": "a",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"navbar-brand\""
+        }, {
+          "name": "href",
+          "value": "\"{{ url_for('index') }}\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 121,
+      "tagName": "i",
+      "attributes": [{
+          "name": "i",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"fas fa-store\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 121,
+      "tagName": "i",
+      "attributes": [{
+          "name": "i",
+          "value": null
+        }]
+    }, {
+      "type": "HtmlTextItem",
+      "line": 121,
+      "text": " متجري\n            "
+    }, {
+      "type": "TagElement",
+      "line": 122,
+      "tagName": "a",
+      "attributes": [{
+          "name": "a",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 123,
+      "tagName": "button",
+      "attributes": [{
+          "name": "button",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"navbar-toggler\""
+        }, {
+          "name": "type",
+          "value": "\"button\""
+        }, {
+          "name": "data-bs-toggle",
+          "value": "\"collapse\""
+        }, {
+          "name": "data-bs-target",
+          "value": "\"#navbarNav\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 124,
+      "tagName": "span",
+      "attributes": [{
+          "name": "span",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"navbar-toggler-icon\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 124,
+      "tagName": "span",
+      "attributes": [{
+          "name": "span",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 125,
+      "tagName": "button",
+      "attributes": [{
+          "name": "button",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 126,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"collapse navbar-collapse\""
+        }, {
+          "name": "id",
+          "value": "\"navbarNav\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 127,
+      "tagName": "ul",
+      "attributes": [{
+          "name": "ul",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"navbar-nav ms-auto\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 128,
+      "tagName": "li",
+      "attributes": [{
+          "name": "li",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"nav-item\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 129,
+      "tagName": "a",
+      "attributes": [{
+          "name": "a",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"nav-link\""
+        }, {
+          "name": "href",
+          "value": "\"{{ url_for('index') }}\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 130,
+      "tagName": "i",
+      "attributes": [{
+          "name": "i",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"fas fa-home\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 130,
+      "tagName": "i",
+      "attributes": [{
+          "name": "i",
+          "value": null
+        }]
+    }, {
+      "type": "HtmlTextItem",
+      "line": 130,
+      "text": " الرئيسية\n                        "
+    }, {
+      "type": "TagElement",
+      "line": 131,
+      "tagName": "a",
+      "attributes": [{
+          "name": "a",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 132,
+      "tagName": "li",
+      "attributes": [{
+          "name": "li",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 133,
+      "tagName": "li",
+      "attributes": [{
+          "name": "li",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"nav-item\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 134,
+      "tagName": "a",
+      "attributes": [{
+          "name": "a",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"nav-link\""
+        }, {
+          "name": "href",
+          "value": "\"{{ url_for('add_product') }}\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 135,
+      "tagName": "i",
+      "attributes": [{
+          "name": "i",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"fas fa-plus-circle\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 135,
+      "tagName": "i",
+      "attributes": [{
+          "name": "i",
+          "value": null
+        }]
+    }, {
+      "type": "HtmlTextItem",
+      "line": 135,
+      "text": " إضافة منتج\n                        "
+    }, {
+      "type": "TagElement",
+      "line": 136,
+      "tagName": "a",
+      "attributes": [{
+          "name": "a",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 137,
+      "tagName": "li",
+      "attributes": [{
+          "name": "li",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 138,
+      "tagName": "ul",
+      "attributes": [{
+          "name": "ul",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 139,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 140,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 141,
+      "tagName": "nav",
+      "attributes": [{
+          "name": "nav",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 144,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"flash-messages\""
+        }]
+    }, {
+      "type": "JinjaWithStatement",
+      "line": 145,
+      "varName": "messages"
+    }, {
+      "type": "TagElement",
+      "line": 156,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 159,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"main-content\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 160,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"container\""
+        }]
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 161,
+      "blockName": "content"
+    }, {
+      "type": "TagElement",
+      "line": 162,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 163,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 166,
+      "tagName": "footer",
+      "attributes": [{
+          "name": "footer",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"footer text-center\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 167,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"container\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 168,
+      "tagName": "p",
+      "attributes": [{
+          "name": "p",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"mb-0\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 169,
+      "tagName": "i",
+      "attributes": [{
+          "name": "i",
+          "value": null
+        }, {
+          "name": "class",
+          "value": "\"fas fa-heart text-danger\""
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 169,
+      "tagName": "i",
+      "attributes": [{
+          "name": "i",
+          "value": null
+        }]
+    }, {
+      "type": "HtmlTextItem",
+      "line": 169,
+      "text": " \n                نظام إدارة المنتجات - جميع الحقوق محفوظة &copy; 2026\n            "
+    }, {
+      "type": "TagElement",
+      "line": 171,
+      "tagName": "p",
+      "attributes": [{
+          "name": "p",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 172,
+      "tagName": "div",
+      "attributes": [{
+          "name": "div",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 173,
+      "tagName": "footer",
+      "attributes": [{
+          "name": "footer",
+          "value": null
+        }]
+    }, {
+      "type": "ScriptElement",
+      "line": 176
+    }, {
+      "type": "ScriptElement",
+      "line": 179
+    }, {
+      "type": "JinjaBlockStatement",
+      "line": 189,
+      "blockName": "extra_js"
+    }, {
+      "type": "TagElement",
+      "line": 190,
+      "tagName": "body",
+      "attributes": [{
+          "name": "body",
+          "value": null
+        }]
+    }, {
+      "type": "TagElement",
+      "line": 191,
+      "tagName": "html",
+      "attributes": [{
+          "name": "html",
+          "value": null
+        }]
+    }]
+}
+    }
+  ]
+}

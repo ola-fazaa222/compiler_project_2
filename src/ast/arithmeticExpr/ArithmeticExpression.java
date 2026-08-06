@@ -34,10 +34,12 @@ public class ArithmeticExpression extends SimpleExpression {
     @Override
     public String symbolTablePrint() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(left.symbolTablePrint());
+        stringBuilder.append(left == null ? "?" : left.symbolTablePrint());
         if(right != null){
             for(PythonExpression pythonExpression : right){
-                stringBuilder.append(operator).append(" ").append(pythonExpression.symbolTablePrint());
+                if (pythonExpression != null) {
+                    stringBuilder.append(operator).append(" ").append(pythonExpression.symbolTablePrint());
+                }
             }
         }
         return stringBuilder.toString();
@@ -46,10 +48,12 @@ public class ArithmeticExpression extends SimpleExpression {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(left.toString());
+        stringBuilder.append(left == null ? "?" : left.toString());
         if(right != null){
             for(PythonExpression pythonExpression : right){
-                stringBuilder.append(operator).append(pythonExpression.toString());
+                if (pythonExpression != null) {
+                    stringBuilder.append(operator).append(pythonExpression.toString());
+                }
             }
         }
         return stringBuilder.toString();

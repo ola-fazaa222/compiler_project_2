@@ -3,6 +3,7 @@ package symbolTable;
 public enum ScopeType {
     GLOBAL,
     FUNCTION,
+    CLASS,
     IF,
     ELIF,
     ELSE,

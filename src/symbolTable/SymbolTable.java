@@ -64,7 +64,10 @@ public class SymbolTable {
     }
 
     public SymbolEntry insert(String name) {
-
+//        if (table.containsKey(name)) {
+//            System.out.println("Error: symbol '" + name + "' already defined!");
+//            return null;
+//        }
 
         SymbolEntry entry = new SymbolEntry(name);
         table.put(name, entry);

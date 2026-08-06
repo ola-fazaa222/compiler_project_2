@@ -15,6 +15,6 @@ public class JinjaSimpleExpression extends JinjaExpression {
 
     @Override
     public String toString() {
-        return expr.toString();
+        return expr != null ? expr.toString() : "?";
     }
 }

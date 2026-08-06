@@ -21,8 +21,10 @@ public class HtmlContent extends ASTNode {
         stringBuilder.append(super.toString());
         if (items != null) {
             for (HtmlContentItem htmlContentItem : items) {
-                stringBuilder.append(Consts.printIndent(4))
-                        .append(htmlContentItem.toString());
+                if (htmlContentItem != null) {
+                    stringBuilder.append(Consts.printIndent(4))
+                            .append(htmlContentItem.toString());
+                }
             }
         }
 

@@ -1,0 +1,166 @@
+HtmlContent [Line: 1]
+|   |   |   |   JinjaExtendStatement [Line: 1] ( extended : "base.html" ) 
+|   |   |   |   JinjaBlockStatement [Line: 3] ( title
+|   |   |   HtmlContent [Line: 3]
+|   |   |   |   HtmlTextItem [Line: 3] ( تفاصيل المنتج -  ) 
+|   |   |   |   product.name
+|   |   |   |   JinjaBlockStatement [Line: 5] ( content
+|   |   |   HtmlContent [Line: 6]
+|   |   |   |   TagElement [Line: 6]
+|   |   |   Tag [ 6 ] div
+|   |   |   Tag [ 6 ] class = "row justify-content-center"
+|   |   |   |   TagElement [Line: 7]
+|   |   |   Tag [ 7 ] div
+|   |   |   Tag [ 7 ] class = "col-md-10"
+|   |   |   |   TagElement [Line: 8]
+|   |   |   Tag [ 8 ] div
+|   |   |   Tag [ 8 ] class = "card"
+|   |   |   |   TagElement [Line: 9]
+|   |   |   Tag [ 9 ] div
+|   |   |   Tag [ 9 ] class = "card-body"
+|   |   |   |   TagElement [Line: 10]
+|   |   |   Tag [ 10 ] div
+|   |   |   Tag [ 10 ] class = "row"
+|   |   |   |   TagElement [Line: 11]
+|   |   |   Tag [ 11 ] div
+|   |   |   Tag [ 11 ] class = "col-md-5 text-center"
+|   |   |   |   JinjaIfStatement [Line: 12] ( product.image_filename ) 
+|   |   |   HtmlContent [Line: 13]
+|   |   |   |   TagElement [Line: 13]
+|   |   |   Tag [ 13 ] img
+|   |   |   Tag [ 13 ] src = "{{ url_for('static', filename='uploads/' + product.image_filename) }}"
+|   |   |   Tag [ 14 ] alt = "{{ product.name }}"
+|   |   |   Tag [ 15 ] class = "img-fluid rounded"
+|   |   |   Tag [ 16 ] style = "max-height: 300px; width: 100%; object-fit: cover;"
+|   |   |   |   TagElement [Line: 23]
+|   |   |   Tag [ 23 ] div
+|   |   |   |   TagElement [Line: 25]
+|   |   |   Tag [ 25 ] div
+|   |   |   Tag [ 25 ] class = "col-md-7"
+|   |   |   |   TagElement [Line: 26]
+|   |   |   Tag [ 26 ] h2
+|   |   |   Tag [ 26 ] class = "mb-3"
+|   |   |   |   product.name
+|   |   |   |   TagElement [Line: 26]
+|   |   |   Tag [ 26 ] h2
+|   |   |   |   TagElement [Line: 28]
+|   |   |   Tag [ 28 ] div
+|   |   |   Tag [ 28 ] class = "mb-3"
+|   |   |   |   TagElement [Line: 29]
+|   |   |   Tag [ 29 ] span
+|   |   |   Tag [ 29 ] class = "badge bg-primary fs-5"
+|   |   |   |   TagElement [Line: 30]
+|   |   |   Tag [ 30 ] i
+|   |   |   Tag [ 30 ] class = "fas fa-tag"
+|   |   |   |   TagElement [Line: 30]
+|   |   |   Tag [ 30 ] i
+|   |   |   |   HtmlTextItem [Line: 30] (  السعر
+                             ) 
+|   |   |   |   TagElement [Line: 31]
+|   |   |   Tag [ 31 ] span
+|   |   |   |   TagElement [Line: 32]
+|   |   |   Tag [ 32 ] h3
+|   |   |   Tag [ 32 ] class = "price-tag d-inline-block me-3"
+|   |   |   |   JinjaFilteredExpression [Line: 33] ( ? | format ) 
+|   |   |   |   HtmlTextItem [Line: 33] (  دولار
+                             ) 
+|   |   |   |   TagElement [Line: 34]
+|   |   |   Tag [ 34 ] h3
+|   |   |   |   TagElement [Line: 35]
+|   |   |   Tag [ 35 ] div
+|   |   |   |   TagElement [Line: 37]
+|   |   |   Tag [ 37 ] div
+|   |   |   Tag [ 37 ] class = "mb-4"
+|   |   |   |   TagElement [Line: 38]
+|   |   |   Tag [ 38 ] h5
+|   |   |   |   TagElement [Line: 38]
+|   |   |   Tag [ 38 ] i
+|   |   |   Tag [ 38 ] class = "fas fa-info-circle"
+|   |   |   |   TagElement [Line: 38]
+|   |   |   Tag [ 38 ] i
+|   |   |   |   HtmlTextItem [Line: 38] (  تفاصيل المنتج ) 
+|   |   |   |   TagElement [Line: 38]
+|   |   |   Tag [ 38 ] h5
+|   |   |   |   TagElement [Line: 39]
+|   |   |   Tag [ 39 ] p
+|   |   |   Tag [ 39 ] class = "text-muted"
+|   |   |   |   product.details
+|   |   |   |   TagElement [Line: 39]
+|   |   |   Tag [ 39 ] p
+|   |   |   |   TagElement [Line: 40]
+|   |   |   Tag [ 40 ] div
+|   |   |   |   TagElement [Line: 42]
+|   |   |   Tag [ 42 ] div
+|   |   |   Tag [ 42 ] class = "mb-3"
+|   |   |   |   TagElement [Line: 43]
+|   |   |   Tag [ 43 ] small
+|   |   |   Tag [ 43 ] class = "text-muted"
+|   |   |   |   TagElement [Line: 44]
+|   |   |   Tag [ 44 ] i
+|   |   |   Tag [ 44 ] class = "fas fa-calendar-alt"
+|   |   |   |   TagElement [Line: 44]
+|   |   |   Tag [ 44 ] i
+|   |   |   |   HtmlTextItem [Line: 44] ( 
+                                تاريخ الإضافة:  ) 
+|   |   |   |   product.created_at
+|   |   |   |   TagElement [Line: 46]
+|   |   |   Tag [ 46 ] small
+|   |   |   |   TagElement [Line: 47]
+|   |   |   Tag [ 47 ] div
+|   |   |   |   TagElement [Line: 49]
+|   |   |   Tag [ 49 ] div
+|   |   |   Tag [ 49 ] class = "btn-group w-100"
+|   |   |   |   TagElement [Line: 50]
+|   |   |   Tag [ 50 ] a
+|   |   |   Tag [ 50 ] href = "{{ url_for('edit_product', product_id=product.id) }}"
+|   |   |   Tag [ 51 ] class = "btn btn-warning"
+|   |   |   |   TagElement [Line: 52]
+|   |   |   Tag [ 52 ] i
+|   |   |   Tag [ 52 ] class = "fas fa-edit"
+|   |   |   |   TagElement [Line: 52]
+|   |   |   Tag [ 52 ] i
+|   |   |   |   HtmlTextItem [Line: 52] (  تعديل
+                             ) 
+|   |   |   |   TagElement [Line: 53]
+|   |   |   Tag [ 53 ] a
+|   |   |   |   TagElement [Line: 54]
+|   |   |   Tag [ 54 ] a
+|   |   |   Tag [ 54 ] href = "{{ url_for('delete_product', product_id=product.id) }}"
+|   |   |   Tag [ 55 ] class = "btn btn-danger"
+|   |   |   Tag [ 56 ] onclick = "return confirm('هل أنت متأكد من حذف هذا المنتج؟')"
+|   |   |   |   TagElement [Line: 57]
+|   |   |   Tag [ 57 ] i
+|   |   |   Tag [ 57 ] class = "fas fa-trash"
+|   |   |   |   TagElement [Line: 57]
+|   |   |   Tag [ 57 ] i
+|   |   |   |   HtmlTextItem [Line: 57] (  حذف
+                             ) 
+|   |   |   |   TagElement [Line: 58]
+|   |   |   Tag [ 58 ] a
+|   |   |   |   TagElement [Line: 59]
+|   |   |   Tag [ 59 ] a
+|   |   |   Tag [ 59 ] href = "{{ url_for('index') }}"
+|   |   |   Tag [ 60 ] class = "btn btn-secondary"
+|   |   |   |   TagElement [Line: 61]
+|   |   |   Tag [ 61 ] i
+|   |   |   Tag [ 61 ] class = "fas fa-arrow-right"
+|   |   |   |   TagElement [Line: 61]
+|   |   |   Tag [ 61 ] i
+|   |   |   |   HtmlTextItem [Line: 61] (  رجوع
+                             ) 
+|   |   |   |   TagElement [Line: 62]
+|   |   |   Tag [ 62 ] a
+|   |   |   |   TagElement [Line: 63]
+|   |   |   Tag [ 63 ] div
+|   |   |   |   TagElement [Line: 64]
+|   |   |   Tag [ 64 ] div
+|   |   |   |   TagElement [Line: 65]
+|   |   |   Tag [ 65 ] div
+|   |   |   |   TagElement [Line: 66]
+|   |   |   Tag [ 66 ] div
+|   |   |   |   TagElement [Line: 67]
+|   |   |   Tag [ 67 ] div
+|   |   |   |   TagElement [Line: 68]
+|   |   |   Tag [ 68 ] div
+|   |   |   |   TagElement [Line: 69]
+|   |   |   Tag [ 69 ] div

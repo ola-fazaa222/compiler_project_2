@@ -11,6 +11,10 @@ public class ListAccess extends AtomExpression {
         this.index = index;
     }
 
+    public String getIndex() {
+        return index;
+    }
+
     @Override
     public String toString() {
         return super.toString() + "[" + index + "]" + " ) ";

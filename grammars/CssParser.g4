@@ -1,11 +1,10 @@
 parser grammar CssParser;
 
-@header {package antlr.css;}
 
 options { tokenVocab=CssLexer; }
 
 style_sheet
-    : ruleSet* # StyleSheet
+    : (ruleSet | css_at_rule)* # StyleSheet
     ;
 
 ruleSet
@@ -18,13 +17,15 @@ selector_decl
 
 css_selector_list
     : css_selector (CSS_GT  css_selector )* # CssSelectorList
+    | css_selector css_selector+            # CssDescendantSelector
     ;
 
 css_selector
-    : CSS_ID ( CSS_DOT CSS_ID )*                    # QualifiedSelector
-    | ( CSS_DOT CSS_ID CSS_ID? )+                   # StandaloneSimpleSelector
-    | CSS_ID (CSS_HASH CSS_ID)*                     # TypeAndIdSelector
-    | CSS_ID                                        # TypeSelector
+    : CSS_ID ( CSS_DOT CSS_ID )* (CSS_COLON CSS_ID)* (CSS_COLON CSS_COLON CSS_ID)*    # QualifiedSelector
+    | ( CSS_DOT CSS_ID CSS_ID? )+ (CSS_COLON CSS_ID)* (CSS_COLON CSS_COLON CSS_ID)*   # StandaloneSimpleSelector
+    | CSS_ID (CSS_HASH CSS_ID)* (CSS_COLON CSS_ID)* (CSS_COLON CSS_COLON CSS_ID)*     # TypeAndIdSelector
+    | CSS_UNIVERSAL (CSS_COLON CSS_ID)? (CSS_COLON CSS_COLON CSS_ID)?                 # UniversalSelector
+    | CSS_ID (CSS_COLON CSS_ID)* (CSS_COLON CSS_COLON CSS_ID)?                        # TypeSelector
     ;
 
 declarationList
@@ -32,7 +33,11 @@ declarationList
     ;
 
 declaration
-    : CSS_ID  CSS_COLON  cssterm+  CSS_SEMI # CssDeclaration
+    : CSS_ID  CSS_COLON  css_value  CSS_IMPORTANT? CSS_SEMI # CssDeclaration
+    ;
+
+css_value
+    : cssterm+ (CSS_COMMA cssterm+)*
     ;
 
 css_function_args
@@ -48,7 +53,15 @@ cssterm
     : css_function_call         # FunctionTerm
     | CSS_STRING                # StringTerm
     | CSS_HEX_COLOR             # ColorTerm
-    | CSS_NUMBER CSS_UNIT       # UnitNumberTerm
-    | CSS_NUMBER                # NumberTerm
+    | CSS_MINUS? CSS_NUMBER CSS_UNIT # UnitNumberTerm
+    | CSS_MINUS? CSS_NUMBER     # NumberTerm
     | CSS_ID                    # IdentifierTerm
+    ;
+
+css_at_rule
+    : CSS_AT CSS_ID CSS_ID? CSS_LBRACE css_at_rule_body* CSS_RBRACE # CssAtKeyframes
+    ;
+
+css_at_rule_body
+    : CSS_ID CSS_LBRACE declarationList CSS_RBRACE # CssAtKeyframeBlock
     ;

@@ -1,0 +1,134 @@
+HtmlContent [Line: 1]
+|   |   |   |   JinjaExtendStatement [Line: 1] ( extended : "base.html" ) 
+|   |   |   |   JinjaBlockStatement [Line: 3] ( title
+|   |   |   HtmlContent [Line: 3]
+|   |   |   |   HtmlTextItem [Line: 3] ( إضافة منتج جديد ) 
+|   |   |   |   JinjaBlockStatement [Line: 5] ( content
+|   |   |   HtmlContent [Line: 6]
+|   |   |   |   TagElement [Line: 6]
+|   |   |   Tag [ 6 ] div
+|   |   |   Tag [ 6 ] class = "row justify-content-center"
+|   |   |   |   TagElement [Line: 7]
+|   |   |   Tag [ 7 ] div
+|   |   |   Tag [ 7 ] class = "col-md-8 col-lg-6"
+|   |   |   |   TagElement [Line: 8]
+|   |   |   Tag [ 8 ] div
+|   |   |   Tag [ 8 ] class = "card"
+|   |   |   |   TagElement [Line: 9]
+|   |   |   Tag [ 9 ] div
+|   |   |   Tag [ 9 ] class = "card-header bg-primary text-white text-center"
+|   |   |   |   TagElement [Line: 10]
+|   |   |   Tag [ 10 ] h4
+|   |   |   Tag [ 10 ] class = "mb-0"
+|   |   |   |   TagElement [Line: 11]
+|   |   |   Tag [ 11 ] i
+|   |   |   Tag [ 11 ] class = "fas fa-plus-circle"
+|   |   |   |   TagElement [Line: 11]
+|   |   |   Tag [ 11 ] i
+|   |   |   |   HtmlTextItem [Line: 11] (  إضافة منتج جديد
+                 ) 
+|   |   |   |   TagElement [Line: 12]
+|   |   |   Tag [ 12 ] h4
+|   |   |   |   TagElement [Line: 13]
+|   |   |   Tag [ 13 ] div
+|   |   |   |   TagElement [Line: 14]
+|   |   |   Tag [ 14 ] div
+|   |   |   Tag [ 14 ] class = "card-body"
+|   |   |   |   TagElement [Line: 15]
+|   |   |   Tag [ 15 ] form
+|   |   |   Tag [ 15 ] method = "POST"
+|   |   |   Tag [ 15 ] enctype = "multipart/form-data"
+|   |   |   |   form.hidden_tag (  )
+|   |   |   |   TagElement [Line: 18]
+|   |   |   Tag [ 18 ] div
+|   |   |   Tag [ 18 ] class = "mb-3"
+|   |   |   |   form.name.label ( JinjaKeywordArgument [Line: 19] ( class = "form-label fw-bold" )  )
+|   |   |   |   form.name ( JinjaKeywordArgument [Line: 20] ( class = "form-control" ) , JinjaKeywordArgument [Line: 20] ( placeholder = "أدخل اسم المنتج" )  )
+|   |   |   |   JinjaIfStatement [Line: 21] ( form.name.errors ) 
+|   |   |   HtmlContent [Line: 22]
+|   |   |   |   JinjaForStatement [Line: 22] ( error in form.name.errors ) 
+|   |   |   HtmlContent [Line: 23]
+|   |   |   |   TagElement [Line: 23]
+|   |   |   Tag [ 23 ] div
+|   |   |   Tag [ 23 ] class = "text-danger small"
+|   |   |   |   error
+|   |   |   |   TagElement [Line: 23]
+|   |   |   Tag [ 23 ] div
+|   |   |   |   TagElement [Line: 26]
+|   |   |   Tag [ 26 ] div
+|   |   |   |   TagElement [Line: 28]
+|   |   |   Tag [ 28 ] div
+|   |   |   Tag [ 28 ] class = "mb-3"
+|   |   |   |   form.price.label ( JinjaKeywordArgument [Line: 29] ( class = "form-label fw-bold" )  )
+|   |   |   |   form.price ( JinjaKeywordArgument [Line: 30] ( class = "form-control" ) , JinjaKeywordArgument [Line: 30] ( placeholder = "أدخل سعر المنتج" ) , JinjaKeywordArgument [Line: 30] ( step = "0.01" )  )
+|   |   |   |   JinjaIfStatement [Line: 31] ( form.price.errors ) 
+|   |   |   HtmlContent [Line: 32]
+|   |   |   |   JinjaForStatement [Line: 32] ( error in form.price.errors ) 
+|   |   |   HtmlContent [Line: 33]
+|   |   |   |   TagElement [Line: 33]
+|   |   |   Tag [ 33 ] div
+|   |   |   Tag [ 33 ] class = "text-danger small"
+|   |   |   |   error
+|   |   |   |   TagElement [Line: 33]
+|   |   |   Tag [ 33 ] div
+|   |   |   |   TagElement [Line: 36]
+|   |   |   Tag [ 36 ] div
+|   |   |   |   TagElement [Line: 38]
+|   |   |   Tag [ 38 ] div
+|   |   |   Tag [ 38 ] class = "mb-3"
+|   |   |   |   form.details.label ( JinjaKeywordArgument [Line: 39] ( class = "form-label fw-bold" )  )
+|   |   |   |   form.details ( JinjaKeywordArgument [Line: 40] ( class = "form-control" ) , JinjaKeywordArgument [Line: 40] ( rows = "5" ) , JinjaKeywordArgument [Line: 40] ( placeholder = "أدخل تفاصيل المنتج" )  )
+|   |   |   |   JinjaIfStatement [Line: 41] ( form.details.errors ) 
+|   |   |   HtmlContent [Line: 42]
+|   |   |   |   JinjaForStatement [Line: 42] ( error in form.details.errors ) 
+|   |   |   HtmlContent [Line: 43]
+|   |   |   |   TagElement [Line: 43]
+|   |   |   Tag [ 43 ] div
+|   |   |   Tag [ 43 ] class = "text-danger small"
+|   |   |   |   error
+|   |   |   |   TagElement [Line: 43]
+|   |   |   Tag [ 43 ] div
+|   |   |   |   TagElement [Line: 46]
+|   |   |   Tag [ 46 ] div
+|   |   |   |   TagElement [Line: 48]
+|   |   |   Tag [ 48 ] div
+|   |   |   Tag [ 48 ] class = "mb-3"
+|   |   |   |   form.image.label ( JinjaKeywordArgument [Line: 49] ( class = "form-label fw-bold" )  )
+|   |   |   |   form.image ( JinjaKeywordArgument [Line: 50] ( class = "form-control" ) , JinjaKeywordArgument [Line: 50] ( accept = "image/*" )  )
+|   |   |   |   TagElement [Line: 51]
+|   |   |   Tag [ 51 ] small
+|   |   |   Tag [ 51 ] class = "text-muted"
+|   |   |   |   HtmlTextItem [Line: 51] ( الصور المدعومة: PNG, JPG, JPEG, GIF, WEBP (الحد الأقصى 16MB) ) 
+|   |   |   |   TagElement [Line: 51]
+|   |   |   Tag [ 51 ] small
+|   |   |   |   TagElement [Line: 52]
+|   |   |   Tag [ 52 ] div
+|   |   |   |   TagElement [Line: 54]
+|   |   |   Tag [ 54 ] div
+|   |   |   Tag [ 54 ] class = "d-grid gap-2"
+|   |   |   |   form.submit ( JinjaKeywordArgument [Line: 55] ( class = "btn btn-primary btn-lg" )  )
+|   |   |   |   TagElement [Line: 56]
+|   |   |   Tag [ 56 ] a
+|   |   |   Tag [ 56 ] href = "{{ url_for('index') }}"
+|   |   |   Tag [ 56 ] class = "btn btn-secondary"
+|   |   |   |   TagElement [Line: 57]
+|   |   |   Tag [ 57 ] i
+|   |   |   Tag [ 57 ] class = "fas fa-arrow-right"
+|   |   |   |   TagElement [Line: 57]
+|   |   |   Tag [ 57 ] i
+|   |   |   |   HtmlTextItem [Line: 57] (  العودة للرئيسية
+                         ) 
+|   |   |   |   TagElement [Line: 58]
+|   |   |   Tag [ 58 ] a
+|   |   |   |   TagElement [Line: 59]
+|   |   |   Tag [ 59 ] div
+|   |   |   |   TagElement [Line: 60]
+|   |   |   Tag [ 60 ] form
+|   |   |   |   TagElement [Line: 61]
+|   |   |   Tag [ 61 ] div
+|   |   |   |   TagElement [Line: 62]
+|   |   |   Tag [ 62 ] div
+|   |   |   |   TagElement [Line: 63]
+|   |   |   Tag [ 63 ] div
+|   |   |   |   TagElement [Line: 64]
+|   |   |   Tag [ 64 ] div

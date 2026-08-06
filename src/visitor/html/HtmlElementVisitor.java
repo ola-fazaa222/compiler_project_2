@@ -1,12 +1,15 @@
 package visitor.html;
 
+import antlr.html.HtmlLexer;
 import antlr.html.HtmlParser;
 import antlr.html.HtmlParserBaseVisitor;
 import ast.htmlElement.HtmlElement;
+import ast.htmlElement.ScriptElement;
 import ast.htmlElement.StyleSheet;
 import ast.htmlElement.TagElement;
 import ast.tagContent.TagElementItem;
-import visitor.css.StyleSheetVisitor;
+import org.antlr.v4.runtime.Token;
+import visitor.html.HtmlStyleSheetVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,15 @@ public class HtmlElementVisitor extends HtmlParserBaseVisitor<HtmlElement> {
 
     @Override
     public HtmlElement visitStyleElement(HtmlParser.StyleElementContext ctx) {
-        return (StyleSheet) new StyleSheetVisitor().visit(ctx.style_sheet());
+        return (StyleSheet) new HtmlStyleSheetVisitor().visit(ctx.style_sheet());
+    }
+
+    @Override
+    public HtmlElement visitScriptElement(HtmlParser.ScriptElementContext ctx) {
+        ScriptElement scriptElement = new ScriptElement(ctx.start.getLine());
+        if (ctx.SCRIPT_CONTENT() != null) {
+            scriptElement.setContent(ctx.SCRIPT_CONTENT().getText());
+        }
+        return scriptElement;
     }
 }

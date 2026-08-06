@@ -7,9 +7,6 @@ options {
     superClass = PythonLexerBase;
 }
 
-@lexer::header {
-package antlr.python;
-}
 
 // =================== LEXER RULES (Hybrid Indentation) ===================
 
@@ -31,6 +28,7 @@ ELSE: 'else';
 FOR: 'for';
 IN: 'in';
 GLOBAL: 'global';
+CLASS: 'class';
 AND: 'and';
 OR: 'or';
 NOT: 'not';
@@ -40,6 +38,10 @@ NONE: 'None';
 IS: 'is';
 WHILE : 'while';
 ARROW : '->';
+DEL: 'del';
+TRY: 'try';
+EXCEPT: 'except';
+FINALLY: 'finally';
 
 AT: '@';
 EQ: '==';
@@ -54,6 +56,11 @@ GT: '>';
 LT: '<';
 SLASH: '/';
 STAR: '*';
+
+PLUS_ASSIGN: '+=';
+MINUS_ASSIGN: '-=';
+STAR_ASSIGN: '*=';
+SLASH_ASSIGN: '/=';
 
 COLON: ':';
 SEMI: ';';
@@ -70,10 +77,10 @@ CLASS_NAME: [A-Z][a-zA-Z0-9_]*;
 NAME: [a-zA-Z_][a-zA-Z0-9_]*;
 
 
-LP:  '(' {this.openBrace();};
-RP: ')'  {this.closeBrace();};
-LBRACK:  '[' {this.openBrace();};
-RBRACK:  ']' {this.closeBrace();};
+LP:  '(' {this.openParen();};
+RP: ')'  {this.closeParen();};
+LBRACK:  '[' {this.openBracket();};
+RBRACK:  ']' {this.closeBracket();};
 LKBRACE: '{' {this.openBrace();};
 RKBRACE:  '}' {this.closeBrace();};
 
@@ -86,6 +93,11 @@ DOT: '.';
 TRIPLE_QUOTE_STRING : '"""' .*? '"""'
 {String content = getText();
 setText(content.substring(3, content.length() - 3));}
+;
+
+FSTRING : [fF]'"' (~["\r\n])* '"'
+{String content = getText();
+setText(content.substring(2, content.length() - 1));}
 ;
 
 fragment SPACES: [ \t]+;

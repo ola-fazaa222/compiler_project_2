@@ -4,7 +4,10 @@ import ast.HtmlContent;
 import ast.htmlContentItem.HtmlContentItem;
 import ast.htmlElement.TagElement;
 import ast.htmlElement.StyleSheet;
-import ast.jinja.jinjaStatment.*;
+import ast.jinja.jinjaStatment.JinjaBlockStatement;
+import ast.jinja.jinjaStatment.JinjaForStatement;
+import ast.jinja.jinjaStatment.JinjaIfStatement;
+import ast.jinja.jinjaStatment.JinjaWithStatement;
 import ast.tagContent.TagElementItem;
 
 import java.util.*;
@@ -64,6 +67,12 @@ public class HtmlSemanticAnalyzer {
         } else if (item instanceof JinjaForStatement jfs) {
             if (jfs.htmlContent != null && jfs.htmlContent.items != null) {
                 for (HtmlContentItem child : jfs.htmlContent.items) {
+                    analyzeItem(child);
+                }
+            }
+        } else if (item instanceof JinjaWithStatement jws) {
+            if (jws.htmlContent != null && jws.htmlContent.items != null) {
+                for (HtmlContentItem child : jws.htmlContent.items) {
                     analyzeItem(child);
                 }
             }

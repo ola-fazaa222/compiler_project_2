@@ -1,0 +1,26 @@
+===== FINAL SYMBOL TABLE (HIERARCHICAL TREE) =====
+Scope: [Global] | Parent: [None (Root)]
+------------------------------------------------------------------------------------------
+ Symbol Name          | Type            | Attributes
+------------------------------------------------------------------------------------------
+ NumberRange          | Imported        | From wtforms.validators
+ DataRequired         | Imported        | From wtforms.validators
+ FlaskForm            | Imported        | From flask_wtf
+ Length               | Imported        | From wtforms.validators
+ StringField          | Imported        | From wtforms
+ SubmitField          | Imported        | From wtforms
+ FileField            | Imported        | From wtforms
+ ProductForm          | Class           | Defined at line 5
+ TextAreaField        | Imported        | From wtforms
+ FloatField           | Imported        | From wtforms
+
+  Scope: [Class_Scope_ProductForm] | Parent: [Global]
+  ------------------------------------------------------------------------------------------
+   Symbol Name          | Type            | Attributes
+  ------------------------------------------------------------------------------------------
+   image                | Variable        | FunctionCall
+   submit               | Variable        | FunctionCall
+   price                | Variable        | FunctionCall
+   name                 | Variable        | FunctionCall
+   details              | Variable        | FunctionCall
+

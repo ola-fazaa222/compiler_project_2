@@ -23,7 +23,8 @@ public class Symbol {
         this.kind = kind;
         this.type = DataType.UNKNOWN;
         this.declaredLine = declaredLine;
-        this.initialized = (kind == SymbolKind.FUNCTION || kind == SymbolKind.PARAMETER
+        this.initialized = (kind == SymbolKind.FUNCTION || kind == SymbolKind.CLASS
+                || kind == SymbolKind.PARAMETER
                 || kind == SymbolKind.BUILTIN || kind == SymbolKind.IMPORT
                 || kind == SymbolKind.LOOP_VAR);
         this.mutable = true;

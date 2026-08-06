@@ -50,7 +50,7 @@ public class CssSelectorVisitor extends CssParserBaseVisitor<CssSelector> {
     public CssSelector visitTypeSelector(CssParser.TypeSelectorContext ctx) {
         CssSelector cssSelector = new CssSelector(ctx.start.getLine());
 
-        String text = ctx.CSS_ID().getText();
+        String text = ctx.CSS_ID(0).getText();
 
         cssSelector.setElementName(text);
 

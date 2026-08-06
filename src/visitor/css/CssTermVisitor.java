@@ -36,14 +36,16 @@ public class CssTermVisitor extends CssParserBaseVisitor<CssTerm> {
     @Override
     public CssTerm visitUnitNumberTerm(CssParser.UnitNumberTermContext ctx) {
         UnitNumberTerm unitNumberTerm = new UnitNumberTerm(ctx.start.getLine());
-        unitNumberTerm.setValue(ctx.CSS_NUMBER().getText() + " " + ctx.CSS_UNIT().getText());
+        String prefix = ctx.CSS_MINUS() != null ? "-" : "";
+        unitNumberTerm.setValue(prefix + ctx.CSS_NUMBER().getText() + " " + ctx.CSS_UNIT().getText());
         return unitNumberTerm;
     }
 
     @Override
     public CssTerm visitNumberTerm(CssParser.NumberTermContext ctx) {
         NumberTerm numberTerm = new NumberTerm(ctx.start.getLine());
-        numberTerm.setValue(ctx.CSS_NUMBER().getText());
+        String prefix = ctx.CSS_MINUS() != null ? "-" : "";
+        numberTerm.setValue(prefix + ctx.CSS_NUMBER().getText());
         return numberTerm;
     }
 

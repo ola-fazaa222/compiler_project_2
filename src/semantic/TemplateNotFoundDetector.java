@@ -2,9 +2,15 @@ package semantic;
 
 import ast.*;
 import ast.argsList.AtomArguments;
+import ast.argsList.ComplexArguments;
+import ast.argument.*;
+import ast.assignStmt.TemplateLiteralAssignmentStatement;
 import ast.atom.Atom;
+import ast.atom.Str;
 import ast.atomExpression.*;
 import ast.compundStmt.*;
+import ast.compundStmt.ClassDefinition;
+import ast.compundStmt.PythonExpression;
 import ast.functionDef.FunctionDefinition;
 import ast.returnStmt.ComplexReturnStatement;
 import ast.returnStmt.ReturnStatement;
@@ -18,6 +24,7 @@ public class TemplateNotFoundDetector implements ErrorDetector {
 
     private final List<SemanticError> errors = new ArrayList<>();
     private final Set<String> templatesRendered = new HashSet<>();
+    private final Set<String> inlineTemplateVars = new HashSet<>();
     private String baseDir = "";
     private String filePath = "";
 
@@ -25,14 +32,17 @@ public class TemplateNotFoundDetector implements ErrorDetector {
     public void reset() {
         errors.clear();
         templatesRendered.clear();
+        inlineTemplateVars.clear();
     }
 
     @Override
     public void detect(Program program) {
         if (program == null) return;
+
         for (Statement stmt : program.statements) {
             if (stmt == null || stmt.isPass || stmt.compoundStatements == null) continue;
             for (CompoundStatement cs : stmt.compoundStatements) {
+                collectInlineTemplates(cs);
                 analyzeCompoundStatement(cs);
             }
         }
@@ -44,10 +54,49 @@ public class TemplateNotFoundDetector implements ErrorDetector {
         this.baseDir = new File(filePath).getParent();
     }
 
+    private void collectInlineTemplates(CompoundStatement cs) {
+        if (cs == null) return;
+        if (cs instanceof TemplateLiteralAssignmentStatement ta) {
+            if (ta.var != null) {
+                String name = extractVarName(ta.var);
+                if (name != null) {
+                    inlineTemplateVars.add(name);
+                }
+            }
+        } else if (cs instanceof ClassDefinition cd) {
+            if (cd.classBody != null && cd.classBody.compoundStatements != null) {
+                for (CompoundStatement child : cd.classBody.compoundStatements) {
+                    collectInlineTemplates(child);
+                }
+            }
+        } else if (cs instanceof FunctionDefinition fd) {
+            if (fd.functionBody != null && fd.functionBody.compoundStatements != null) {
+                for (CompoundStatement child : fd.functionBody.compoundStatements) {
+                    collectInlineTemplates(child);
+                }
+            }
+        }
+    }
+
+    private String extractVarName(PythonExpression expr) {
+        if (expr instanceof SimpleVariable sv) {
+            return sv.getVarName();
+        }
+        if (expr instanceof ListAccess la) {
+            return la.getVarName();
+        }
+        if (expr instanceof DictionaryAccess da) {
+            return da.getVarName();
+        }
+        return null;
+    }
+
     private void analyzeCompoundStatement(CompoundStatement cs) {
         if (cs == null) return;
         if (cs instanceof FunctionDefinition fd) {
             if (fd.functionBody != null) analyzeStatement(fd.functionBody);
+        } else if (cs instanceof ClassDefinition cd) {
+            if (cd.classBody != null) analyzeStatement(cd.classBody);
         } else if (cs instanceof IfStatement is) {
             if (is.statement != null) analyzeStatement(is.statement);
             if (is.elifStatements != null) {
@@ -87,6 +136,13 @@ public class TemplateNotFoundDetector implements ErrorDetector {
                             templateName = s.replace("\"", "").replace("'", "");
                         }
                     }
+                } else if (fc.argumentsList instanceof ComplexArguments ca) {
+                    if (ca.getArguments() != null && !ca.getArguments().isEmpty()) {
+                        Argument first = ca.getArguments().get(0);
+                        if (first instanceof PositionalArgument pa && pa.getArg() != null) {
+                            templateName = extractTemplateNameFromExpr(pa.getArg());
+                        }
+                    }
                 }
                 if (templateName != null) {
                     templatesRendered.add(templateName);
@@ -95,8 +151,33 @@ public class TemplateNotFoundDetector implements ErrorDetector {
         }
     }
 
+    private String extractTemplateNameFromExpr(PythonExpression expr) {
+        if (expr instanceof SimpleVariable sv) {
+            String val = sv.getVarName();
+            return val.replace("\"", "").replace("'", "");
+        }
+        return null;
+    }
+
+    private boolean isInlineTemplate(String tmpl) {
+        String nameNoExt = tmpl.contains(".") ? tmpl.substring(0, tmpl.lastIndexOf('.')) : tmpl;
+        String nameWithUnderscore = tmpl.replace(".", "_").replace("-", "_");
+        String lowerTmpl = tmpl.toLowerCase();
+        String lowerNoExt = nameNoExt.toLowerCase();
+        String lowerUnderscore = nameWithUnderscore.toLowerCase();
+        for (String varName : inlineTemplateVars) {
+            String lowerVar = varName.toLowerCase();
+            if (lowerVar.equals(lowerTmpl) || lowerVar.equals(lowerNoExt) || lowerVar.equals(lowerUnderscore)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void checkTemplatesExist() {
         for (String tmpl : templatesRendered) {
+            if (isInlineTemplate(tmpl)) continue;
+
             boolean found = false;
             String[] pathsToCheck = {
                     baseDir + File.separator + tmpl,

@@ -1,27 +1,26 @@
 package ast.condition;
 
 import ast.Consts;
-import ast.compundStmt.PythonExpression;
 
 public class NotExpression extends Condition {
-    public PythonExpression pythonExpression;
+    public Condition condition;
 
     public NotExpression(int line_number) {
         super("NotExpression", line_number);
     }
 
-    public void setPythonExpression(PythonExpression pythonExpression) {
-        this.pythonExpression = pythonExpression;
+    public void setCondition(Condition condition) {
+        this.condition = condition;
     }
 
     @Override
     public String symbolTablePrint() {
-        return "not " + pythonExpression.symbolTablePrint();
+        return "not " + (condition != null ? condition.symbolTablePrint() : "None");
     }
 
     @Override
     public String toString() {
         return super.toString() + Consts.printIndent(1) +
-                pythonExpression.toString();
+                (condition != null ? condition.toString() : "None");
     }
 }

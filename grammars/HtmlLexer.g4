@@ -1,6 +1,5 @@
 lexer grammar HtmlLexer;
 
-@header {package antlr.html;}
 
 JINJA_EXPR_START: '{{' -> pushMode(JINJA_MODE);
 JINJA_STMT_START: '{%' -> pushMode(JINJA_MODE);
@@ -36,6 +35,10 @@ SEA_WS
 
 STYLE_OPEN
     : '<style' ~'>'* '>' -> pushMode(STYLE_MODE)
+    ;
+
+SCRIPT_OPEN
+    : '<script' ~'>'* '>' -> pushMode(SCRIPT_MODE)
     ;
 
 TAG_OPEN
@@ -97,12 +100,28 @@ CSS_GT         : '>' ;
 CSS_HASH       : '#' ;
 CSS_HEX_COLOR  : '#' ( [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] )+ ;
 CSS_NUMBER     : ( '0' | [1-9] [0-9]* ) ( '.' [0-9]+ )? ;
-CSS_UNIT       : ( 'px' | 'fr' | '%' | 'em' | 'vh' | 'vw' | 'rem') ;
+CSS_UNIT       : ( 'px' | 'fr' | '%' | 'em' | 'vh' | 'vw' | 'rem' | 's' | 'ms') ;
 CSS_STRING     : '"' (~'"')* '"' | '\'' (~'\'')* '\'' ;
 CSS_ID         : [a-zA-Z] [a-zA-Z0-9\-]* ;
 CSS_Space      : [ \t\r\n]+ -> skip ;
 CSS_Comment    : '/*' .*? '*/' -> skip ;
 CSS_TILDE      : '~';
+CSS_UNIVERSAL  : '*';
+CSS_AT         : '@';
+CSS_MINUS      : '-';
+CSS_IMPORTANT  : '!important';
+
+// =================== SCRIPT MODE (JavaScript) ===================
+mode SCRIPT_MODE;
+
+SCRIPT_CLOSE
+    : '</script' ~'>'* '>' -> popMode
+    ;
+
+SCRIPT_CONTENT
+    : ~'<'+ 
+    ;
+
 // =================== JINJA MODE (Unified Jinja Logic) ===================
 
 mode JINJA_MODE;
@@ -116,8 +135,12 @@ J_ENDBLOCK   : 'endblock' ;
 J_FOR        : 'for'      ;
 J_ENDFOR     : 'endfor'   ;
 J_IF         : 'if'       ;
+J_ELIF       : 'elif'     ;
+J_ELSE       : 'else'     ;
 J_ENDIF      : 'endif'    ;
 J_IN         : 'in'       ;
+J_WITH       : 'with'     ;
+J_ENDWITH    : 'endwith'  ;
 J_LENGTH     : 'length'   ;
 J_OR         : 'or'       ;
 J_AND        : 'and'      ;
@@ -130,8 +153,11 @@ J_NONE       : 'none'     ;
 
 J_LPAREN     : '(' ;
 J_RPAREN     : ')' ;
+J_LBRACK     : '[' ;
+J_RBRACK     : ']' ;
 J_COMMA      : ',' ;
 J_DOT        : '.' ;
+J_COLON      : ':' ;
 J_PIPE       : '|' ;
 J_EQ         : '==' ;
 J_NEQ        : '!=' ;
@@ -147,5 +173,5 @@ J_WS         : [ \t\r\n]+ -> skip ;
 
 fragment
 TAG_NameChar
-    : ~[ \t\r\n"'<>/=-]
+    : ~[ \t\r\n"'<>/=]
     ;

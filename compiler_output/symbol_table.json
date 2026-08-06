@@ -1,0 +1,523 @@
+{
+  "python_symbols": {
+  "scopeName": "Global",
+  "entries": [
+    {
+      "name": "datetime",
+      "type": "Imported",
+      "value": "From datetime"
+    },
+    {
+      "name": "os",
+      "type": "Imported",
+      "value": "Direct"
+    },
+    {
+      "name": "Product",
+      "type": "Class",
+      "value": "Defined at line 5"
+    },
+    {
+      "name": "uuid",
+      "type": "Imported",
+      "value": "Direct"
+    }
+  ],
+  "children": [
+    {
+      "scopeName": "Class_Scope_Product",
+      "parent": "Global",
+      "entries": [
+        {
+          "name": "get_all",
+          "type": "Function",
+          "value": "Defined at line 35"
+        },
+        {
+          "name": "get_by_id",
+          "type": "Function",
+          "value": "Defined at line 40"
+        },
+        {
+          "name": "save",
+          "type": "Function",
+          "value": "Defined at line 29"
+        },
+        {
+          "name": "update",
+          "type": "Function",
+          "value": "Defined at line 62"
+        },
+        {
+          "name": "__init__",
+          "type": "Function",
+          "value": "Defined at line 10"
+        },
+        {
+          "name": "to_dict",
+          "type": "Function",
+          "value": "Defined at line 18"
+        },
+        {
+          "name": "delete",
+          "type": "Function",
+          "value": "Defined at line 45"
+        },
+        {
+          "name": "products",
+          "type": "Variable",
+          "value": "DictionaryLiteral"
+        }
+      ],
+      "children": [
+        {
+          "scopeName": "Function_Scope___init__",
+          "parent": "Class_Scope_Product",
+          "entries": [
+            {
+              "name": "image_filename",
+              "type": "Parameter",
+              "value": "Mixed"
+            },
+            {
+              "name": "price",
+              "type": "Parameter",
+              "value": "Mixed"
+            },
+            {
+              "name": "name",
+              "type": "Parameter",
+              "value": "Mixed"
+            },
+            {
+              "name": "self",
+              "type": "Variable",
+              "value": "MethodAccess"
+            },
+            {
+              "name": "details",
+              "type": "Parameter",
+              "value": "Mixed"
+            }
+          ],
+          "children": []
+        },
+        {
+          "scopeName": "Function_Scope_to_dict",
+          "parent": "Class_Scope_Product",
+          "entries": [
+            {
+              "name": "self",
+              "type": "Parameter",
+              "value": "Mixed"
+            }
+          ],
+          "children": []
+        },
+        {
+          "scopeName": "Function_Scope_save",
+          "parent": "Class_Scope_Product",
+          "entries": [
+            {
+              "name": "product",
+              "type": "Parameter",
+              "value": "Mixed"
+            },
+            {
+              "name": "cls",
+              "type": "Parameter",
+              "value": "Mixed"
+            }
+          ],
+          "children": []
+        },
+        {
+          "scopeName": "Function_Scope_get_all",
+          "parent": "Class_Scope_Product",
+          "entries": [
+            {
+              "name": "cls",
+              "type": "Parameter",
+              "value": "Mixed"
+            }
+          ],
+          "children": []
+        },
+        {
+          "scopeName": "Function_Scope_get_by_id",
+          "parent": "Class_Scope_Product",
+          "entries": [
+            {
+              "name": "product_id",
+              "type": "Parameter",
+              "value": "Mixed"
+            },
+            {
+              "name": "cls",
+              "type": "Parameter",
+              "value": "Mixed"
+            }
+          ],
+          "children": []
+        },
+        {
+          "scopeName": "Function_Scope_delete",
+          "parent": "Class_Scope_Product",
+          "entries": [
+            {
+              "name": "product_id",
+              "type": "Parameter",
+              "value": "Mixed"
+            },
+            {
+              "name": "cls",
+              "type": "Parameter",
+              "value": "Mixed"
+            }
+          ],
+          "children": [
+            {
+              "scopeName": "If_Block_Line_48",
+              "parent": "Function_Scope_delete",
+              "entries": [
+                {
+                  "name": "product",
+                  "type": "Variable",
+                  "value": "Subscript"
+                }
+              ],
+              "children": [
+                {
+                  "scopeName": "If_Block_Line_51",
+                  "parent": "If_Block_Line_48",
+                  "entries": [
+                    {
+                      "name": "image_path",
+                      "type": "Variable",
+                      "value": "MethodAccess"
+                    }
+                  ],
+                  "children": [
+                    {
+                      "scopeName": "If_Block_Line_53",
+                      "parent": "If_Block_Line_51",
+                      "entries": [],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "scopeName": "Function_Scope_update",
+          "parent": "Class_Scope_Product",
+          "entries": [
+            {
+              "name": "price",
+              "type": "Parameter",
+              "value": "Mixed"
+            },
+            {
+              "name": "product_id",
+              "type": "Parameter",
+              "value": "Mixed"
+            },
+            {
+              "name": "name",
+              "type": "Parameter",
+              "value": "Mixed"
+            },
+            {
+              "name": "details",
+              "type": "Parameter",
+              "value": "Mixed"
+            },
+            {
+              "name": "cls",
+              "type": "Parameter",
+              "value": "Mixed"
+            }
+          ],
+          "children": [
+            {
+              "scopeName": "If_Block_Line_65",
+              "parent": "Function_Scope_update",
+              "entries": [],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
+  "jinja_symbols": [
+{
+    "file": "add_product.html",
+    "extends": "base.html",
+    "blocks": [
+      {
+        "name": "title",
+        "line": 3
+      },
+      {
+        "name": "content",
+        "line": 5
+      }
+    ],
+    "loop_vars": [],
+    "read_vars": [],
+    "scope_tree": {
+      "scopeType": "TEMPLATE",
+      "entryLine": -1,
+      "symbols": [],
+      "children": [
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 3,
+          "symbols": [],
+          "children": []
+        },
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 5,
+          "symbols": [],
+          "children": []
+        }
+      ]
+    }
+  },
+{
+    "file": "base.html",
+    "extends": null,
+    "blocks": [
+      {
+        "name": "title",
+        "line": 6
+      },
+      {
+        "name": "extra_css",
+        "line": 114
+      },
+      {
+        "name": "content",
+        "line": 161
+      },
+      {
+        "name": "extra_js",
+        "line": 189
+      }
+    ],
+    "loop_vars": [],
+    "read_vars": [],
+    "scope_tree": {
+      "scopeType": "TEMPLATE",
+      "entryLine": -1,
+      "symbols": [],
+      "children": [
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 6,
+          "symbols": [],
+          "children": []
+        },
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 114,
+          "symbols": [],
+          "children": []
+        },
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 161,
+          "symbols": [],
+          "children": []
+        },
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 189,
+          "symbols": [],
+          "children": []
+        }
+      ]
+    }
+  },
+{
+    "file": "edit_product.html",
+    "extends": "base.html",
+    "blocks": [
+      {
+        "name": "title",
+        "line": 3
+      },
+      {
+        "name": "content",
+        "line": 5
+      }
+    ],
+    "loop_vars": [],
+    "read_vars": [],
+    "scope_tree": {
+      "scopeType": "TEMPLATE",
+      "entryLine": -1,
+      "symbols": [],
+      "children": [
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 3,
+          "symbols": [],
+          "children": []
+        },
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 5,
+          "symbols": [],
+          "children": []
+        }
+      ]
+    }
+  },
+{
+    "file": "index.html",
+    "extends": "base.html",
+    "blocks": [
+      {
+        "name": "title",
+        "line": 3
+      },
+      {
+        "name": "content",
+        "line": 5
+      }
+    ],
+    "loop_vars": [
+      {
+        "name": "product",
+        "line": 17
+      }
+    ],
+    "read_vars": [
+      {
+        "name": "products",
+        "line": 16
+      },
+      {
+        "name": "product.image_filename",
+        "line": 21
+      },
+      {
+        "name": "product.name",
+        "line": 31
+      },
+      {
+        "name": "product.details",
+        "line": 34
+      }
+    ],
+    "scope_tree": {
+      "scopeType": "TEMPLATE",
+      "entryLine": -1,
+      "symbols": [],
+      "children": [
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 3,
+          "symbols": [],
+          "children": []
+        },
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 5,
+          "symbols": [
+            {
+              "name": "products",
+              "kind": "TEMPLATE_VAR",
+              "type": "UNKNOWN",
+              "declaredLine": 16,
+              "initialized": false,
+              "mutable": true
+            }
+          ],
+          "children": [
+            {
+              "scopeType": "JINJA_FOR",
+              "entryLine": 17,
+              "symbols": [
+                {
+                  "name": "product",
+                  "kind": "LOOP_VAR",
+                  "type": "UNKNOWN",
+                  "declaredLine": 17,
+                  "initialized": true,
+                  "mutable": true
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+{
+    "file": "product_detail.html",
+    "extends": "base.html",
+    "blocks": [
+      {
+        "name": "title",
+        "line": 3
+      },
+      {
+        "name": "content",
+        "line": 5
+      }
+    ],
+    "loop_vars": [],
+    "read_vars": [
+      {
+        "name": "product.image_filename",
+        "line": 12
+      },
+      {
+        "name": "product.name",
+        "line": 26
+      },
+      {
+        "name": "product.details",
+        "line": 39
+      }
+    ],
+    "scope_tree": {
+      "scopeType": "TEMPLATE",
+      "entryLine": -1,
+      "symbols": [],
+      "children": [
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 3,
+          "symbols": [],
+          "children": []
+        },
+        {
+          "scopeType": "JINJA_BLOCK",
+          "entryLine": 5,
+          "symbols": [
+            {
+              "name": "product",
+              "kind": "TEMPLATE_VAR",
+              "type": "UNKNOWN",
+              "declaredLine": 12,
+              "initialized": false,
+              "mutable": true
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  }
+]
+
+}

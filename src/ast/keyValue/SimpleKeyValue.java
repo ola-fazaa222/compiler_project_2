@@ -4,7 +4,7 @@ import ast.simpleExpr.SimpleExpression;
 
 public class SimpleKeyValue extends KeyValue {
 
-    SimpleExpression value;
+    public SimpleExpression value;
 
     public SimpleKeyValue(int line_number) {
         super("SimpleKeyValue", line_number);

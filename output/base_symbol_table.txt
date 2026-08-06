@@ -1,5 +1,15 @@
-========== JINJA SYMBOL TABLE ==========
+========== JINJA SYMBOL TABLE (SCOPE-BASED) ==========
 
 --- Blocks ---
-  Line 24: content
+  Line 6: title
+  Line 114: extra_css
+  Line 161: content
+  Line 189: extra_js
+
+--- Scope Tree ---
+Scope[TEMPLATE_Line_-1] symbols=[]
+  Scope[JINJA_BLOCK_Line_6] symbols=[]
+  Scope[JINJA_BLOCK_Line_114] symbols=[]
+  Scope[JINJA_BLOCK_Line_161] symbols=[]
+  Scope[JINJA_BLOCK_Line_189] symbols=[]
 

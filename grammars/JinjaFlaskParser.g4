@@ -1,8 +1,5 @@
 parser grammar JinjaFlaskParser;
 
-@header {package antlr;}
-
-
 options { tokenVocab=JinjaFlaskLexer; }
 
 prog
@@ -22,9 +19,14 @@ compound_stmt
     | for_loop     NEWLINE?      # ForLoopStatement
     | python_expr  NEWLINE?      # PythonExpression
     | func_def     NEWLINE?      # FunctionDefinition
+    | class_def    NEWLINE?      # ClassDefinition
     | return_stmt  NEWLINE?      # ReturnStatement
     | import_from  NEWLINE?      # ImportStatement
     | global_stmt  NEWLINE?      # GlobalStatement
+    ;
+
+class_def
+    : CLASS (NAME | CLASS_NAME) (LP arglist? RP)? COLON statement
     ;
 
 return_stmt
@@ -215,12 +217,14 @@ selector_decl
 
 css_selector_list
     : css_selector (CSS_GT  css_selector )* # CssSelectorList
+    | css_selector css_selector+            # CssDescendantSelector
     ;
 
 css_selector
     : CSS_ID ( CSS_DOT CSS_ID )*                    # QualifiedSelector
     | ( CSS_DOT CSS_ID CSS_ID? )+                   # StandaloneSimpleSelector
     | CSS_ID (CSS_HASH CSS_ID)*                     # TypeAndIdSelector
+    | CSS_UNIVERSAL                                 # UniversalSelector
     | CSS_ID                                        # TypeSelector
     ;
 
@@ -229,7 +233,7 @@ declarationList
     ;
 
 declaration
-    : CSS_ID  CSS_COLON  cssterm+  CSS_SEMI # CssDeclaration
+    : CSS_ID  CSS_COLON  cssterm+  CSS_IMPORTANT? CSS_SEMI # CssDeclaration
     ;
 
 css_function_args
@@ -285,6 +289,10 @@ j_for_stmt
 j_if_stmt
     : J_IF j_expression JINJA_STMT_END
       html_content
+      ( JINJA_STMT_START J_ELIF j_expression JINJA_STMT_END
+        html_content )*
+      ( JINJA_STMT_START J_ELSE JINJA_STMT_END
+        html_content )?
       JINJA_STMT_START J_ENDIF JINJA_STMT_END   # JinjaIfStmtDef
     ;
 
@@ -294,14 +302,21 @@ j_expression
     ;
 
 j_call_expr
-    : j_var_access ( J_PIPE (J_NAME | J_LENGTH) )? # JinjaFilteredExpr
-    | J_NAME J_LPAREN j_argument_list? J_RPAREN    # JinjaFunctionCall
-    | j_var_access                                 # JinjaVarAccessOnly
-    | j_atom                                       # JinjaAtomOnly
+    : j_call_expr J_PIPE j_call_expr                    # JinjaFilteredExpr
+    | j_var_access J_LPAREN j_argument_list? J_RPAREN   # JinjaMethodCall
+    | J_NAME J_LPAREN j_argument_list? J_RPAREN         # JinjaFunctionCall
+    | j_call_expr J_LBRACK j_slice? J_RBRACK            # JinjaSliceAccess
+    | j_var_access                                      # JinjaVarAccessOnly
+    | j_atom                                            # JinjaAtomOnly
+    ;
+
+j_slice
+    : j_expression ( J_COLON j_expression? )?
+    | J_COLON j_expression?
     ;
 
 j_var_access
-    : J_NAME ( J_DOT J_NAME )*  # JinjaVarAccessOnlyDef
+    : (J_NAME | J_LENGTH) ( J_DOT (J_NAME | J_LENGTH) )*  # JinjaVarAccessOnlyDef
     ;
 
 j_argument_list
@@ -320,4 +335,5 @@ j_atom
     | J_FALSE  # JinjaFalseAtom
     | J_NONE   # JinjaNoneAtom
     | J_NAME   # JinjaNameAtom
+    | J_LENGTH # JinjaLengthAtom
     ;

@@ -15,13 +15,19 @@ public class DictionaryLiteral extends ComplexExpression {
         this.keyValues = keyValues;
     }
 
+    public List<KeyValue> getKeyValues() {
+        return keyValues;
+    }
+
     @Override
     public String symbolTablePrint() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(" { ");
-        for (KeyValue keyValue : keyValues) {
-            stringBuilder.append(keyValue.symbolTablePrint())
-                    .append((keyValues.indexOf(keyValue) == (keyValues.size() - 1)) ? "" : ", ");
+        if (keyValues != null) {
+            for (KeyValue keyValue : keyValues) {
+                stringBuilder.append(keyValue.symbolTablePrint())
+                        .append((keyValues.indexOf(keyValue) == (keyValues.size() - 1)) ? "" : ", ");
+            }
         }
         stringBuilder.append(" }");
         return stringBuilder.toString();
@@ -31,9 +37,11 @@ public class DictionaryLiteral extends ComplexExpression {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(super.toString()).append(" { ");
-        for (KeyValue keyValue : keyValues) {
-            stringBuilder.append(keyValue.toString())
-                    .append((keyValues.indexOf(keyValue) == (keyValues.size() - 1)) ? "" : ", ");
+        if (keyValues != null) {
+            for (KeyValue keyValue : keyValues) {
+                stringBuilder.append(keyValue.toString())
+                        .append((keyValues.indexOf(keyValue) == (keyValues.size() - 1)) ? "" : ", ");
+            }
         }
         stringBuilder.append(" }");
         return stringBuilder.toString();

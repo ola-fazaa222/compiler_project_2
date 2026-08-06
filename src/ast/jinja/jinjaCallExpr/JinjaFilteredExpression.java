@@ -17,7 +17,7 @@ public class JinjaFilteredExpression extends JinjaCallExpression{
 
     @Override
     public String toString() {
-        return super.toString() + " ( " + jinjaVariableAccess.toString()
+        return super.toString() + " ( " + (jinjaVariableAccess != null ? jinjaVariableAccess.toString() : "?")
                 + (filterName != null ? (" | " + filterName) : "") + " ) ";
     }
 }

@@ -21,6 +21,6 @@ public class JinjaBlockStatement extends JinjaStatement {
     @Override
     public String toString() {
         return super.toString() +
-                " ( " + blockName + Consts.printIndent(3) + htmlContent.toString();
+                " ( " + blockName + (htmlContent != null ? Consts.printIndent(3) + htmlContent.toString() : "");
     }
 }

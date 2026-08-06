@@ -61,6 +61,19 @@ public class StyleSheetVisitor extends CssParserBaseVisitor<ASTNode> {
     }
 
     @Override
+    public CssSelectorList visitCssDescendantSelector(CssParser.CssDescendantSelectorContext ctx) {
+        CssSelectorList cssSelectorList = new CssSelectorList(ctx.getStart().getLine());
+        CssSelectorVisitor cssSelectorVisitor = new CssSelectorVisitor();
+        List<CssSelector> cssSelectors = new ArrayList<>();
+        for (int i = 0; i < ctx.css_selector().size(); i++) {
+            CssSelector cssSelector = cssSelectorVisitor.visit(ctx.css_selector(i));
+            cssSelectors.add(cssSelector);
+        }
+        cssSelectorList.setSelectors(cssSelectors);
+        return cssSelectorList;
+    }
+
+    @Override
     public CssDeclarationList visitDeclarationBlock(CssParser.DeclarationBlockContext ctx) {
         CssDeclarationList cssDeclarationList = new CssDeclarationList(ctx.start.getLine());
         List<CssDeclaration> declarations = new ArrayList<>();
@@ -80,9 +93,12 @@ public class StyleSheetVisitor extends CssParserBaseVisitor<ASTNode> {
         CssDeclaration cssDeclaration = new CssDeclaration(ctx.start.getLine());
         CssTermVisitor cssTermVisitor = new CssTermVisitor();
         List<CssTerm> terms = new ArrayList<>();
-        for (int i = 0; i < ctx.cssterm().size(); i++) {
-            CssTerm cssTerm = cssTermVisitor.visit(ctx.cssterm(i));
-            terms.add(cssTerm);
+        CssParser.Css_valueContext valueCtx = ctx.css_value();
+        if (valueCtx != null) {
+            for (int i = 0; i < valueCtx.cssterm().size(); i++) {
+                CssTerm cssTerm = cssTermVisitor.visit(valueCtx.cssterm(i));
+                terms.add(cssTerm);
+            }
         }
         cssDeclaration.setCssTermList(terms);
         cssDeclaration.setId(ctx.CSS_ID().getText());

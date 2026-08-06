@@ -23,8 +23,8 @@ public class JinjaIfStatement extends JinjaStatement {
     @Override
     public String toString() {
         return super.toString() +
-                " ( " + condition.toString() + " ) " +
-                Consts.printIndent(3) + htmlContent.toString();
+                " ( " + (condition != null ? condition.toString() : "?") + " ) " +
+                (htmlContent != null ? Consts.printIndent(3) + htmlContent.toString() : "");
     }
 }
 

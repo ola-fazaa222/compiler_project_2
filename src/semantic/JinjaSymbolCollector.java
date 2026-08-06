@@ -8,19 +8,24 @@ import ast.jinja.jinjaCallExpr.*;
 import ast.jinja.jinjaExpression.*;
 import ast.jinja.jinjaStatment.*;
 import ast.tagContent.TagElementItem;
+import symbolTable.*;
 
 import java.util.*;
 
 public class JinjaSymbolCollector {
 
-    private final Map<String, Integer> definedVars = new LinkedHashMap<>();
+    private Scope rootScope;
+    private Scope currentScope;
+    private final Map<String, Integer> readVars = new LinkedHashMap<>();
     private final Map<String, Integer> loopVars = new LinkedHashMap<>();
     private final Map<String, Integer> blocks = new LinkedHashMap<>();
-    private final Map<String, Integer> readVars = new LinkedHashMap<>();
     private String extendsTemplate = null;
     private int extendsLine = -1;
 
     public void analyze(HtmlContent htmlContent) {
+        rootScope = new Scope(null, ScopeType.TEMPLATE, -1);
+        currentScope = rootScope;
+
         if (htmlContent != null && htmlContent.items != null) {
             for (HtmlContentItem item : htmlContent.items) {
                 traverseItem(item);
@@ -41,11 +46,17 @@ public class JinjaSymbolCollector {
             // no jinja vars in raw CSS
         } else if (item instanceof JinjaBlockStatement jbs) {
             blocks.putIfAbsent(jbs.blockName, jbs.line_number);
+
+            Scope previous = currentScope;
+            currentScope = new Scope(currentScope, ScopeType.JINJA_BLOCK, jbs.line_number);
+
             if (jbs.htmlContent != null && jbs.htmlContent.items != null) {
                 for (HtmlContentItem child : jbs.htmlContent.items) {
                     traverseItem(child);
                 }
             }
+
+            currentScope = previous;
         } else if (item instanceof JinjaIfStatement jis) {
             collectVariablesFromExpr(jis.condition);
             if (jis.htmlContent != null && jis.htmlContent.items != null) {
@@ -54,13 +65,28 @@ public class JinjaSymbolCollector {
                 }
             }
         } else if (item instanceof JinjaForStatement jfs) {
-            loopVars.putIfAbsent(jfs.id, jfs.line_number);
+            if (jfs.ids != null) {
+                for (String id : jfs.ids) {
+                    loopVars.putIfAbsent(id, jfs.line_number);
+                }
+            }
+
+            Scope previous = currentScope;
+            currentScope = new Scope(currentScope, ScopeType.JINJA_FOR, jfs.line_number);
+            if (jfs.ids != null) {
+                for (String id : jfs.ids) {
+                    currentScope.define(id, SymbolKind.LOOP_VAR, jfs.line_number);
+                }
+            }
+
             collectVariablesFromExpr(jfs.iterable);
             if (jfs.htmlContent != null && jfs.htmlContent.items != null) {
                 for (HtmlContentItem child : jfs.htmlContent.items) {
                     traverseItem(child);
                 }
             }
+
+            currentScope = previous;
         } else if (item instanceof JinjaExtendStatement jes) {
             extendsTemplate = jes.extended;
             extendsLine = jes.line_number;
@@ -86,11 +112,32 @@ public class JinjaSymbolCollector {
         if (expr == null) return;
         if (expr instanceof JinjaVariableAccess jva) {
             if (jva.dottedName != null && !jva.dottedName.isEmpty()) {
+                String baseVar = jva.dottedName.contains(".")
+                        ? jva.dottedName.substring(0, jva.dottedName.indexOf('.'))
+                        : jva.dottedName;
                 readVars.putIfAbsent(jva.dottedName, jva.line_number);
+
+                if (currentScope != null) {
+                    Symbol existing = currentScope.resolve(baseVar);
+                    if (existing == null) {
+                        currentScope.define(baseVar, SymbolKind.TEMPLATE_VAR, jva.line_number);
+                    }
+                }
             }
         } else if (expr instanceof JinjaFilteredExpression jfe) {
             if (jfe.jinjaVariableAccess != null && jfe.jinjaVariableAccess.dottedName != null) {
-                readVars.putIfAbsent(jfe.jinjaVariableAccess.dottedName, jfe.jinjaVariableAccess.line_number);
+                String dotted = jfe.jinjaVariableAccess.dottedName;
+                readVars.putIfAbsent(dotted, jfe.jinjaVariableAccess.line_number);
+
+                String baseVar = dotted.contains(".")
+                        ? dotted.substring(0, dotted.indexOf('.'))
+                        : dotted;
+                if (currentScope != null) {
+                    Symbol existing = currentScope.resolve(baseVar);
+                    if (existing == null) {
+                        currentScope.define(baseVar, SymbolKind.TEMPLATE_VAR, jfe.jinjaVariableAccess.line_number);
+                    }
+                }
             }
         } else if (expr instanceof JinjaFunctionCall jfc) {
             if (jfc.argumentsList != null && jfc.argumentsList.arguments != null) {
@@ -101,6 +148,10 @@ public class JinjaSymbolCollector {
                 }
             }
         }
+    }
+
+    public Scope getRootScope() {
+        return rootScope;
     }
 
     public Map<String, Integer> getReadVars() {
@@ -116,7 +167,7 @@ public class JinjaSymbolCollector {
     }
 
     public void printTable() {
-        System.out.println("========== JINJA SYMBOL TABLE ==========");
+        System.out.println("========== JINJA SYMBOL TABLE (SCOPE-BASED) ==========");
 
         if (extendsTemplate != null) {
             System.out.println("\n--- Template Extends ---");
@@ -145,10 +196,26 @@ public class JinjaSymbolCollector {
             }
         }
 
+        if (rootScope != null) {
+            System.out.println("\n--- Scope Tree ---");
+            printScope(rootScope, 0);
+        }
+
         if (extendsTemplate == null && blocks.isEmpty() && loopVars.isEmpty() && readVars.isEmpty()) {
             System.out.println("  (no Jinja symbols found)");
         }
 
         System.out.println();
+    }
+
+    private void printScope(Scope scope, int level) {
+        String indent = "  ".repeat(level);
+        System.out.println(indent + scope.toString());
+        for (Symbol sym : scope.getSymbolsInScope()) {
+            System.out.println(indent + "  " + sym);
+        }
+        for (Scope child : scope.children) {
+            printScope(child, level + 1);
+        }
     }
 }

@@ -1,4 +1,4 @@
-// Generated from C:/Users/Yousef Razzouk/IdeaProjects/compiler_project/grammars/CssParser.g4 by ANTLR 4.13.2
+// Generated from /home/ghifar/Downloads/Telegram Desktop/compiler/psychic-broccoli-main/grammars/CssParser.g4 by ANTLR 4.13.2
 package antlr.css;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -39,6 +39,13 @@ public interface CssParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCssSelectorList(CssParser.CssSelectorListContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code CssDescendantSelector}
+	 * labeled alternative in {@link CssParser#css_selector_list}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCssDescendantSelector(CssParser.CssDescendantSelectorContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code QualifiedSelector}
 	 * labeled alternative in {@link CssParser#css_selector}.
 	 * @param ctx the parse tree
@@ -60,6 +67,13 @@ public interface CssParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTypeAndIdSelector(CssParser.TypeAndIdSelectorContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code UniversalSelector}
+	 * labeled alternative in {@link CssParser#css_selector}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUniversalSelector(CssParser.UniversalSelectorContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code TypeSelector}
 	 * labeled alternative in {@link CssParser#css_selector}.
 	 * @param ctx the parse tree
@@ -80,6 +94,12 @@ public interface CssParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCssDeclaration(CssParser.CssDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CssParser#css_value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCss_value(CssParser.Css_valueContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code FunctionArguments}
 	 * labeled alternative in {@link CssParser#css_function_args}.
@@ -136,4 +156,18 @@ public interface CssParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIdentifierTerm(CssParser.IdentifierTermContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CssAtKeyframes}
+	 * labeled alternative in {@link CssParser#css_at_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCssAtKeyframes(CssParser.CssAtKeyframesContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CssAtKeyframeBlock}
+	 * labeled alternative in {@link CssParser#css_at_rule_body}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCssAtKeyframeBlock(CssParser.CssAtKeyframeBlockContext ctx);
 }

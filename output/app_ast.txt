@@ -1,92 +1,181 @@
 Program [Line: 1]
-|   ImportStatement [Line: 1], ( module_name :  )
+|   ImportStatement [Line: 1], ( module_name : flask )
 |   |   Imported [Line: 1], ( name : Flask )
 |   |   Imported [Line: 1], ( name : render_template )
 |   |   Imported [Line: 1], ( name : request )
 |   |   Imported [Line: 1], ( name : redirect )
 |   |   Imported [Line: 1], ( name : url_for )
-|   PythonExpressionAssignStatement [Line: 3]
-|   |   SimpleVariable [Line: 3] ( app  )  = 
-|   |   ObjectCreation [Line: 3] ( Flask __name__ ) 
-|   PythonExpressionAssignStatement [Line: 6]
-|   |   SimpleVariable [Line: 6] ( products  )  = 
-|   |   ListLiteral [Line: 6] ( [  ] ) 
-|   TemplateLiteralAssignmentStatement [Line: 8]
-|   |   SimpleVariable [Line: 8] ( multi  )  = 
-|   |   TemplateLiteral [Line: 8]
-|   |   |   hello world ) 
-|   FunctionDefinition [Line: 12]( duplicate_func() ) 
-|   |   return SimpleVariable [Line: 13] ( 1  ) 
-|   FunctionDefinition [Line: 15]( duplicate_func() ) 
-|   |   return SimpleVariable [Line: 16] ( 2  ) 
-|   FunctionCall [Line: 19] ( undefined_function ( undefined_var )
-|   FunctionDefinition [Line: 22]( infinite_rec() ) 
-|   |   return FunctionCall [Line: 23] ( infinite_rec (  )
-|   FunctionDefinition [Line: 26]( add(a,b) ) 
-|   |   return SimpleVariable [Line: 27] ( 1  ) 
-|   PythonExpressionAssignStatement [Line: 29]
-|   |   SimpleVariable [Line: 29] ( result  )  = 
-|   |   FunctionCall [Line: 29] ( add ( 5 )
-|   FunctionDefinition [Line: 32]( unreachable() ) 
-|   |   return SimpleVariable [Line: 33] ( 1  ) 
-|   FunctionCall [Line: 34] ( print ( "test" )
-|   FunctionDefinition [Line: 37]( before_init() ) 
-|   |   FunctionCall [Line: 38] ( print ( z )
-|   PythonExpressionAssignStatement [Line: 39]
-|   |   SimpleVariable [Line: 39] ( z  )  = 
-|   |   SimpleVariable [Line: 39] ( 10  ) 
-|   FunctionDefinition [Line: 42]( type_mismatch() ) 
-|   |   PythonExpressionAssignStatement [Line: 43]
-|   |   SimpleVariable [Line: 43] ( age  )  = 
-|   |   SimpleVariable [Line: 43] ( "20"  ) 
-|   SimpleVariable [Line: 44] ( age  ) +SimpleVariable [Line: 44] ( 5  ) 
-|   FunctionDefinition [Line: 47]( template_error() ) 
-|   |   return FunctionCall [Line: 48] ( render_template ( "nonexistent.html" )
-|   FunctionDefinition [Line: 50]( index() ) 
-|   |   return FunctionCall [Line: 52] ( render_template ( SimpleVariable [Line: 52] ( "index.html"  ) , products = SimpleVariable [Line: 52] ( products  )  )
-|   FunctionDefinition [Line: 55]( add_product() ) 
-|   |   IfStatement [Line: 57], ( ComparisonExpression [Line: 57]
-|   |   |   AttributeAccess [Line: 57] ( request .method ) 
-|   |   |   == SimpleVariable [Line: 57] ( "POST"  )  )
-|   |   PythonExpressionAssignStatement [Line: 58]
-|   |   SimpleVariable [Line: 58] ( name  )  = 
-|   |   MethodAccess [Line: 58] ( request .MethodAccess [Line: 58] ( form .FunctionCall [Line: 58] ( get ( "name" ) )  ) 
+|   |   Imported [Line: 1], ( name : flash )
+|   ImportStatement [Line: 2], ( module_name : werkzeug.utils )
+|   |   Imported [Line: 2], ( name : secure_filename )
+|   ImportStatement [Line: 3], ( module_name : os )
+|   |   Imported [Line: 3], ( name : os )
+|   ImportStatement [Line: 4], ( module_name : models )
+|   |   Imported [Line: 4], ( name : Product )
+|   ImportStatement [Line: 5], ( module_name : forms )
+|   |   Imported [Line: 5], ( name : ProductForm )
+|   PythonExpressionAssignStatement [Line: 7]
+|   |   SimpleVariable [Line: 7] ( app  )  = 
+|   |   FunctionCall [Line: 7] ( Flask ( __name__ )
+|   PythonExpressionAssignStatement [Line: 8]
+|   |   Subscript [Line: 8] ( null  ( MethodAccess [Line: 8] ( app .SimpleVariable [Line: 8] ( config  )  )  [ 'SECRET_KEY' ] ) = 
+|   |   SimpleVariable [Line: 8] ( 'your-secret-key-here-change-this'  ) 
+|   PythonExpressionAssignStatement [Line: 9]
+|   |   Subscript [Line: 9] ( null  ( MethodAccess [Line: 9] ( app .SimpleVariable [Line: 9] ( config  )  )  [ 'UPLOAD_FOLDER' ] ) = 
+|   |   SimpleVariable [Line: 9] ( 'static/uploads'  ) 
+|   ArithmeticAssignStatement [Line: 10]
+|   |   Subscript [Line: 10] ( null  ( MethodAccess [Line: 10] ( app .SimpleVariable [Line: 10] ( config  )  )  [ 'MAX_CONTENT_LENGTH' ] ) = 
+|   |   SimpleVariable [Line: 10] ( 16  ) *SimpleVariable [Line: 10] ( 1024  ) *SimpleVariable [Line: 10] ( 1024  )  ) 
+|   MethodAccess [Line: 13] ( os .FunctionCall [Line: 13] ( makedirs ( Subscript [Line: 13] ( null  ( MethodAccess [Line: 13] ( app .SimpleVariable [Line: 13] ( config  )  )  [ 'UPLOAD_FOLDER' ] ), exist_ok = SimpleVariable [Line: 13] ( True  )  ) ) 
+|   PythonExpressionAssignStatement [Line: 16]
+|   |   SimpleVariable [Line: 16] ( ALLOWED_EXTENSIONS  )  = 
+|   |   {SimpleVariable [Line: 16] ( 'png'  ) , SimpleVariable [Line: 16] ( 'jpg'  ) , SimpleVariable [Line: 16] ( 'jpeg'  ) , SimpleVariable [Line: 16] ( 'gif'  ) , SimpleVariable [Line: 16] ( 'webp'  ) }
+|   FunctionDefinition [Line: 18]( allowed_file(filename) ) 
+|   |   SimpleVariable [Line: 19] ( """التحقق من امتداد الملف المسموح"""  ) 
+|   return  ( return AndCondition [Line: 20]
+|   ComparisonExpression [Line: 20]
+|   |   |   SimpleVariable [Line: 20] ( '.'  ) 
+|   |   |   in SimpleVariable [Line: 20] ( filename  ) 
+|   and
+|   ComparisonExpression [Line: 20]
+|   |   |   MethodAccess [Line: 20] ( filename.rsplit('.',1)[1] .FunctionCall [Line: 20] ( lower (  ) ) 
+|   |   |   in SimpleVariable [Line: 20] ( ALLOWED_EXTENSIONS  )  ) 
+|   FunctionDefinition [Line: 23]( init_sample_products() ) 
+|   |   SimpleVariable [Line: 24] ( """دالة لإضافة منتجات تجريبية"""  ) 
+|   IfStatement [Line: 25], ( NotExpression [Line: 25]
+|   ComparisonExpression [Line: 25]
+|   |   |   MethodAccess [Line: 25] ( Product .FunctionCall [Line: 25] ( get_all (  ) )  )
+|   |   PythonExpressionAssignStatement [Line: 26]
+|   |   SimpleVariable [Line: 26] ( sample_products  )  = 
+|   |   ListLiteral [Line: -1] ( [ FunctionCall [Line: 27] ( Product ( 'لابتوب احترافي', 2499, 'لابتوب عالي الأداء معالج Intel Core i7، رام 16GB، SSD 512GB', '2798cfc20e70ca87_png' ), FunctionCall [Line: 28] ( Product ( 'هاتف ذكي', 1899, 'هاتف بشاشة 6.7 بوصة، كاميرا 108 ميجابكسل، بطارية 5000mAh', 'c700ec1070dd55e8_17.png' ), FunctionCall [Line: 29] ( Product ( 'سماعات لاسلكية', 299, 'سماعات بلوتوث مع عزل الضوضاء، عمر بطارية 30 ساعة', '1e9830f6401fc017_png' ) ] ) 
+|   ForLoop [Line: 31] ( product in SimpleVariable [Line: 31] ( sample_products  )  ) 
+|   FunctionCall [Line: 35] ( init_sample_products (  )
+|   FunctionDefinition [Line: 37]( Decorator [Line: 37] ( @app.route( '/') index() ) 
+|   |   SimpleVariable [Line: 39] ( """الصفحة الرئيسية - عرض جميع المنتجات"""  ) 
+|   PythonExpressionAssignStatement [Line: 40]
+|   |   SimpleVariable [Line: 40] ( products  )  = 
+|   |   MethodAccess [Line: 40] ( Product .FunctionCall [Line: 40] ( get_all (  ) ) 
+|   MethodAccess [Line: 42] ( products .FunctionCall [Line: 42] ( reverse (  ) ) 
+|   return  ( return ComparisonExpression [Line: 43]
+|   |   |   FunctionCall [Line: 43] ( render_template ( SimpleVariable [Line: 43] ( 'index.html'  ) , products = SimpleVariable [Line: 43] ( products  )  ) ) 
+|   FunctionDefinition [Line: 45]( Decorator [Line: 45] ( @app.route( SimpleVariable [Line: 45] ( '/product/add'  ) , methods = ListLiteral [Line: -1] ( [ SimpleVariable [Line: 45] ( 'GET'  ) , SimpleVariable [Line: 45] ( 'POST'  )  ] ) ) add_product() ) 
+|   |   SimpleVariable [Line: 47] ( """صفحة إضافة منتج جديد"""  ) 
+|   PythonExpressionAssignStatement [Line: 48]
+|   |   SimpleVariable [Line: 48] ( form  )  = 
+|   |   FunctionCall [Line: 48] ( ProductForm (  )
+|   IfStatement [Line: 50], ( ComparisonExpression [Line: 50]
+|   |   |   MethodAccess [Line: 50] ( form .FunctionCall [Line: 50] ( validate_on_submit (  ) )  )
+|   |   PythonExpressionAssignStatement [Line: 52]
+|   |   SimpleVariable [Line: 52] ( image_filename  )  = 
+|   |   SimpleVariable [Line: 52] ( None  ) 
+|   IfStatement [Line: 53], ( AndCondition [Line: 53]
+|   ComparisonExpression [Line: 53]
+|   |   |   MethodAccess [Line: 53] ( form .SimpleVariable [Line: 53] ( image  ) .SimpleVariable [Line: 53] ( data  )  ) 
+|   and
+|   ComparisonExpression [Line: 53]
+|   |   |   FunctionCall [Line: 53] ( allowed_file ( MethodAccess [Line: 53] ( form .SimpleVariable [Line: 53] ( image  ) .SimpleVariable [Line: 53] ( data  ) .SimpleVariable [Line: 53] ( filename  )  )  ) )
+|   |   PythonExpressionAssignStatement [Line: 54]
+|   |   SimpleVariable [Line: 54] ( filename  )  = 
+|   |   FunctionCall [Line: 54] ( secure_filename ( MethodAccess [Line: 54] ( form .SimpleVariable [Line: 54] ( image  ) .SimpleVariable [Line: 54] ( data  ) .SimpleVariable [Line: 54] ( filename  )  )  )
+|   PythonExpressionAssignStatement [Line: 56]
+|   |   SimpleVariable [Line: 56] ( unique_filename  )  = 
+|   |   FStringAtomExpression [Line: 56] ( null  ( f"{str(os.urandom(8).hex())}_{filename}" ) 
+|   PythonExpressionAssignStatement [Line: 57]
+|   |   SimpleVariable [Line: 57] ( filepath  )  = 
+|   |   MethodAccess [Line: 57] ( os .SimpleVariable [Line: 57] ( path  ) .FunctionCall [Line: 57] ( join ( Subscript [Line: 57] ( null  ( MethodAccess [Line: 57] ( app .SimpleVariable [Line: 57] ( config  )  )  [ 'UPLOAD_FOLDER' ] ), SimpleVariable [Line: 57] ( unique_filename  )  ) ) 
+|   MethodAccess [Line: 58] ( form .SimpleVariable [Line: 58] ( image  ) .SimpleVariable [Line: 58] ( data  ) .FunctionCall [Line: 58] ( save ( filepath ) ) 
 |   PythonExpressionAssignStatement [Line: 59]
-|   |   SimpleVariable [Line: 59] ( price  )  = 
-|   |   MethodAccess [Line: 59] ( request .MethodAccess [Line: 59] ( form .FunctionCall [Line: 59] ( get ( "price" ) )  ) 
-|   PythonExpressionAssignStatement [Line: 60]
-|   |   SimpleVariable [Line: 60] ( description  )  = 
-|   |   MethodAccess [Line: 60] ( request .MethodAccess [Line: 60] ( form .FunctionCall [Line: 60] ( get ( "description" ) )  ) 
-|   PythonExpressionAssignStatement [Line: 61]
-|   |   SimpleVariable [Line: 61] ( specification  )  = 
-|   |   MethodAccess [Line: 61] ( request .MethodAccess [Line: 61] ( form .FunctionCall [Line: 61] ( get ( "specification" ) )  ) 
-|   ComparisonAssignStmt [Line: 62]
-|   |   SimpleVariable [Line: 62] ( img  )  = 
-|   |   ComparisonExpression [Line: 62]
-|   |   |   MethodAccess [Line: 62] ( request .MethodAccess [Line: 62] ( form .FunctionCall [Line: 62] ( get ( "img" ) )  ) 
-|   |   |   or SimpleVariable [Line: 62] ( "static/images/default.png"  )  ) 
-|   PythonExpressionAssignStatement [Line: 64]
-|   |   SimpleVariable [Line: 64] ( product  )  = 
-|   |   DictionaryLiteral [Line: 65] { "id" : FunctionCall [Line: 65] ( len ( products )+SimpleVariable [Line: 65] ( 1  ) , "name" : name, "price" : price, "description" : description, "specification" : specification, "img" : img }
-|   MethodAccess [Line: 73] ( products .FunctionCall [Line: 73] ( append ( product ) ) 
-|   return FunctionCall [Line: 74] ( redirect ( FunctionCall [Line: 74] ( url_for ( "index" ) )
-|   return FunctionCall [Line: 76] ( render_template ( "add.html" )
-|   FunctionDefinition [Line: 79]( detail(product_id) ) 
-|   |   PythonExpressionAssignStatement [Line: 81]
-|   |   SimpleVariable [Line: 81] ( product  )  = 
-|   |   FunctionCall [Line: 81] ( next ( Generator [Line: 81] ( ForLoop [Line: 81] ( p in SimpleVariable [Line: 81] ( products  ) ComparisonExpression [Line: 81]
-|   |   |   DictionaryAccess [Line: 81] ( p ["id"] ) 
-|   |   |   == SimpleVariable [Line: 81] ( product_id  )  )  ) , SimpleVariable [Line: 81] ( None  )  )
-|   return FunctionCall [Line: 82] ( render_template ( SimpleVariable [Line: 82] ( "detail.html"  ) , product = SimpleVariable [Line: 82] ( product  )  )
-|   FunctionDefinition [Line: 85]( delete(product_id) ) 
-|   |   GlobalStatement [Line: 87]( products ) 
-|   PythonExpressionAssignStatement [Line: 88]
-|   |   SimpleVariable [Line: 88] ( products  )  = 
-|   |   ListComprehension [Line: 88] ( ForLoop [Line: 88] ( p in SimpleVariable [Line: 88] ( products  ) ComparisonExpression [Line: 88]
-|   |   |   DictionaryAccess [Line: 88] ( p ["id"] ) 
-|   |   |   != SimpleVariable [Line: 88] ( product_id  )  )  ) 
-|   return FunctionCall [Line: 89] ( redirect ( FunctionCall [Line: 89] ( url_for ( "index" ) )
-|   IfStatement [Line: 92], ( ComparisonExpression [Line: 92]
-|   |   |   SimpleVariable [Line: 92] ( __name__  ) 
-|   |   |   == SimpleVariable [Line: 92] ( "__main__"  )  )
-|   |   MethodAccess [Line: 93] ( app .FunctionCall [Line: 93] ( run ( debug = SimpleVariable [Line: 93] ( True  )  ) ) 
+|   |   SimpleVariable [Line: 59] ( image_filename  )  = 
+|   |   SimpleVariable [Line: 59] ( unique_filename  ) 
+|   PythonExpressionAssignStatement [Line: 62]
+|   |   SimpleVariable [Line: 62] ( product  )  = 
+|   |   FunctionCall [Line: 62] ( Product ( name = MethodAccess [Line: 63] ( form .SimpleVariable [Line: 63] ( name  ) .SimpleVariable [Line: 63] ( data  )  ) , price = MethodAccess [Line: 64] ( form .SimpleVariable [Line: 64] ( price  ) .SimpleVariable [Line: 64] ( data  )  ) , details = MethodAccess [Line: 65] ( form .SimpleVariable [Line: 65] ( details  ) .SimpleVariable [Line: 65] ( data  )  ) , image_filename = SimpleVariable [Line: 66] ( image_filename  )  )
+|   MethodAccess [Line: 69] ( Product .FunctionCall [Line: 69] ( save ( product ) ) 
+|   FunctionCall [Line: 70] ( flash ( 'تم إضافة المنتج بنجاح!', 'success' )
+|   return  ( return ComparisonExpression [Line: 71]
+|   |   |   FunctionCall [Line: 71] ( redirect ( FunctionCall [Line: 71] ( url_for ( 'index' ) ) ) 
+|   return  ( return ComparisonExpression [Line: 73]
+|   |   |   FunctionCall [Line: 73] ( render_template ( SimpleVariable [Line: 73] ( 'add_product.html'  ) , form = SimpleVariable [Line: 73] ( form  )  ) ) 
+|   FunctionDefinition [Line: 75]( Decorator [Line: 75] ( @app.route( '/product/<product_id>') product_detail(product_id) ) 
+|   |   SimpleVariable [Line: 77] ( """صفحة تفاصيل المنتج"""  ) 
+|   PythonExpressionAssignStatement [Line: 78]
+|   |   SimpleVariable [Line: 78] ( product  )  = 
+|   |   MethodAccess [Line: 78] ( Product .FunctionCall [Line: 78] ( get_by_id ( product_id ) ) 
+|   IfStatement [Line: 79], ( NotExpression [Line: 79]
+|   ComparisonExpression [Line: 79]
+|   |   |   SimpleVariable [Line: 79] ( product  )  )
+|   |   FunctionCall [Line: 80] ( flash ( 'المنتج غير موجود!', 'danger' )
+|   return  ( return ComparisonExpression [Line: 81]
+|   |   |   FunctionCall [Line: 81] ( redirect ( FunctionCall [Line: 81] ( url_for ( 'index' ) ) ) 
+|   return  ( return ComparisonExpression [Line: 83]
+|   |   |   FunctionCall [Line: 83] ( render_template ( SimpleVariable [Line: 83] ( 'product_detail.html'  ) , product = SimpleVariable [Line: 83] ( product  )  ) ) 
+|   FunctionDefinition [Line: 85]( Decorator [Line: 85] ( @app.route( '/product/delete/<product_id>') delete_product(product_id) ) 
+|   |   SimpleVariable [Line: 87] ( """حذف منتج"""  ) 
+|   IfStatement [Line: 88], ( ComparisonExpression [Line: 88]
+|   |   |   MethodAccess [Line: 88] ( Product .FunctionCall [Line: 88] ( delete ( product_id ) )  )
+|   |   FunctionCall [Line: 89] ( flash ( 'تم حذف المنتج بنجاح!', 'success' )
+|   FunctionCall [Line: 91] ( flash ( 'المنتج غير موجود!', 'danger' )
+|   return  ( return ComparisonExpression [Line: 93]
+|   |   |   FunctionCall [Line: 93] ( redirect ( FunctionCall [Line: 93] ( url_for ( 'index' ) ) ) 
+|   FunctionDefinition [Line: 95]( Decorator [Line: 95] ( @app.route( SimpleVariable [Line: 95] ( '/product/edit/<product_id>'  ) , methods = ListLiteral [Line: -1] ( [ SimpleVariable [Line: 95] ( 'GET'  ) , SimpleVariable [Line: 95] ( 'POST'  )  ] ) ) edit_product(product_id) ) 
+|   |   SimpleVariable [Line: 97] ( """تعديل بيانات المنتج"""  ) 
+|   PythonExpressionAssignStatement [Line: 98]
+|   |   SimpleVariable [Line: 98] ( product  )  = 
+|   |   MethodAccess [Line: 98] ( Product .FunctionCall [Line: 98] ( get_by_id ( product_id ) ) 
+|   IfStatement [Line: 99], ( NotExpression [Line: 99]
+|   ComparisonExpression [Line: 99]
+|   |   |   SimpleVariable [Line: 99] ( product  )  )
+|   |   FunctionCall [Line: 100] ( flash ( 'المنتج غير موجود!', 'danger' )
+|   return  ( return ComparisonExpression [Line: 101]
+|   |   |   FunctionCall [Line: 101] ( redirect ( FunctionCall [Line: 101] ( url_for ( 'index' ) ) ) 
+|   PythonExpressionAssignStatement [Line: 103]
+|   |   SimpleVariable [Line: 103] ( form  )  = 
+|   |   FunctionCall [Line: 103] ( ProductForm (  )
+|   IfStatement [Line: 105], ( ComparisonExpression [Line: 105]
+|   |   |   MethodAccess [Line: 105] ( form .FunctionCall [Line: 105] ( validate_on_submit (  ) )  )
+|   |   MethodAccess [Line: 107] ( Product .FunctionCall [Line: 107] ( update ( SimpleVariable [Line: 108] ( product_id  ) , MethodAccess [Line: 109] ( form .SimpleVariable [Line: 109] ( name  ) .SimpleVariable [Line: 109] ( data  )  ) , MethodAccess [Line: 110] ( form .SimpleVariable [Line: 110] ( price  ) .SimpleVariable [Line: 110] ( data  )  ) , MethodAccess [Line: 111] ( form .SimpleVariable [Line: 111] ( details  ) .SimpleVariable [Line: 111] ( data  )  )  ) ) 
+|   IfStatement [Line: 115], ( AndCondition [Line: 115]
+|   ComparisonExpression [Line: 115]
+|   |   |   MethodAccess [Line: 115] ( form .SimpleVariable [Line: 115] ( image  ) .SimpleVariable [Line: 115] ( data  )  ) 
+|   and
+|   ComparisonExpression [Line: 115]
+|   |   |   FunctionCall [Line: 115] ( allowed_file ( MethodAccess [Line: 115] ( form .SimpleVariable [Line: 115] ( image  ) .SimpleVariable [Line: 115] ( data  ) .SimpleVariable [Line: 115] ( filename  )  )  ) )
+|   |   PythonExpressionAssignStatement [Line: 116]
+|   |   SimpleVariable [Line: 116] ( filename  )  = 
+|   |   FunctionCall [Line: 116] ( secure_filename ( MethodAccess [Line: 116] ( form .SimpleVariable [Line: 116] ( image  ) .SimpleVariable [Line: 116] ( data  ) .SimpleVariable [Line: 116] ( filename  )  )  )
+|   PythonExpressionAssignStatement [Line: 117]
+|   |   SimpleVariable [Line: 117] ( unique_filename  )  = 
+|   |   FStringAtomExpression [Line: 117] ( null  ( f"{str(os.urandom(8).hex())}_{filename}" ) 
+|   PythonExpressionAssignStatement [Line: 118]
+|   |   SimpleVariable [Line: 118] ( filepath  )  = 
+|   |   MethodAccess [Line: 118] ( os .SimpleVariable [Line: 118] ( path  ) .FunctionCall [Line: 118] ( join ( Subscript [Line: 118] ( null  ( MethodAccess [Line: 118] ( app .SimpleVariable [Line: 118] ( config  )  )  [ 'UPLOAD_FOLDER' ] ), SimpleVariable [Line: 118] ( unique_filename  )  ) ) 
+|   MethodAccess [Line: 119] ( form .SimpleVariable [Line: 119] ( image  ) .SimpleVariable [Line: 119] ( data  ) .FunctionCall [Line: 119] ( save ( filepath ) ) 
+|   IfStatement [Line: 122], ( ComparisonExpression [Line: 122]
+|   |   |   MethodAccess [Line: 122] ( product .FunctionCall [Line: 122] ( get ( 'image_filename' ) )  )
+|   |   PythonExpressionAssignStatement [Line: 123]
+|   |   SimpleVariable [Line: 123] ( old_image_path  )  = 
+|   |   MethodAccess [Line: 123] ( os .SimpleVariable [Line: 123] ( path  ) .FunctionCall [Line: 123] ( join ( Subscript [Line: 123] ( null  ( MethodAccess [Line: 123] ( app .SimpleVariable [Line: 123] ( config  )  )  [ 'UPLOAD_FOLDER' ] ), Subscript [Line: 123] ( null  ( SimpleVariable [Line: 123] ( product  )  [ 'image_filename' ] ) ) ) 
+|   IfStatement [Line: 124], ( ComparisonExpression [Line: 124]
+|   |   |   MethodAccess [Line: 124] ( os .SimpleVariable [Line: 124] ( path  ) .FunctionCall [Line: 124] ( exists ( old_image_path ) )  )
+|   |   TryStatement [Line: 125] ( try: MethodAccess [Line: 126] ( os .FunctionCall [Line: 126] ( remove ( old_image_path ) )  )
+|   PythonExpressionAssignStatement [Line: 131]
+|   |   Subscript [Line: 131] ( null  ( SimpleVariable [Line: 131] ( product  )  [ 'image_filename' ] ) = 
+|   |   SimpleVariable [Line: 131] ( unique_filename  ) 
+|   FunctionCall [Line: 133] ( flash ( 'تم تحديث المنتج بنجاح!', 'success' )
+|   return  ( return ComparisonExpression [Line: 134]
+|   |   |   FunctionCall [Line: 134] ( redirect ( FunctionCall [Line: 134] ( url_for ( SimpleVariable [Line: 134] ( 'product_detail'  ) , product_id = SimpleVariable [Line: 134] ( product_id  )  ) ) ) 
+|   PythonExpressionAssignStatement [Line: 137]
+|   |   MethodAccess [Line: 137] ( form .SimpleVariable [Line: 137] ( name  ) .SimpleVariable [Line: 137] ( data  )  )  = 
+|   |   Subscript [Line: 137] ( null  ( SimpleVariable [Line: 137] ( product  )  [ 'name' ] )
+|   PythonExpressionAssignStatement [Line: 138]
+|   |   MethodAccess [Line: 138] ( form .SimpleVariable [Line: 138] ( price  ) .SimpleVariable [Line: 138] ( data  )  )  = 
+|   |   Subscript [Line: 138] ( null  ( SimpleVariable [Line: 138] ( product  )  [ 'price' ] )
+|   PythonExpressionAssignStatement [Line: 139]
+|   |   MethodAccess [Line: 139] ( form .SimpleVariable [Line: 139] ( details  ) .SimpleVariable [Line: 139] ( data  )  )  = 
+|   |   Subscript [Line: 139] ( null  ( SimpleVariable [Line: 139] ( product  )  [ 'details' ] )
+|   return  ( return ComparisonExpression [Line: 141]
+|   |   |   FunctionCall [Line: 141] ( render_template ( SimpleVariable [Line: 141] ( 'edit_product.html'  ) , form = SimpleVariable [Line: 141] ( form  ) , product = SimpleVariable [Line: 141] ( product  )  ) ) 
+|   IfStatement [Line: 143], ( ComparisonExpression [Line: 143]
+|   |   |   SimpleVariable [Line: 143] ( __name__  ) 
+|   |   |   == SimpleVariable [Line: 143] ( '__main__'  )  )
+|   |   MethodAccess [Line: 144] ( app .FunctionCall [Line: 144] ( run ( debug = SimpleVariable [Line: 144] ( True  ) , port = SimpleVariable [Line: 144] ( 5000  )  ) ) 

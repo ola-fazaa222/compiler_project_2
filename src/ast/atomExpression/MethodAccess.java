@@ -13,6 +13,10 @@ public class MethodAccess extends AtomExpression {
         this.methodCalls = methodCalls;
     }
 
+    public List<AtomExpression> getMethodCalls() {
+        return methodCalls;
+    }
+
     @Override
     public String symbolTablePrint() {
         StringBuilder stringBuilder = new StringBuilder();

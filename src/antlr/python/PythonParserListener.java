@@ -1,4 +1,4 @@
-// Generated from D:/Telegram Desktop/psychic-broccoli-main/grammars/PythonParser.g4 by ANTLR 4.13.2
+// Generated from /home/ghifar/Downloads/Telegram Desktop/psychic-broccoli-main/grammars/PythonParser.g4 by ANTLR 4.13.2
 package antlr.python;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -20,29 +20,53 @@ public interface PythonParserListener extends ParseTreeListener {
 	 */
 	void exitProgram(PythonParser.ProgramContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code CompoundStatement}
+	 * Enter a parse tree produced by the {@code SimpleStatement}
 	 * labeled alternative in {@link PythonParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterCompoundStatement(PythonParser.CompoundStatementContext ctx);
+	void enterSimpleStatement(PythonParser.SimpleStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code CompoundStatement}
+	 * Exit a parse tree produced by the {@code SimpleStatement}
 	 * labeled alternative in {@link PythonParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitCompoundStatement(PythonParser.CompoundStatementContext ctx);
+	void exitSimpleStatement(PythonParser.SimpleStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code PassStatement}
-	 * labeled alternative in {@link PythonParser#statement}.
+	 * Enter a parse tree produced by the {@code SimpleSuite}
+	 * labeled alternative in {@link PythonParser#suite}.
 	 * @param ctx the parse tree
 	 */
-	void enterPassStatement(PythonParser.PassStatementContext ctx);
+	void enterSimpleSuite(PythonParser.SimpleSuiteContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code PassStatement}
-	 * labeled alternative in {@link PythonParser#statement}.
+	 * Exit a parse tree produced by the {@code SimpleSuite}
+	 * labeled alternative in {@link PythonParser#suite}.
 	 * @param ctx the parse tree
 	 */
-	void exitPassStatement(PythonParser.PassStatementContext ctx);
+	void exitSimpleSuite(PythonParser.SimpleSuiteContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code CompoundSuite}
+	 * labeled alternative in {@link PythonParser#suite}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompoundSuite(PythonParser.CompoundSuiteContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code CompoundSuite}
+	 * labeled alternative in {@link PythonParser#suite}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompoundSuite(PythonParser.CompoundSuiteContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PassSuite}
+	 * labeled alternative in {@link PythonParser#suite}.
+	 * @param ctx the parse tree
+	 */
+	void enterPassSuite(PythonParser.PassSuiteContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PassSuite}
+	 * labeled alternative in {@link PythonParser#suite}.
+	 * @param ctx the parse tree
+	 */
+	void exitPassSuite(PythonParser.PassSuiteContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code IfStatement}
 	 * labeled alternative in {@link PythonParser#compound_stmt}.
@@ -128,6 +152,18 @@ public interface PythonParserListener extends ParseTreeListener {
 	 */
 	void exitFunctionDefinition(PythonParser.FunctionDefinitionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ClassDefinition}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterClassDefinition(PythonParser.ClassDefinitionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ClassDefinition}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitClassDefinition(PythonParser.ClassDefinitionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code ReturnStatement}
 	 * labeled alternative in {@link PythonParser#compound_stmt}.
 	 * @param ctx the parse tree
@@ -152,6 +188,18 @@ public interface PythonParserListener extends ParseTreeListener {
 	 */
 	void exitImportStatement(PythonParser.ImportStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ImportFromStatement}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterImportFromStatement(PythonParser.ImportFromStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ImportFromStatement}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitImportFromStatement(PythonParser.ImportFromStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code GlobalStatement}
 	 * labeled alternative in {@link PythonParser#compound_stmt}.
 	 * @param ctx the parse tree
@@ -164,6 +212,124 @@ public interface PythonParserListener extends ParseTreeListener {
 	 */
 	void exitGlobalStatement(PythonParser.GlobalStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code DeleteStatement}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeleteStatement(PythonParser.DeleteStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DeleteStatement}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeleteStatement(PythonParser.DeleteStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code TryStatement}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterTryStatement(PythonParser.TryStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code TryStatement}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitTryStatement(PythonParser.TryStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PassStatement}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterPassStatement(PythonParser.PassStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PassStatement}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitPassStatement(PythonParser.PassStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code BlankStatement}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlankStatement(PythonParser.BlankStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code BlankStatement}
+	 * labeled alternative in {@link PythonParser#compound_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlankStatement(PythonParser.BlankStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ImportDef}
+	 * labeled alternative in {@link PythonParser#import_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterImportDef(PythonParser.ImportDefContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ImportDef}
+	 * labeled alternative in {@link PythonParser#import_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitImportDef(PythonParser.ImportDefContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DelDef}
+	 * labeled alternative in {@link PythonParser#del_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterDelDef(PythonParser.DelDefContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DelDef}
+	 * labeled alternative in {@link PythonParser#del_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitDelDef(PythonParser.DelDefContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code TryExceptDef}
+	 * labeled alternative in {@link PythonParser#try_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterTryExceptDef(PythonParser.TryExceptDefContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code TryExceptDef}
+	 * labeled alternative in {@link PythonParser#try_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitTryExceptDef(PythonParser.TryExceptDefContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ExceptClauseDef}
+	 * labeled alternative in {@link PythonParser#except_clause}.
+	 * @param ctx the parse tree
+	 */
+	void enterExceptClauseDef(PythonParser.ExceptClauseDefContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ExceptClauseDef}
+	 * labeled alternative in {@link PythonParser#except_clause}.
+	 * @param ctx the parse tree
+	 */
+	void exitExceptClauseDef(PythonParser.ExceptClauseDefContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PythonParser#class_def}.
+	 * @param ctx the parse tree
+	 */
+	void enterClass_def(PythonParser.Class_defContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PythonParser#class_def}.
+	 * @param ctx the parse tree
+	 */
+	void exitClass_def(PythonParser.Class_defContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ConditionReturn}
+	 * labeled alternative in {@link PythonParser#return_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionReturn(PythonParser.ConditionReturnContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ConditionReturn}
+	 * labeled alternative in {@link PythonParser#return_stmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionReturn(PythonParser.ConditionReturnContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code ComplexReturn}
 	 * labeled alternative in {@link PythonParser#return_stmt}.
 	 * @param ctx the parse tree
@@ -175,18 +341,6 @@ public interface PythonParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitComplexReturn(PythonParser.ComplexReturnContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code SimpleReturn}
-	 * labeled alternative in {@link PythonParser#return_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterSimpleReturn(PythonParser.SimpleReturnContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code SimpleReturn}
-	 * labeled alternative in {@link PythonParser#return_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitSimpleReturn(PythonParser.SimpleReturnContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code GlobalStatementDef}
 	 * labeled alternative in {@link PythonParser#global_stmt}.
@@ -236,6 +390,18 @@ public interface PythonParserListener extends ParseTreeListener {
 	 */
 	void exitIfStatementDef(PythonParser.IfStatementDefContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ComparisonExpression}
+	 * labeled alternative in {@link PythonParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparisonExpression(PythonParser.ComparisonExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComparisonExpression}
+	 * labeled alternative in {@link PythonParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparisonExpression(PythonParser.ComparisonExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code BooleanCondition}
 	 * labeled alternative in {@link PythonParser#condition}.
 	 * @param ctx the parse tree
@@ -260,17 +426,29 @@ public interface PythonParserListener extends ParseTreeListener {
 	 */
 	void exitNotExpression(PythonParser.NotExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ComparisonExpression}
+	 * Enter a parse tree produced by the {@code OrCondition}
 	 * labeled alternative in {@link PythonParser#condition}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparisonExpression(PythonParser.ComparisonExpressionContext ctx);
+	void enterOrCondition(PythonParser.OrConditionContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ComparisonExpression}
+	 * Exit a parse tree produced by the {@code OrCondition}
 	 * labeled alternative in {@link PythonParser#condition}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparisonExpression(PythonParser.ComparisonExpressionContext ctx);
+	void exitOrCondition(PythonParser.OrConditionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code AndCondition}
+	 * labeled alternative in {@link PythonParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void enterAndCondition(PythonParser.AndConditionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code AndCondition}
+	 * labeled alternative in {@link PythonParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void exitAndCondition(PythonParser.AndConditionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code AtomComplexExpression}
 	 * labeled alternative in {@link PythonParser#python_expr}.
@@ -296,65 +474,41 @@ public interface PythonParserListener extends ParseTreeListener {
 	 */
 	void exitComplexExpression(PythonParser.ComplexExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ListAccess}
+	 * Enter a parse tree produced by the {@code Slice}
 	 * labeled alternative in {@link PythonParser#atom_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterListAccess(PythonParser.ListAccessContext ctx);
+	void enterSlice(PythonParser.SliceContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ListAccess}
+	 * Exit a parse tree produced by the {@code Slice}
 	 * labeled alternative in {@link PythonParser#atom_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitListAccess(PythonParser.ListAccessContext ctx);
+	void exitSlice(PythonParser.SliceContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code DictionaryAccess}
+	 * Enter a parse tree produced by the {@code SimpleVar}
 	 * labeled alternative in {@link PythonParser#atom_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterDictionaryAccess(PythonParser.DictionaryAccessContext ctx);
+	void enterSimpleVar(PythonParser.SimpleVarContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code DictionaryAccess}
+	 * Exit a parse tree produced by the {@code SimpleVar}
 	 * labeled alternative in {@link PythonParser#atom_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitDictionaryAccess(PythonParser.DictionaryAccessContext ctx);
+	void exitSimpleVar(PythonParser.SimpleVarContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code AttributeAccess}
+	 * Enter a parse tree produced by the {@code Subscript}
 	 * labeled alternative in {@link PythonParser#atom_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterAttributeAccess(PythonParser.AttributeAccessContext ctx);
+	void enterSubscript(PythonParser.SubscriptContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code AttributeAccess}
+	 * Exit a parse tree produced by the {@code Subscript}
 	 * labeled alternative in {@link PythonParser#atom_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitAttributeAccess(PythonParser.AttributeAccessContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code MethodAccess}
-	 * labeled alternative in {@link PythonParser#atom_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterMethodAccess(PythonParser.MethodAccessContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code MethodAccess}
-	 * labeled alternative in {@link PythonParser#atom_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitMethodAccess(PythonParser.MethodAccessContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ObjectCreation}
-	 * labeled alternative in {@link PythonParser#atom_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterObjectCreation(PythonParser.ObjectCreationContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ObjectCreation}
-	 * labeled alternative in {@link PythonParser#atom_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitObjectCreation(PythonParser.ObjectCreationContext ctx);
+	void exitSubscript(PythonParser.SubscriptContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code FunctionCall}
 	 * labeled alternative in {@link PythonParser#atom_expr}.
@@ -368,17 +522,17 @@ public interface PythonParserListener extends ParseTreeListener {
 	 */
 	void exitFunctionCall(PythonParser.FunctionCallContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code SimpleVar}
+	 * Enter a parse tree produced by the {@code MethodAccess}
 	 * labeled alternative in {@link PythonParser#atom_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterSimpleVar(PythonParser.SimpleVarContext ctx);
+	void enterMethodAccess(PythonParser.MethodAccessContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code SimpleVar}
+	 * Exit a parse tree produced by the {@code MethodAccess}
 	 * labeled alternative in {@link PythonParser#atom_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitSimpleVar(PythonParser.SimpleVarContext ctx);
+	void exitMethodAccess(PythonParser.MethodAccessContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code Generator}
 	 * labeled alternative in {@link PythonParser#complex_expr}.
@@ -415,6 +569,18 @@ public interface PythonParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDictionaryLiteral(PythonParser.DictionaryLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SetLiteral}
+	 * labeled alternative in {@link PythonParser#complex_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetLiteral(PythonParser.SetLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SetLiteral}
+	 * labeled alternative in {@link PythonParser#complex_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetLiteral(PythonParser.SetLiteralContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ListLiteral}
 	 * labeled alternative in {@link PythonParser#complex_expr}.
@@ -680,6 +846,18 @@ public interface PythonParserListener extends ParseTreeListener {
 	 */
 	void exitFunctionParameters(PythonParser.FunctionParametersContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code MixedParams}
+	 * labeled alternative in {@link PythonParser#fun_params}.
+	 * @param ctx the parse tree
+	 */
+	void enterMixedParams(PythonParser.MixedParamsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code MixedParams}
+	 * labeled alternative in {@link PythonParser#fun_params}.
+	 * @param ctx the parse tree
+	 */
+	void exitMixedParams(PythonParser.MixedParamsContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code KeywordParams}
 	 * labeled alternative in {@link PythonParser#fun_params}.
 	 * @param ctx the parse tree
@@ -691,18 +869,6 @@ public interface PythonParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitKeywordParams(PythonParser.KeywordParamsContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code PositionalParams}
-	 * labeled alternative in {@link PythonParser#fun_params}.
-	 * @param ctx the parse tree
-	 */
-	void enterPositionalParams(PythonParser.PositionalParamsContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code PositionalParams}
-	 * labeled alternative in {@link PythonParser#fun_params}.
-	 * @param ctx the parse tree
-	 */
-	void exitPositionalParams(PythonParser.PositionalParamsContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code NameAtom}
 	 * labeled alternative in {@link PythonParser#atom}.
@@ -751,6 +917,30 @@ public interface PythonParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStringAtom(PythonParser.StringAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code TripleQuoteStringAtom}
+	 * labeled alternative in {@link PythonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterTripleQuoteStringAtom(PythonParser.TripleQuoteStringAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code TripleQuoteStringAtom}
+	 * labeled alternative in {@link PythonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitTripleQuoteStringAtom(PythonParser.TripleQuoteStringAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code FStringAtom}
+	 * labeled alternative in {@link PythonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterFStringAtom(PythonParser.FStringAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code FStringAtom}
+	 * labeled alternative in {@link PythonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitFStringAtom(PythonParser.FStringAtomContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code NoneAtom}
 	 * labeled alternative in {@link PythonParser#atom}.
@@ -847,6 +1037,18 @@ public interface PythonParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSimpleKeyValue(PythonParser.SimpleKeyValueContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ExprKeyValue}
+	 * labeled alternative in {@link PythonParser#key_value}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprKeyValue(PythonParser.ExprKeyValueContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ExprKeyValue}
+	 * labeled alternative in {@link PythonParser#key_value}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprKeyValue(PythonParser.ExprKeyValueContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ArithmeticExpression}
 	 * labeled alternative in {@link PythonParser#simple_expr}.

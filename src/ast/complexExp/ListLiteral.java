@@ -1,17 +1,17 @@
 package ast.complexExp;
 
-import ast.atom.Atom;
+import ast.atomExpression.AtomExpression;
 
 import java.util.List;
 
 public class ListLiteral extends ComplexExpression {
-    public List<Atom> listItems;
+    public List<AtomExpression> listItems;
 
     public ListLiteral(int line_number) {
         super("ListLiteral", line_number);
     }
 
-    public void setListItems(List<Atom> listItems) {
+    public void setListItems(List<AtomExpression> listItems) {
         this.listItems = listItems;
     }
 
@@ -20,10 +20,9 @@ public class ListLiteral extends ComplexExpression {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(" [ ");
         if (listItems != null) {
-            for (Atom listItem : listItems) {
-                stringBuilder.append(listItem.toString())
-                        .append((listItems.indexOf(listItem) == listItems.size() - 1)
-                                ? "" : ", ");
+            for (int i = 0; i < listItems.size(); i++) {
+                stringBuilder.append(listItems.get(i).toString());
+                if (i < listItems.size() - 1) stringBuilder.append(", ");
             }
         }
         stringBuilder.append(" ] ");
@@ -36,10 +35,9 @@ public class ListLiteral extends ComplexExpression {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(super.toString()).append(" ( [ ");
         if (listItems != null) {
-            for (Atom listItem : listItems) {
-                stringBuilder.append(listItem.toString())
-                        .append((listItems.indexOf(listItem) == listItems.size() - 1)
-                                ? "" : ", ");
+            for (int i = 0; i < listItems.size(); i++) {
+                stringBuilder.append(listItems.get(i).toString());
+                if (i < listItems.size() - 1) stringBuilder.append(", ");
             }
         }
         stringBuilder.append(" ] ) ");

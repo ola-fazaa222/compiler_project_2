@@ -1,67 +1,299 @@
 HtmlContent [Line: 2]
 |   |   |   |   TagElement [Line: 2]
 |   |   |   Tag [ 2 ] html
-|   |   |   Tag [ 2 ] lang = "en"
+|   |   |   Tag [ 2 ] lang = "ar"
+|   |   |   Tag [ 2 ] dir = "rtl"
+|   |   |   |   TagElement [Line: 3]
+|   |   |   Tag [ 3 ] head
 |   |   |   |   TagElement [Line: 4]
-|   |   |   Tag [ 4 ] head
+|   |   |   Tag [ 4 ] meta
+|   |   |   Tag [ 4 ] charset = "UTF-8"
 |   |   |   |   TagElement [Line: 5]
 |   |   |   Tag [ 5 ] meta
-|   |   |   Tag [ 5 ] charset = "UTF-8"
+|   |   |   Tag [ 5 ] name = "viewport"
+|   |   |   Tag [ 5 ] content = "width=device-width, initial-scale=1.0"
 |   |   |   |   TagElement [Line: 6]
-|   |   |   Tag [ 6 ] meta
-|   |   |   Tag [ 6 ] name = "viewport"
-|   |   |   Tag [ 6 ] content = "width=device-width, initial-scale=1.0"
-|   |   |   |   TagElement [Line: 7]
-|   |   |   Tag [ 7 ] title
-|   |   |   |   HtmlTextItem [Line: 7] ( Product Manager ) 
-|   |   |   |   TagElement [Line: 7]
-|   |   |   Tag [ 7 ] title
-|   |   |   |   TagElement [Line: 8]
-|   |   |   Tag [ 8 ] link
-|   |   |   Tag [ 8 ] rel = "stylesheet"
+|   |   |   Tag [ 6 ] title
+|   |   |   |   JinjaBlockStatement [Line: 6] ( title
+|   |   |   HtmlContent [Line: 6]
+|   |   |   |   HtmlTextItem [Line: 6] ( نظام إدارة المنتجات ) 
+|   |   |   |   TagElement [Line: 6]
+|   |   |   Tag [ 6 ] title
 |   |   |   |   TagElement [Line: 9]
-|   |   |   Tag [ 9 ] head
+|   |   |   Tag [ 9 ] link
+|   |   |   Tag [ 9 ] href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+|   |   |   Tag [ 9 ] rel = "stylesheet"
 |   |   |   |   TagElement [Line: 11]
-|   |   |   Tag [ 11 ] body
-|   |   |   |   TagElement [Line: 12]
-|   |   |   Tag [ 12 ] header
+|   |   |   Tag [ 11 ] link
+|   |   |   Tag [ 11 ] rel = "stylesheet"
+|   |   |   Tag [ 11 ] href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 |   |   |   |   TagElement [Line: 13]
-|   |   |   Tag [ 13 ] h1
-|   |   |   |   HtmlTextItem [Line: 13] ( Product Manager ) 
-|   |   |   |   TagElement [Line: 13]
-|   |   |   Tag [ 13 ] h1
-|   |   |   |   TagElement [Line: 14]
-|   |   |   Tag [ 14 ] nav
-|   |   |   |   TagElement [Line: 15]
-|   |   |   Tag [ 15 ] a = "{{ url_for('index') }}"
-|   |   |   |   HtmlTextItem [Line: 15] ( Home ) 
-|   |   |   |   TagElement [Line: 15]
-|   |   |   Tag [ 15 ] a
-|   |   |   |   TagElement [Line: 16]
-|   |   |   Tag [ 16 ] a
-|   |   |   Tag [ 16 ] href = "{{ url_for('add_product') }}"
-|   |   |   |   HtmlTextItem [Line: 16] ( Add Product ) 
-|   |   |   |   TagElement [Line: 16]
-|   |   |   Tag [ 16 ] a
-|   |   |   |   TagElement [Line: 17]
-|   |   |   Tag [ 17 ] nav
-|   |   |   |   TagElement [Line: 18]
-|   |   |   Tag [ 18 ] header
-|   |   |   |   TagElement [Line: 20]
-|   |   |   Tag [ 20 ] p
-|   |   |   |   TagElement [Line: 21]
-|   |   |   Tag [ 21 ] div
-|   |   |   |   TagElement [Line: 21]
-|   |   |   Tag [ 21 ] div
-|   |   |   |   TagElement [Line: 22]
-|   |   |   Tag [ 22 ] p
-|   |   |   |   TagElement [Line: 23]
-|   |   |   Tag [ 23 ] main
-|   |   |   |   JinjaBlockStatement [Line: 24] ( content
-|   |   |   HtmlContent [Line: 24]
-|   |   |   |   TagElement [Line: 25]
-|   |   |   Tag [ 25 ] main
-|   |   |   |   TagElement [Line: 26]
-|   |   |   Tag [ 26 ] body
-|   |   |   |   TagElement [Line: 28]
-|   |   |   Tag [ 28 ] html
+|   |   |   Tag [ 13 ] link
+|   |   |   Tag [ 13 ] href = "https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap"
+|   |   |   Tag [ 13 ] rel = "stylesheet"
+|   |   |   |   StyleSheet [Line: 16]
+|   |   |   |   |   RuleSet [Line: 16] ( SelectorDeclaration [Line: 16] ( [ CssSelectorList [Line: 16] ( [ CssSelector [Line: 16]
+|   |   |   |   |   |   |   * ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 17]( [ CssDeclaration [Line: 17] ( font-family ) 
+|   |   |   |   |   |   |    [ String [Line: 17] ( 'Cairo' ) , Identifier [Line: 17] ( sans-serif )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 20] ( SelectorDeclaration [Line: 20] ( [ CssSelectorList [Line: 20] ( [ CssSelector [Line: 20]
+|   |   |   |   |   |   |   body ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 21]( [ CssDeclaration [Line: 21] ( background ) 
+|   |   |   |   |   |   |    [ Function [Line: 21] ( linear-gradient ) 
+|   |   |   Number [Line: 21] ( 135 ) , Identifier [Line: 21] ( deg ) , Color [Line: 21] ( #667eea ) , UnitNumber [Line: 21] ( 0 % ) , Color [Line: 21] ( #764ba2 ) , UnitNumber [Line: 21] ( 100 % )  ] ) , CssDeclaration [Line: 22] ( min-height ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 22] ( 100 vh )  ] ) , CssDeclaration [Line: 23] ( display ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 23] ( flex )  ] ) , CssDeclaration [Line: 24] ( flex-direction ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 24] ( column )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 27] ( SelectorDeclaration [Line: 27] ( [ CssSelectorList [Line: 27] ( [ CssSelector [Line: 27]
+|   |   |   |   |   |   |   .navbar ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 28]( [ CssDeclaration [Line: 28] ( background ) 
+|   |   |   |   |   |   |    [ Function [Line: 28] ( linear-gradient ) 
+|   |   |   Number [Line: 28] ( 135 ) , Identifier [Line: 28] ( deg ) , Color [Line: 28] ( #667eea ) , UnitNumber [Line: 28] ( 0 % ) , Color [Line: 28] ( #764ba2 ) , UnitNumber [Line: 28] ( 100 % )  ] ) , CssDeclaration [Line: 29] ( box-shadow ) 
+|   |   |   |   |   |   |    [ Number [Line: 29] ( 0 ) , UnitNumber [Line: 29] ( 2 px ) , UnitNumber [Line: 29] ( 10 px ) , Function [Line: 29] ( rgba ) 
+|   |   |   Number [Line: 29] ( 0 ) , Number [Line: 29] ( 0 ) , Number [Line: 29] ( 0 ) , Number [Line: 29] ( 0.1 )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 32] ( SelectorDeclaration [Line: 32] ( [ CssSelectorList [Line: 32] ( [ CssSelector [Line: 32]
+|   |   |   |   |   |   |   .navbar-brand ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 33]( [ CssDeclaration [Line: 33] ( font-weight ) 
+|   |   |   |   |   |   |    [ Number [Line: 33] ( 700 )  ] ) , CssDeclaration [Line: 34] ( font-size ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 34] ( 1.5 rem )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 37] ( SelectorDeclaration [Line: 37] ( [ CssSelectorList [Line: 37] ( [ CssSelector [Line: 37]
+|   |   |   |   |   |   |   .main-content ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 38]( [ CssDeclaration [Line: 38] ( flex ) 
+|   |   |   |   |   |   |    [ Number [Line: 38] ( 1 )  ] ) , CssDeclaration [Line: 39] ( padding ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 39] ( 30 px ) , Number [Line: 39] ( 0 )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 42] ( SelectorDeclaration [Line: 42] ( [ CssSelectorList [Line: 42] ( [ CssSelector [Line: 42]
+|   |   |   |   |   |   |   .footer ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 43]( [ CssDeclaration [Line: 43] ( background ) 
+|   |   |   |   |   |   |    [ Function [Line: 43] ( linear-gradient ) 
+|   |   |   Number [Line: 43] ( 135 ) , Identifier [Line: 43] ( deg ) , Color [Line: 43] ( #667eea ) , UnitNumber [Line: 43] ( 0 % ) , Color [Line: 43] ( #764ba2 ) , UnitNumber [Line: 43] ( 100 % )  ] ) , CssDeclaration [Line: 44] ( color ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 44] ( white )  ] ) , CssDeclaration [Line: 45] ( padding ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 45] ( 20 px ) , Number [Line: 45] ( 0 )  ] ) , CssDeclaration [Line: 46] ( margin-top ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 46] ( auto )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 49] ( SelectorDeclaration [Line: 49] ( [ CssSelectorList [Line: 49] ( [ CssSelector [Line: 49]
+|   |   |   |   |   |   |   .card ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 50]( [ CssDeclaration [Line: 50] ( border ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 50] ( none )  ] ) , CssDeclaration [Line: 51] ( border-radius ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 51] ( 15 px )  ] ) , CssDeclaration [Line: 52] ( box-shadow ) 
+|   |   |   |   |   |   |    [ Number [Line: 52] ( 0 ) , UnitNumber [Line: 52] ( 5 px ) , UnitNumber [Line: 52] ( 15 px ) , Function [Line: 52] ( rgba ) 
+|   |   |   Number [Line: 52] ( 0 ) , Number [Line: 52] ( 0 ) , Number [Line: 52] ( 0 ) , Number [Line: 52] ( 0.1 )  ] ) , CssDeclaration [Line: 53] ( transition ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 53] ( transform ) , UnitNumber [Line: 53] ( 0.3 s ) , Identifier [Line: 53] ( ease )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 56] ( SelectorDeclaration [Line: 56] ( [ CssSelectorList [Line: 56] ( [ CssSelector [Line: 56]
+|   |   |   |   |   |   |   .card.hover ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 57]( [ CssDeclaration [Line: 57] ( transform ) 
+|   |   |   |   |   |   |    [ Function [Line: 57] ( translateY ) 
+|   |   |   UnitNumber [Line: 57] ( -5 px )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 60] ( SelectorDeclaration [Line: 60] ( [ CssSelectorList [Line: 60] ( [ CssSelector [Line: 60]
+|   |   |   |   |   |   |   .btn-primary ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 61]( [ CssDeclaration [Line: 61] ( background ) 
+|   |   |   |   |   |   |    [ Function [Line: 61] ( linear-gradient ) 
+|   |   |   Number [Line: 61] ( 135 ) , Identifier [Line: 61] ( deg ) , Color [Line: 61] ( #667eea ) , UnitNumber [Line: 61] ( 0 % ) , Color [Line: 61] ( #764ba2 ) , UnitNumber [Line: 61] ( 100 % )  ] ) , CssDeclaration [Line: 62] ( border ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 62] ( none )  ] ) , CssDeclaration [Line: 63] ( border-radius ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 63] ( 25 px )  ] ) , CssDeclaration [Line: 64] ( padding ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 64] ( 10 px ) , UnitNumber [Line: 64] ( 25 px )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 67] ( SelectorDeclaration [Line: 67] ( [ CssSelectorList [Line: 67] ( [ CssSelector [Line: 67]
+|   |   |   |   |   |   |   .btn-primary.hover ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 68]( [ CssDeclaration [Line: 68] ( background ) 
+|   |   |   |   |   |   |    [ Function [Line: 68] ( linear-gradient ) 
+|   |   |   Number [Line: 68] ( 135 ) , Identifier [Line: 68] ( deg ) , Color [Line: 68] ( #764ba2 ) , UnitNumber [Line: 68] ( 0 % ) , Color [Line: 68] ( #667eea ) , UnitNumber [Line: 68] ( 100 % )  ] ) , CssDeclaration [Line: 69] ( transform ) 
+|   |   |   |   |   |   |    [ Function [Line: 69] ( scale ) 
+|   |   |   Number [Line: 69] ( 1.05 )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 72] ( SelectorDeclaration [Line: 72] ( [ CssSelectorList [Line: 72] ( [ CssSelector [Line: 72]
+|   |   |   |   |   |   |   .alert ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 73]( [ CssDeclaration [Line: 73] ( border-radius ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 73] ( 10 px )  ] ) , CssDeclaration [Line: 74] ( border ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 74] ( none )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 77] ( SelectorDeclaration [Line: 77] ( [ CssSelectorList [Line: 77] ( [ CssSelector [Line: 77]
+|   |   |   |   |   |   |   .product-img ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 78]( [ CssDeclaration [Line: 78] ( width ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 78] ( 100 % )  ] ) , CssDeclaration [Line: 79] ( height ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 79] ( 200 px )  ] ) , CssDeclaration [Line: 80] ( object-fit ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 80] ( cover )  ] ) , CssDeclaration [Line: 81] ( border-radius ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 81] ( 10 px )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 84] ( SelectorDeclaration [Line: 84] ( [ CssSelectorList [Line: 84] ( [ CssSelector [Line: 84]
+|   |   |   |   |   |   |   .price-tag ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 85]( [ CssDeclaration [Line: 85] ( font-size ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 85] ( 1.5 rem )  ] ) , CssDeclaration [Line: 86] ( font-weight ) 
+|   |   |   |   |   |   |    [ Number [Line: 86] ( 700 )  ] ) , CssDeclaration [Line: 87] ( color ) 
+|   |   |   |   |   |   |    [ Color [Line: 87] ( #667eea )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 90] ( SelectorDeclaration [Line: 90] ( [ CssSelectorList [Line: 90] ( [ CssSelector [Line: 90]
+|   |   |   |   |   |   |   .flash-messages ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 91]( [ CssDeclaration [Line: 91] ( position ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 91] ( fixed )  ] ) , CssDeclaration [Line: 92] ( top ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 92] ( 80 px )  ] ) , CssDeclaration [Line: 93] ( left ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 93] ( 20 px )  ] ) , CssDeclaration [Line: 94] ( right ) 
+|   |   |   |   |   |   |    [ UnitNumber [Line: 94] ( 20 px )  ] ) , CssDeclaration [Line: 95] ( z-index ) 
+|   |   |   |   |   |   |    [ Number [Line: 95] ( 1000 )  ] )  ] ) 
+|   |   |   |   |   RuleSet [Line: 109] ( SelectorDeclaration [Line: 109] ( [ CssSelectorList [Line: 109] ( [ CssSelector [Line: 109]
+|   |   |   |   |   |   |   .alert ] ) 
+|   |   |   |   |   |   CssDeclarationList [Line: 110]( [ CssDeclaration [Line: 110] ( animation ) 
+|   |   |   |   |   |   |    [ Identifier [Line: 110] ( slideDown ) , UnitNumber [Line: 110] ( 0.5 s ) , Identifier [Line: 110] ( ease )  ] )  ] ) 
+|   |   |   |   JinjaBlockStatement [Line: 114] ( extra_css
+|   |   |   HtmlContent [Line: 114]
+|   |   |   |   TagElement [Line: 115]
+|   |   |   Tag [ 115 ] head
+|   |   |   |   TagElement [Line: 116]
+|   |   |   Tag [ 116 ] body
+|   |   |   |   TagElement [Line: 118]
+|   |   |   Tag [ 118 ] nav
+|   |   |   Tag [ 118 ] class = "navbar navbar-expand-lg navbar-dark"
+|   |   |   |   TagElement [Line: 119]
+|   |   |   Tag [ 119 ] div
+|   |   |   Tag [ 119 ] class = "container"
+|   |   |   |   TagElement [Line: 120]
+|   |   |   Tag [ 120 ] a
+|   |   |   Tag [ 120 ] class = "navbar-brand"
+|   |   |   Tag [ 120 ] href = "{{ url_for('index') }}"
+|   |   |   |   TagElement [Line: 121]
+|   |   |   Tag [ 121 ] i
+|   |   |   Tag [ 121 ] class = "fas fa-store"
+|   |   |   |   TagElement [Line: 121]
+|   |   |   Tag [ 121 ] i
+|   |   |   |   HtmlTextItem [Line: 121] (  متجري
+             ) 
+|   |   |   |   TagElement [Line: 122]
+|   |   |   Tag [ 122 ] a
+|   |   |   |   TagElement [Line: 123]
+|   |   |   Tag [ 123 ] button
+|   |   |   Tag [ 123 ] class = "navbar-toggler"
+|   |   |   Tag [ 123 ] type = "button"
+|   |   |   Tag [ 123 ] data-bs-toggle = "collapse"
+|   |   |   Tag [ 123 ] data-bs-target = "#navbarNav"
+|   |   |   |   TagElement [Line: 124]
+|   |   |   Tag [ 124 ] span
+|   |   |   Tag [ 124 ] class = "navbar-toggler-icon"
+|   |   |   |   TagElement [Line: 124]
+|   |   |   Tag [ 124 ] span
+|   |   |   |   TagElement [Line: 125]
+|   |   |   Tag [ 125 ] button
+|   |   |   |   TagElement [Line: 126]
+|   |   |   Tag [ 126 ] div
+|   |   |   Tag [ 126 ] class = "collapse navbar-collapse"
+|   |   |   Tag [ 126 ] id = "navbarNav"
+|   |   |   |   TagElement [Line: 127]
+|   |   |   Tag [ 127 ] ul
+|   |   |   Tag [ 127 ] class = "navbar-nav ms-auto"
+|   |   |   |   TagElement [Line: 128]
+|   |   |   Tag [ 128 ] li
+|   |   |   Tag [ 128 ] class = "nav-item"
+|   |   |   |   TagElement [Line: 129]
+|   |   |   Tag [ 129 ] a
+|   |   |   Tag [ 129 ] class = "nav-link"
+|   |   |   Tag [ 129 ] href = "{{ url_for('index') }}"
+|   |   |   |   TagElement [Line: 130]
+|   |   |   Tag [ 130 ] i
+|   |   |   Tag [ 130 ] class = "fas fa-home"
+|   |   |   |   TagElement [Line: 130]
+|   |   |   Tag [ 130 ] i
+|   |   |   |   HtmlTextItem [Line: 130] (  الرئيسية
+                         ) 
+|   |   |   |   TagElement [Line: 131]
+|   |   |   Tag [ 131 ] a
+|   |   |   |   TagElement [Line: 132]
+|   |   |   Tag [ 132 ] li
+|   |   |   |   TagElement [Line: 133]
+|   |   |   Tag [ 133 ] li
+|   |   |   Tag [ 133 ] class = "nav-item"
+|   |   |   |   TagElement [Line: 134]
+|   |   |   Tag [ 134 ] a
+|   |   |   Tag [ 134 ] class = "nav-link"
+|   |   |   Tag [ 134 ] href = "{{ url_for('add_product') }}"
+|   |   |   |   TagElement [Line: 135]
+|   |   |   Tag [ 135 ] i
+|   |   |   Tag [ 135 ] class = "fas fa-plus-circle"
+|   |   |   |   TagElement [Line: 135]
+|   |   |   Tag [ 135 ] i
+|   |   |   |   HtmlTextItem [Line: 135] (  إضافة منتج
+                         ) 
+|   |   |   |   TagElement [Line: 136]
+|   |   |   Tag [ 136 ] a
+|   |   |   |   TagElement [Line: 137]
+|   |   |   Tag [ 137 ] li
+|   |   |   |   TagElement [Line: 138]
+|   |   |   Tag [ 138 ] ul
+|   |   |   |   TagElement [Line: 139]
+|   |   |   Tag [ 139 ] div
+|   |   |   |   TagElement [Line: 140]
+|   |   |   Tag [ 140 ] div
+|   |   |   |   TagElement [Line: 141]
+|   |   |   Tag [ 141 ] nav
+|   |   |   |   TagElement [Line: 144]
+|   |   |   Tag [ 144 ] div
+|   |   |   Tag [ 144 ] class = "flash-messages"
+|   |   |   |   JinjaWithStatement [Line: 145] ( messages = get_flashed_messages ( JinjaKeywordArgument [Line: 145] ( with_categories = True )  ) ) 
+|   |   |   HtmlContent [Line: 146]
+|   |   |   |   JinjaIfStatement [Line: 146] ( messages ) 
+|   |   |   HtmlContent [Line: 147]
+|   |   |   |   JinjaForStatement [Line: 147] ( category, message in messages ) 
+|   |   |   HtmlContent [Line: 148]
+|   |   |   |   TagElement [Line: 148]
+|   |   |   Tag [ 148 ] div
+|   |   |   Tag [ 148 ] class = "alert alert-{{ category if category != 'message' else 'info' }} alert-dismissible fade show"
+|   |   |   Tag [ 148 ] role = "alert"
+|   |   |   |   TagElement [Line: 149]
+|   |   |   Tag [ 149 ] i
+|   |   |   Tag [ 149 ] class = "fas fa-{% if category == 'success' %}check-circle{% elif category == 'danger' %}exclamation-circle{% else %}info-circle{% endif %}"
+|   |   |   |   TagElement [Line: 149]
+|   |   |   Tag [ 149 ] i
+|   |   |   |   message
+|   |   |   |   TagElement [Line: 151]
+|   |   |   Tag [ 151 ] button
+|   |   |   Tag [ 151 ] type = "button"
+|   |   |   Tag [ 151 ] class = "btn-close"
+|   |   |   Tag [ 151 ] data-bs-dismiss = "alert"
+|   |   |   |   TagElement [Line: 151]
+|   |   |   Tag [ 151 ] button
+|   |   |   |   TagElement [Line: 152]
+|   |   |   Tag [ 152 ] div
+|   |   |   |   TagElement [Line: 156]
+|   |   |   Tag [ 156 ] div
+|   |   |   |   TagElement [Line: 159]
+|   |   |   Tag [ 159 ] div
+|   |   |   Tag [ 159 ] class = "main-content"
+|   |   |   |   TagElement [Line: 160]
+|   |   |   Tag [ 160 ] div
+|   |   |   Tag [ 160 ] class = "container"
+|   |   |   |   JinjaBlockStatement [Line: 161] ( content
+|   |   |   HtmlContent [Line: 161]
+|   |   |   |   TagElement [Line: 162]
+|   |   |   Tag [ 162 ] div
+|   |   |   |   TagElement [Line: 163]
+|   |   |   Tag [ 163 ] div
+|   |   |   |   TagElement [Line: 166]
+|   |   |   Tag [ 166 ] footer
+|   |   |   Tag [ 166 ] class = "footer text-center"
+|   |   |   |   TagElement [Line: 167]
+|   |   |   Tag [ 167 ] div
+|   |   |   Tag [ 167 ] class = "container"
+|   |   |   |   TagElement [Line: 168]
+|   |   |   Tag [ 168 ] p
+|   |   |   Tag [ 168 ] class = "mb-0"
+|   |   |   |   TagElement [Line: 169]
+|   |   |   Tag [ 169 ] i
+|   |   |   Tag [ 169 ] class = "fas fa-heart text-danger"
+|   |   |   |   TagElement [Line: 169]
+|   |   |   Tag [ 169 ] i
+|   |   |   |   HtmlTextItem [Line: 169] (  
+                نظام إدارة المنتجات - جميع الحقوق محفوظة &copy; 2024
+             ) 
+|   |   |   |   TagElement [Line: 171]
+|   |   |   Tag [ 171 ] p
+|   |   |   |   TagElement [Line: 172]
+|   |   |   Tag [ 172 ] div
+|   |   |   |   TagElement [Line: 173]
+|   |   |   Tag [ 173 ] footer
+|   |   |   |   ScriptElement [Line: 176]
+|   |   |   |   ScriptElement [Line: 179] ( 
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+     ) 
+|   |   |   |   JinjaBlockStatement [Line: 189] ( extra_js
+|   |   |   HtmlContent [Line: 189]
+|   |   |   |   TagElement [Line: 190]
+|   |   |   Tag [ 190 ] body
+|   |   |   |   TagElement [Line: 191]
+|   |   |   Tag [ 191 ] html

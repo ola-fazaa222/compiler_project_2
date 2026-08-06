@@ -12,6 +12,10 @@ public class SimpleReturnStatement extends ReturnStatement {
         this.atom = atom;
     }
 
+    public Atom getAtom() {
+        return atom;
+    }
+
     @Override
     public String toString() {
         return super.toString() + atom.toString();

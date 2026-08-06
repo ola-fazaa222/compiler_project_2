@@ -3,6 +3,7 @@ package symbolTable;
 public enum SymbolKind {
     VARIABLE,
     FUNCTION,
+    CLASS,
     PARAMETER,
     BUILTIN,
     IMPORT,

@@ -5,6 +5,8 @@ import ast.atom.Atom;
 import ast.atom.Name;
 import ast.atomExpression.*;
 import ast.compundStmt.*;
+import ast.compundStmt.ClassDefinition;
+import ast.compundStmt.ImportStatement;
 import ast.functionDef.FunctionDefinition;
 import ast.functionDef.FunctionParameter;
 import symbolTable.*;
@@ -14,9 +16,29 @@ import java.util.*;
 public class UndefinedSymbolDetector extends ScopeAwareDetector {
 
     @Override
+    protected void enterImport(ImportStatement imp) {
+        if (imp.getImportedList() != null) {
+            for (Imported i : imp.getImportedList()) {
+                String name = i.getName();
+                if (name != null) {
+                    Symbol sym = defineSymbol(name, SymbolKind.IMPORT, imp.line_number);
+                    if (sym != null) sym.initialized = true;
+                }
+            }
+        }
+    }
+
+    @Override
     protected void enterFunction(FunctionDefinition fd) {
         if (fd.functionName != null) {
             defineSymbol(fd.functionName, SymbolKind.FUNCTION, fd.line_number);
+        }
+    }
+
+    @Override
+    protected void enterClass(ClassDefinition cd) {
+        if (cd.className != null) {
+            defineSymbol(cd.className, SymbolKind.CLASS, cd.line_number);
         }
     }
 

@@ -12,6 +12,7 @@ import ast.atom.Atom;
 import ast.atom.Name;
 import ast.atomExpression.*;
 import ast.compundStmt.*;
+import ast.compundStmt.ClassDefinition;
 import ast.complexExp.*;
 import ast.condition.*;
 import ast.functionDef.FunctionDefinition;
@@ -236,6 +237,8 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
 
         if (cs instanceof FunctionDefinition fd) {
             walkFunction(fd);
+        } else if (cs instanceof ClassDefinition cd) {
+            walkClass(cd);
         } else if (cs instanceof IfStatement is) {
             walkIf(is);
         } else if (cs instanceof ForLoop fl) {
@@ -314,6 +317,21 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
     protected void enterFunction(FunctionDefinition fd) {}
     protected void exitFunction(FunctionDefinition fd) {}
 
+    // ================ Class Scope ================
+
+    protected void walkClass(ClassDefinition cd) {
+        enterClass(cd);
+        pushScope(ScopeType.CLASS, cd.line_number);
+        if (cd.classBody != null) {
+            walkStatement(cd.classBody);
+        }
+        popScope();
+        exitClass(cd);
+    }
+
+    protected void enterClass(ClassDefinition cd) {}
+    protected void exitClass(ClassDefinition cd) {}
+
     // ================ If/Elif/Else Scopes ================
 
     protected void walkIf(IfStatement is) {
@@ -324,27 +342,21 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
                 ? new HashMap<>() : new HashMap<>(branchSnapshotStack.peek());
 
         enterIf(is);
-        pushScope(ScopeType.IF, is.line_number);
         if (is.statement != null) walkStatement(is.statement);
-        popScope();
         exitIf(is);
 
         if (is.elifStatements != null) {
             for (ElIfStatement elif : is.elifStatements) {
                 if (elif.condition != null) walkCondition(elif.condition);
                 enterElif(elif);
-                pushScope(ScopeType.ELIF, elif.line_number);
                 if (elif.statement != null) walkStatement(elif.statement);
-                popScope();
                 exitElif(elif);
             }
         }
 
         if (is.elseStatement != null) {
             enterElse(is);
-            pushScope(ScopeType.ELSE, is.elseStatement.line_number);
             walkStatement(is.elseStatement);
-            popScope();
             exitElse(is);
         }
 
@@ -368,11 +380,7 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
         if (fl.iter != null) walkPythonExpression(fl.iter);
 
         enterFor(fl);
-        pushScope(ScopeType.FOR, fl.line_number);
-        // Subclasses that need the loop variable registered should do so
-        // in enterFor() via defineSymbol(). The base class does not auto-register.
         if (fl.statement != null) walkStatement(fl.statement);
-        popScope();
         exitFor(fl);
     }
 
@@ -400,6 +408,7 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
 
     protected void walkAtomExpression(AtomExpression ae) {
         if (ae == null) return;
+        if (ae instanceof FStringAtomExpression) return;
         enterAtomExpression(ae);
         String varName = ae.getVarName();
 
@@ -417,6 +426,10 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
             checkVariableReference(varName, oc.line_number);
         } else if (ae instanceof SimpleVariable sv) {
             checkVariableReference(varName, sv.line_number);
+        } else if (ae instanceof Subscript ss) {
+            if (ss.getTarget() instanceof SimpleVariable sv) {
+                checkVariableReference(sv.getVarName(), ss.line_number);
+            }
         }
         exitAtomExpression(ae);
     }
@@ -492,10 +505,11 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
             }
         } else if (ce instanceof ListLiteral ll) {
             if (ll.listItems != null) {
-                for (Atom a : ll.listItems) {
-                    if (a instanceof Name n) {
-                        String name = n.getValue() != null ? n.getValue().toString() : null;
-                        checkVariableReference(name, a.line_number);
+                for (AtomExpression ae : ll.listItems) {
+                    if (ae instanceof SimpleVariable sv) {
+                        checkVariableReference(sv.getVarName(), ae.line_number);
+                    } else {
+                        walkPythonExpression(ae);
                     }
                 }
             }
@@ -512,7 +526,13 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
                 }
             }
         } else if (cond instanceof NotExpression ne) {
-            if (ne.pythonExpression != null) walkPythonExpression(ne.pythonExpression);
+            if (ne.condition != null) walkCondition(ne.condition);
+        } else if (cond instanceof AndCondition ac) {
+            if (ac.left != null) walkCondition(ac.left);
+            if (ac.right != null) walkCondition(ac.right);
+        } else if (cond instanceof OrCondition oc) {
+            if (oc.left != null) walkCondition(oc.left);
+            if (oc.right != null) walkCondition(oc.right);
         }
     }
 

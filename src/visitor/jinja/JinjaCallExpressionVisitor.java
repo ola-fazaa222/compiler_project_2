@@ -16,12 +16,29 @@ public class JinjaCallExpressionVisitor extends HtmlParserBaseVisitor<JinjaCallE
     @Override
     public JinjaCallExpression visitJinjaFilteredExpr(HtmlParser.JinjaFilteredExprContext ctx) {
         JinjaFilteredExpression jinjaFilteredExpression = new JinjaFilteredExpression(ctx.start.getLine());
-        JinjaVariableAccess jinjaVariableAccess = (JinjaVariableAccess) jinjaVisitor.visit(ctx.j_var_access());
-        jinjaFilteredExpression.setJinjaVariableAccess(jinjaVariableAccess);
-        if (ctx.getChild(2) != null) {
-            jinjaFilteredExpression.setFilterName(ctx.getChild(2).getText());
+        JinjaCallExpression left = visit(ctx.j_call_expr(0));
+        JinjaCallExpression right = visit(ctx.j_call_expr(1));
+        jinjaFilteredExpression.setJinjaVariableAccess(
+            left instanceof JinjaVariableAccess ? (JinjaVariableAccess) left : null
+        );
+        if (right instanceof JinjaVariableAccess) {
+            jinjaFilteredExpression.setFilterName(((JinjaVariableAccess) right).dottedName);
+        } else if (right instanceof JinjaFunctionCall) {
+            jinjaFilteredExpression.setFilterName(((JinjaFunctionCall) right).functionName);
         }
         return jinjaFilteredExpression;
+    }
+
+    @Override
+    public JinjaCallExpression visitJinjaMethodCall(HtmlParser.JinjaMethodCallContext ctx) {
+        JinjaVariableAccess varAccess = (JinjaVariableAccess) jinjaVisitor.visit(ctx.j_var_access());
+        JinjaFunctionCall jinjaFunctionCall = new JinjaFunctionCall(ctx.start.getLine());
+        jinjaFunctionCall.setFunctionName(varAccess.dottedName);
+        if (ctx.j_argument_list() != null) {
+            JinjaArgumentsList jinjaArgumentsList = (JinjaArgumentsList) jinjaVisitor.visit(ctx.j_argument_list());
+            jinjaFunctionCall.setArgumentsList(jinjaArgumentsList);
+        }
+        return jinjaFunctionCall;
     }
 
     @Override
