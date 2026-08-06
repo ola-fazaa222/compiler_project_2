@@ -111,11 +111,28 @@ public class HtmlStyleSheetVisitor extends HtmlParserBaseVisitor<ASTNode> {
         CssFunctionArguments cssFunctionArguments = new CssFunctionArguments(ctx.start.getLine());
         HtmlCssTermVisitor cssTermVisitor = new HtmlCssTermVisitor();
         List<CssTerm> cssTerms = new ArrayList<>();
-        for (int i = 0; i < ctx.cssterm().size(); i++) {
-            CssTerm cssTerm = cssTermVisitor.visit(ctx.cssterm(i));
-            cssTerms.add(cssTerm);
+        List<List<CssTerm>> groups = new ArrayList<>();
+        List<CssTerm> currentGroup = new ArrayList<>();
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            Object child = ctx.getChild(i);
+            if (child instanceof HtmlParser.CsstermContext) {
+                CssTerm term = cssTermVisitor.visit((HtmlParser.CsstermContext) child);
+                currentGroup.add(term);
+                cssTerms.add(term);
+            } else if (child instanceof org.antlr.v4.runtime.tree.TerminalNode) {
+                org.antlr.v4.runtime.tree.TerminalNode tn =
+                    (org.antlr.v4.runtime.tree.TerminalNode) child;
+                if (tn.getSymbol().getType() == HtmlParser.CSS_COMMA) {
+                    groups.add(currentGroup);
+                    currentGroup = new ArrayList<>();
+                }
+            }
+        }
+        if (!currentGroup.isEmpty()) {
+            groups.add(currentGroup);
         }
         cssFunctionArguments.setCssTerms(cssTerms);
+        cssFunctionArguments.setGroupedTerms(groups);
         return cssFunctionArguments;
     }
 }

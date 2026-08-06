@@ -9,6 +9,10 @@ public class JinjaAtom extends JinjaCallExpression {
         this.atom = atom;
     }
 
+    public Atom getAtom() {
+        return atom;
+    }
+
     @Override
     public String toString() {
         return atom.toString();

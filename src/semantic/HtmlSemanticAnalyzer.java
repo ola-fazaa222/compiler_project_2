@@ -64,6 +64,20 @@ public class HtmlSemanticAnalyzer {
                     analyzeItem(child);
                 }
             }
+            if (jis.elifBodies != null) {
+                for (HtmlContent elifBody : jis.elifBodies) {
+                    if (elifBody != null && elifBody.items != null) {
+                        for (HtmlContentItem child : elifBody.items) {
+                            analyzeItem(child);
+                        }
+                    }
+                }
+            }
+            if (jis.elseBody != null && jis.elseBody.items != null) {
+                for (HtmlContentItem child : jis.elseBody.items) {
+                    analyzeItem(child);
+                }
+            }
         } else if (item instanceof JinjaForStatement jfs) {
             if (jfs.htmlContent != null && jfs.htmlContent.items != null) {
                 for (HtmlContentItem child : jfs.htmlContent.items) {

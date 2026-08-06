@@ -48,6 +48,9 @@ public class HtmlElementVisitor extends HtmlParserBaseVisitor<HtmlElement> {
     @Override
     public HtmlElement visitScriptElement(HtmlParser.ScriptElementContext ctx) {
         ScriptElement scriptElement = new ScriptElement(ctx.start.getLine());
+        if (ctx.SCRIPT_OPEN() != null) {
+            scriptElement.setOpenTag(ctx.SCRIPT_OPEN().getText());
+        }
         if (ctx.SCRIPT_CONTENT() != null) {
             scriptElement.setContent(ctx.SCRIPT_CONTENT().getText());
         }

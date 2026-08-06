@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}تفاصيل المنتج - {{ product.name }}{% endblock %}
+{% block title %}تفاصيل المنتج{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-10">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" id="product-detail-content">
                 <div class="row">
                     <div class="col-md-5 text-center">
                         {% if product.image_filename %}
@@ -39,24 +39,17 @@
                             <p class="text-muted">{{ product.details }}</p>
                         </div>
                         
-                        <div class="mb-3">
-                            <small class="text-muted">
-                                <i class="fas fa-calendar-alt"></i>
-                                تاريخ الإضافة: {{ product.created_at }}
-                            </small>
-                        </div>
-                        
                         <div class="btn-group w-100">
-                            <a href="{{ url_for('edit_product', product_id=product.id) }}" 
+                            <a href="edit_product.html?id={{ product.id }}" 
                                class="btn btn-warning">
                                 <i class="fas fa-edit"></i> تعديل
                             </a>
-                            <a href="{{ url_for('delete_product', product_id=product.id) }}" 
+                            <a href="#" 
                                class="btn btn-danger"
-                               onclick="return confirm('هل أنت متأكد من حذف هذا المنتج؟')">
+                               onclick="CrudManager.handleDelete('{{ product.id }}'); return false;">
                                 <i class="fas fa-trash"></i> حذف
                             </a>
-                            <a href="{{ url_for('index') }}" 
+                            <a href="index.html" 
                                class="btn btn-secondary">
                                 <i class="fas fa-arrow-right"></i> رجوع
                             </a>

@@ -46,7 +46,7 @@ def index():
 @app.route("/product/<int:product_id>")
 def detail(product_id):
     p = find_product(product_id)
-    return render_template("detail.html", product=p)
+    return render_template("product_detail.html", product=p)
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -63,7 +63,7 @@ def add_product():
         counter = counter + 1
         products.append(product)
         return redirect(url_for("index"))
-    return render_template("add.html")
+    return render_template("add_product.html")
 
 
 # =========================================
@@ -75,6 +75,23 @@ def delete(product_id):
     global products
     products = []
     return redirect(url_for("index"))
+
+
+@app.route("/edit/<int:product_id>", methods=["GET", "POST"])
+def edit_product(product_id):
+    p = find_product(product_id)
+    if not p:
+        return redirect(url_for("index"))
+
+    if request.method == "POST":
+        p["name"] = request.form.get("name", p["name"])
+        p["price"] = request.form.get("price", p["price"])
+        p["description"] = request.form.get("description", p.get("description", ""))
+        p["specification"] = request.form.get("specification", p.get("specification", ""))
+        p["img"] = request.form.get("img", p.get("img", ""))
+        return redirect(url_for("detail", product_id=product_id))
+
+    return render_template("edit_product.html", product=p)
 
 
 if __name__ == "__main__":

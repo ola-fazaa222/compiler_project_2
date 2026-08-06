@@ -4,6 +4,7 @@ import ast.*;
 import ast.argsList.AtomArguments;
 import ast.argsList.ComplexArguments;
 import ast.argument.*;
+import ast.assignStmt.PythonExpressionAssignStatement;
 import ast.assignStmt.TemplateLiteralAssignmentStatement;
 import ast.atom.Atom;
 import ast.atom.Str;
@@ -11,8 +12,10 @@ import ast.atomExpression.*;
 import ast.compundStmt.*;
 import ast.compundStmt.ClassDefinition;
 import ast.compundStmt.PythonExpression;
+import ast.condition.*;
 import ast.functionDef.FunctionDefinition;
 import ast.returnStmt.ComplexReturnStatement;
+import ast.returnStmt.ConditionReturnStatement;
 import ast.returnStmt.ReturnStatement;
 
 import java.io.File;
@@ -63,6 +66,13 @@ public class TemplateNotFoundDetector implements ErrorDetector {
                     inlineTemplateVars.add(name);
                 }
             }
+        } else if (cs instanceof PythonExpressionAssignStatement pa) {
+            if (pa.var != null && isTripleQuoteString(pa.value)) {
+                String name = extractVarName(pa.var);
+                if (name != null) {
+                    inlineTemplateVars.add(name);
+                }
+            }
         } else if (cs instanceof ClassDefinition cd) {
             if (cd.classBody != null && cd.classBody.compoundStatements != null) {
                 for (CompoundStatement child : cd.classBody.compoundStatements) {
@@ -76,6 +86,14 @@ public class TemplateNotFoundDetector implements ErrorDetector {
                 }
             }
         }
+    }
+
+    private boolean isTripleQuoteString(PythonExpression expr) {
+        if (expr instanceof SimpleVariable sv) {
+            String name = sv.getVarName();
+            return name != null && name.startsWith("\"\"\"");
+        }
+        return false;
     }
 
     private String extractVarName(PythonExpression expr) {
@@ -111,6 +129,10 @@ public class TemplateNotFoundDetector implements ErrorDetector {
             if (rs instanceof ComplexReturnStatement crs && crs.pythonExpression != null) {
                 PythonExpression expr = crs.pythonExpression;
                 if (expr instanceof AtomExpression ae) analyzeAtomExpression(ae);
+            } else if (rs instanceof ConditionReturnStatement crs && crs.condition != null) {
+                if (crs.condition instanceof ComparisonExpression ce) {
+                    if (ce.baseExpr instanceof AtomExpression ae) analyzeAtomExpression(ae);
+                }
             }
         } else if (cs instanceof AtomExpression ae) {
             analyzeAtomExpression(ae);

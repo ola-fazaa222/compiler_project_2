@@ -9,7 +9,6 @@ import java.util.*;
 public class CssSemanticAnalyzer {
 
     private final List<SemanticError> errors = new ArrayList<>();
-    private final Set<String> seenSelectors = new HashSet<>();
 
     private static final Set<String> KNOWN_PROPERTIES = new HashSet<>(Arrays.asList(
             "color", "background", "background-color", "background-image", "background-size",
@@ -149,7 +148,6 @@ public class CssSemanticAnalyzer {
 
     public boolean analyze(StyleSheet styleSheet) {
         errors.clear();
-        seenSelectors.clear();
         if (styleSheet != null && styleSheet.ruleSets != null) {
             for (RuleSet rule : styleSheet.ruleSets) {
                 analyzeRuleSet(rule);
@@ -161,17 +159,6 @@ public class CssSemanticAnalyzer {
 
     private void analyzeRuleSet(RuleSet rule) {
         if (rule == null) return;
-
-        // Check for duplicate selectors
-        if (rule.selectorDeclaration != null && rule.selectorDeclaration.selectorLists != null) {
-            String selectorStr = rule.selectorDeclaration.toSelectorString();
-            if (seenSelectors.contains(selectorStr)) {
-                errors.add(new SemanticError(rule.line_number,
-                        "CSS Error: Duplicate selector '" + selectorStr + "'."));
-            } else {
-                seenSelectors.add(selectorStr);
-            }
-        }
 
         // Check for empty rule set
         if (rule.declarationList == null || rule.declarationList.declarations == null

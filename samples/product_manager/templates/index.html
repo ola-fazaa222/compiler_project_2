@@ -13,7 +13,7 @@
 
     {% for product in products %}
 
-    <div class="card">
+    <div class="card" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-product-price="{{ product.price }}" data-product-details="{{ product.details }}" data-product-image="{{ product.image }}">
 
         <img src="{{ product.image }}" alt="product image">
 
@@ -22,7 +22,7 @@
         <p class="price">${{ product.price }}</p>
 
         <div class="buttons">
-            <a href="{{ url_for('details', product_id=product.id) }}">
+            <a href="{{ url_for('product_detail', product_id=product.id) }}">
                 Details
             </a>
 

@@ -9,15 +9,17 @@ import antlr.python.PythonParser;
 import ast.ASTNode;
 import ast.HtmlContent;
 import ast.Program;
+import ast.htmlElement.StyleSheet;
 import codegen.AstToTac;
 import codegen.PythonCodeGenerator;
 import codegen.ir.TacProgram;
+import generationlogger.GenerationLogger;
+import htmlgen.HtmlGenerator;
 import listener.CustomErrorListener;
 import semantic.CssSemanticAnalyzer;
 import semantic.HtmlSemanticAnalyzer;
 import semantic.JinjaSymbolCollector;
 import semantic.JinjaTemplateVariableDetector;
-import semantic.SemanticAnalyzer;
 import semantic.SemanticError;
 import semantic.TemplateVariableChecker;
 import org.antlr.v4.gui.TreeViewer;
@@ -26,6 +28,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
+import symbolTable.Scope;
+import symbolTable.Symbol;
 import symbolTable.SymbolTableManager;
 import visitor.css.StyleSheetVisitor;
 import visitor.html.HtmlContentVisitor;
@@ -37,7 +41,10 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.stream.Collectors;
@@ -48,10 +55,12 @@ public class App {
     private static final Set<String> SKIP_DIRS = Set.of(
         "venv", "env", ".venv", ".git", "__pycache__",
         "node_modules", ".mypy_cache", ".pytest_cache",
-        "egg-info", "dist", "build", ".idea", ".vscode"
+        "egg-info", "dist", "build", ".idea", ".vscode",
+        "output", "compiler_output"
     );
 
     private static Set<String> localModules = new HashSet<>();
+    private static final List<Map<String, Object>> jinjaTemplateDataList = new ArrayList<>();
 
     private static boolean shouldSkip(Path path) {
         for (int i = 0; i < path.getNameCount(); i++) {
@@ -63,6 +72,10 @@ public class App {
     }
 
     public static void main(String[] args) {
+
+        HtmlGenerator.clearSharedErrors();
+        HtmlGenerator.resetSharedRouteTable();
+        jinjaTemplateDataList.clear();
 
         Path outputDir = Paths.get("output");
         try {
@@ -137,6 +150,10 @@ public class App {
                 processFile(startPath.toString());
             }
 
+            String jinjaSymbolTableJson = buildJinjaSymbolTableJson();
+            HtmlGenerator.setJinjaSymbolTableJson(jinjaSymbolTableJson);
+            HtmlGenerator.writeFinalReport();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -171,64 +188,31 @@ public class App {
                 ProgramVisitor visitor = new ProgramVisitor();
                 Program program = visitor.visit(tree);
 
-                // Write AST to file
-                try (PrintStream ps = new PrintStream("output/" + pureFileName + "_ast.txt")) {
-                    System.setOut(ps);
-                    System.out.println(program);
-                }
+                // Preserve existing TAC and PythonCodeGenerator components (run silently)
+                AstToTac astToTac = new AstToTac();
+                TacProgram tac = astToTac.translate(program);
+                PythonCodeGenerator pyGen = new PythonCodeGenerator(localModules);
+                String generatedCode = pyGen.generate(program);
 
-                // Write symbol table to file
-                try (PrintStream ps = new PrintStream("output/" + pureFileName + "_symbol_table.txt")) {
-                    System.setOut(ps);
-                    SymbolTableManager.INSTANCE.printFullTable();
-                }
-
-                // Write errors to file (syntax + semantic)
-                boolean hasSemanticErrors = false;
-                try (PrintStream ps = new PrintStream("output/" + pureFileName + "_errors.txt")) {
-                    System.setOut(ps);
-                    writeSyntaxErrors(errorListener);
-                    SemanticAnalyzer analyzer = new SemanticAnalyzer();
-                    hasSemanticErrors = !analyzer.analyze(program, fileName);
-                }
-
-                boolean hasSyntaxErrors = errorListener.hasErrors();
-                boolean canGenerate = !hasSyntaxErrors && !hasSemanticErrors;
-
-                if (canGenerate) {
-                    // Write generated TAC IR to file
-                    try (PrintStream ps = new PrintStream("output/" + pureFileName + "_ir.txt")) {
-                        System.setOut(ps);
-                        AstToTac astToTac = new AstToTac();
-                        TacProgram tac = astToTac.translate(program);
-                        System.out.println(tac.toString());
-                    }
-
-                    // Write generated Python code to file
-                    try (PrintStream ps = new PrintStream("output/" + pureFileName + "_generated.py")) {
-                        System.setOut(ps);
-                        PythonCodeGenerator pyGen = new PythonCodeGenerator(localModules);
-                        String generatedCode = pyGen.generate(program);
-                        System.out.println(generatedCode);
-                    }
-
-                    // Validate generated Python syntax
-                    String generatedFilePath = "output/" + pureFileName + "_generated.py";
-                    boolean syntaxValid = validateGeneratedPython(generatedFilePath);
-                    System.setOut(originalOut);
-                    if (syntaxValid) {
-                        System.out.println("[OK] " + pureFileName + " -> output/   (run: python3 output/" + pureFileName + "_generated.py)");
+                // ===== Generation pipeline (always writes compiler_output) =====
+                System.setOut(originalOut);
+                System.out.println("[GEN] Running generation pipeline...");
+                try {
+                    GenerationLogger genLogger = new GenerationLogger();
+                    genLogger.setOutput(System.out);
+                    HtmlGenerator htmlGen = new HtmlGenerator(fileName, genLogger);
+                    htmlGen.generate(program, fileName);
+                    if (htmlGen.hasErrors()) {
+                        System.out.println("[GEN] Semantic errors detected - see compiler_output/semantic_report.txt");
                     } else {
-                        System.out.println("[CODEGEN WARNING] " + pureFileName + " -> output/   (generated Python has syntax errors)");
+                        System.out.println("[GEN] Generation completed successfully.");
+                        System.out.println("[GEN] Output: output/ and compiler_output/");
                     }
-                } else {
-                    System.setOut(originalOut);
-                    if (hasSyntaxErrors) {
-                        System.out.println("[SYNTAX ERRORS] " + pureFileName + " -> output/   (codegen skipped due to syntax errors)");
-                    } else if (hasSemanticErrors) {
-                        System.out.println("[SEMANTIC ERRORS] " + pureFileName + " -> output/   (codegen skipped due to semantic errors)");
-                    }
+                } catch (Exception e) {
+                    System.out.println("[GEN] Generation pipeline error: " + e.getMessage());
+                    e.printStackTrace();
                 }
+                // ===== END =====
 
                 // end of Python file processing
             }
@@ -257,34 +241,54 @@ public class App {
 
                 HtmlContent htmlContent = visitor.visit(tree);
 
-                try (PrintStream ps = new PrintStream("output/" + pureFileName + "_ast.txt")) {
-                    System.setOut(ps);
-                    System.out.println(htmlContent);
-                }
-
-                // Write Jinja symbol table to file
+                String htmlShortName = new java.io.File(fileName).getName();
                 JinjaSymbolCollector jinjaCollector = new JinjaSymbolCollector();
                 jinjaCollector.analyze(htmlContent);
-                try (PrintStream ps = new PrintStream("output/" + pureFileName + "_symbol_table.txt")) {
-                    System.setOut(ps);
-                    jinjaCollector.printTable();
-                }
-
                 JinjaTemplateVariableDetector jinjaVarDetector = new JinjaTemplateVariableDetector();
                 jinjaVarDetector.analyze(jinjaCollector, fileName);
-                try (PrintStream ps = new PrintStream("output/" + pureFileName + "_errors.txt")) {
-                    System.setOut(ps);
-                    writeSyntaxErrors(errorListener);
-                    HtmlSemanticAnalyzer htmlAnalyzer = new HtmlSemanticAnalyzer();
-                    htmlAnalyzer.analyze(htmlContent);
-                    jinjaVarDetector.printErrors();
+                HtmlGenerator.addSharedErrors(jinjaVarDetector.getErrors(), htmlShortName);
+
+                HtmlSemanticAnalyzer htmlAnalyzer = new HtmlSemanticAnalyzer();
+                htmlAnalyzer.analyze(htmlContent);
+                HtmlGenerator.addSharedErrors(htmlAnalyzer.getErrors(), htmlShortName);
+
+                Map<String, Object> jinjaData = new LinkedHashMap<>();
+                jinjaData.put("file", htmlShortName);
+                jinjaData.put("extends", jinjaCollector.getExtendsTemplate());
+                List<Map<String, Object>> blocksList = new ArrayList<>();
+                for (var e : jinjaCollector.getBlocks().entrySet()) {
+                    Map<String, Object> bm = new LinkedHashMap<>();
+                    bm.put("name", e.getKey());
+                    bm.put("line", e.getValue());
+                    blocksList.add(bm);
                 }
+                jinjaData.put("blocks", blocksList);
+                List<Map<String, Object>> loopVarsList = new ArrayList<>();
+                for (var e : jinjaCollector.getLoopVars().entrySet()) {
+                    Map<String, Object> lvm = new LinkedHashMap<>();
+                    lvm.put("name", e.getKey());
+                    lvm.put("line", e.getValue());
+                    loopVarsList.add(lvm);
+                }
+                jinjaData.put("loop_vars", loopVarsList);
+                List<Map<String, Object>> readVarsList = new ArrayList<>();
+                for (var e : jinjaCollector.getReadVars().entrySet()) {
+                    Map<String, Object> rvm = new LinkedHashMap<>();
+                    rvm.put("name", e.getKey());
+                    rvm.put("line", e.getValue());
+                    readVarsList.add(rvm);
+                }
+                jinjaData.put("read_vars", readVarsList);
+                if (jinjaCollector.getRootScope() != null) {
+                    jinjaData.put("scope_tree", scopeToMap(jinjaCollector.getRootScope()));
+                }
+                jinjaTemplateDataList.add(jinjaData);
 
                 System.setOut(originalOut);
                 if (errorListener.hasErrors()) {
-                    System.out.println("[SYNTAX ERRORS] " + pureFileName + " -> output/");
+                    System.out.println("[SYNTAX ERRORS] " + pureFileName);
                 } else {
-                    System.out.println("[OK] " + pureFileName + " -> output/");
+                    System.out.println("[OK] " + pureFileName);
                 }
             }
 
@@ -309,27 +313,19 @@ public class App {
                 StyleSheetVisitor visitor =
                         new StyleSheetVisitor();
 
+                String cssShortName = new java.io.File(fileName).getName();
                 ASTNode styleSheet = visitor.visit(tree);
-
-                try (PrintStream ps = new PrintStream("output/" + pureFileName + "_ast.txt")) {
-                    System.setOut(ps);
-                    System.out.println(styleSheet);
-                }
-
-                try (PrintStream ps = new PrintStream("output/" + pureFileName + "_errors.txt")) {
-                    System.setOut(ps);
-                    writeSyntaxErrors(errorListener);
+                if (styleSheet instanceof StyleSheet ss) {
                     CssSemanticAnalyzer cssAnalyzer = new CssSemanticAnalyzer();
-                    if (styleSheet instanceof ast.htmlElement.StyleSheet ss) {
-                        cssAnalyzer.analyze(ss);
-                    }
+                    cssAnalyzer.analyze(ss);
+                    HtmlGenerator.addSharedErrors(cssAnalyzer.getErrors(), cssShortName);
                 }
 
                 System.setOut(originalOut);
                 if (errorListener.hasErrors()) {
-                    System.out.println("[SYNTAX ERRORS] " + pureFileName + " -> output/");
+                    System.out.println("[SYNTAX ERRORS] " + pureFileName);
                 } else {
-                    System.out.println("[OK] " + pureFileName + " -> output/");
+                    System.out.println("[OK] " + pureFileName);
                 }
             }
 
@@ -402,6 +398,94 @@ public class App {
             name = name.substring(0, name.lastIndexOf('.'));
         }
         return name;
+    }
+
+    private static Map<String, Object> scopeToMap(Scope scope) {
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("scopeType", scope.scopeType.name());
+        map.put("entryLine", scope.entryLine);
+        List<Map<String, Object>> syms = new ArrayList<>();
+        for (Symbol sym : scope.getSymbolsInScope()) {
+            Map<String, Object> sm = new LinkedHashMap<>();
+            sm.put("name", sym.name);
+            sm.put("kind", sym.kind.name());
+            sm.put("type", sym.type.name());
+            sm.put("declaredLine", sym.declaredLine);
+            sm.put("initialized", sym.initialized);
+            sm.put("mutable", sym.mutable);
+            syms.add(sm);
+        }
+        map.put("symbols", syms);
+        List<Map<String, Object>> childScopes = new ArrayList<>();
+        for (Scope child : scope.children) {
+            childScopes.add(scopeToMap(child));
+        }
+        map.put("children", childScopes);
+        return map;
+    }
+
+    private static String buildJinjaSymbolTableJson() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[\n");
+        boolean first = true;
+        for (Map<String, Object> data : jinjaTemplateDataList) {
+            if (!first) sb.append(",\n");
+            first = false;
+            sb.append(mapToJson(data, 1));
+        }
+        sb.append("\n]\n");
+        return sb.toString();
+    }
+
+    @SuppressWarnings("unchecked")
+    private static String mapToJson(Object obj, int indent) {
+        if (obj == null) return "null";
+        if (obj instanceof String s) {
+            return "\"" + escapeJsonStr(s) + "\"";
+        }
+        if (obj instanceof Number || obj instanceof Boolean) {
+            return obj.toString();
+        }
+        if (obj instanceof Map<?, ?> map) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("{");
+            boolean first = true;
+            for (Map.Entry<String, Object> entry : ((Map<String, Object>) map).entrySet()) {
+                if (!first) sb.append(",");
+                first = false;
+                sb.append("\n").append("  ".repeat(indent + 1));
+                sb.append("\"").append(escapeJsonStr(entry.getKey())).append("\": ");
+                sb.append(mapToJson(entry.getValue(), indent + 1));
+            }
+            if (!first) sb.append("\n").append("  ".repeat(indent));
+            sb.append("}");
+            return sb.toString();
+        }
+        if (obj instanceof List<?> list) {
+            if (list.isEmpty()) return "[]";
+            StringBuilder sb = new StringBuilder();
+            sb.append("[");
+            boolean first = true;
+            for (Object item : list) {
+                if (!first) sb.append(",");
+                first = false;
+                sb.append("\n").append("  ".repeat(indent + 1));
+                sb.append(mapToJson(item, indent + 1));
+            }
+            sb.append("\n").append("  ".repeat(indent));
+            sb.append("]");
+            return sb.toString();
+        }
+        return "\"" + escapeJsonStr(obj.toString()) + "\"";
+    }
+
+    private static String escapeJsonStr(String s) {
+        if (s == null) return "";
+        return s.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\t", "\\t");
     }
 
     private static void showParseTree(

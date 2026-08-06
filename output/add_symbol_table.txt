@@ -1,8 +1,0 @@
-========== JINJA SYMBOL TABLE ==========
-
---- Template Extends ---
-  Line 1: extends "base.html"
-
---- Blocks ---
-  Line 2: content
-

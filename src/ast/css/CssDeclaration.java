@@ -8,6 +8,7 @@ import java.util.List;
 
 public class CssDeclaration extends ASTNode {
     public List<CssTerm> cssTermList;
+    public List<Boolean> commaBefore;
     public String id;
 
     public CssDeclaration(int line_number) {
@@ -16,6 +17,10 @@ public class CssDeclaration extends ASTNode {
 
     public void setCssTermList(List<CssTerm> cssTermList) {
         this.cssTermList = cssTermList;
+    }
+
+    public void setCommaBefore(List<Boolean> commaBefore) {
+        this.commaBefore = commaBefore;
     }
 
     public void setId(String id) {

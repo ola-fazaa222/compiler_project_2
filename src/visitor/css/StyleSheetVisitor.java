@@ -93,14 +93,26 @@ public class StyleSheetVisitor extends CssParserBaseVisitor<ASTNode> {
         CssDeclaration cssDeclaration = new CssDeclaration(ctx.start.getLine());
         CssTermVisitor cssTermVisitor = new CssTermVisitor();
         List<CssTerm> terms = new ArrayList<>();
+        List<Boolean> commaBefore = new ArrayList<>();
         CssParser.Css_valueContext valueCtx = ctx.css_value();
         if (valueCtx != null) {
-            for (int i = 0; i < valueCtx.cssterm().size(); i++) {
-                CssTerm cssTerm = cssTermVisitor.visit(valueCtx.cssterm(i));
-                terms.add(cssTerm);
+            boolean expectComma = false;
+            for (int i = 0; i < valueCtx.getChildCount(); i++) {
+                Object child = valueCtx.getChild(i);
+                if (child instanceof CssParser.CsstermContext) {
+                    CssTerm term = cssTermVisitor.visit((CssParser.CsstermContext) child);
+                    terms.add(term);
+                    commaBefore.add(expectComma);
+                    expectComma = false;
+                } else if (child instanceof org.antlr.v4.runtime.tree.TerminalNode tn) {
+                    if (tn.getSymbol().getType() == CssParser.CSS_COMMA) {
+                        expectComma = true;
+                    }
+                }
             }
         }
         cssDeclaration.setCssTermList(terms);
+        cssDeclaration.setCommaBefore(commaBefore);
         cssDeclaration.setId(ctx.CSS_ID().getText());
 
         return cssDeclaration;
@@ -112,12 +124,28 @@ public class StyleSheetVisitor extends CssParserBaseVisitor<ASTNode> {
         CssFunctionArguments cssFunctionArguments = new CssFunctionArguments(ctx.start.getLine());
         CssTermVisitor cssTermVisitor = new CssTermVisitor();
         List<CssTerm> cssTerms = new ArrayList<>();
-        for(int i = 0; i < ctx.cssterm().size(); i ++ ){
-            CssTerm cssTerm = cssTermVisitor.visit(ctx.cssterm(i));
-            cssTerms.add(cssTerm);
+        List<List<CssTerm>> groups = new ArrayList<>();
+        List<CssTerm> currentGroup = new ArrayList<>();
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            Object child = ctx.getChild(i);
+            if (child instanceof CssParser.CsstermContext) {
+                CssTerm term = cssTermVisitor.visit((CssParser.CsstermContext) child);
+                currentGroup.add(term);
+                cssTerms.add(term);
+            } else if (child instanceof org.antlr.v4.runtime.tree.TerminalNode) {
+                org.antlr.v4.runtime.tree.TerminalNode tn =
+                    (org.antlr.v4.runtime.tree.TerminalNode) child;
+                if (tn.getSymbol().getType() == CssParser.CSS_COMMA) {
+                    groups.add(currentGroup);
+                    currentGroup = new ArrayList<>();
+                }
+            }
+        }
+        if (!currentGroup.isEmpty()) {
+            groups.add(currentGroup);
         }
         cssFunctionArguments.setCssTerms(cssTerms);
-
+        cssFunctionArguments.setGroupedTerms(groups);
         return cssFunctionArguments;
     }
 }

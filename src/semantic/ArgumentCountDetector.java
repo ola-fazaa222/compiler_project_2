@@ -27,6 +27,9 @@ public class ArgumentCountDetector extends ScopeAwareDetector {
         if (fd.functionName != null) {
             int count = (fd.functionParameters != null && fd.functionParameters.parameters != null)
                     ? fd.functionParameters.parameters.size() : 0;
+            if (count > 0 && isInScope(ScopeType.CLASS)) {
+                count--;
+            }
             functionParamCount.put(fd.functionName, count);
         }
     }

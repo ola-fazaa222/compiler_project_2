@@ -1,2 +1,0 @@
-
-[Semantic Analyzer] No semantic errors found. ✓

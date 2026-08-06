@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map;
 
 public class SymbolTable {
 
@@ -28,6 +30,7 @@ public class SymbolTable {
     }
     public SymbolTable getParent() { return parent; }
     public List<SymbolTable> getChildren() { return children; }
+    public Set<Map.Entry<String, SymbolEntry>> getAllEntries() { return table.entrySet(); }
 
     public SymbolTable() {
         allocate();

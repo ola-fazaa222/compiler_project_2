@@ -16,6 +16,12 @@ public class CssSelector extends ASTNode {
     // 3. Class Selectors (e.g., ["active", "large"])
     public List<String> classes;
 
+    // 4. Pseudo-classes (e.g., ["hover", "nth-child(2)"])
+    public List<String> pseudoClasses;
+
+    // 5. Pseudo-elements (e.g., ["before", "after"])
+    public List<String> pseudoElements;
+
     public CssSelector(int line_number) {
         super("CssSelector", line_number);
     }
@@ -32,6 +38,14 @@ public class CssSelector extends ASTNode {
         this.elementName = elementName;
     }
 
+    public void setPseudoClasses(List<String> pseudoClasses) {
+        this.pseudoClasses = pseudoClasses;
+    }
+
+    public void setPseudoElements(List<String> pseudoElements) {
+        this.pseudoElements = pseudoElements;
+    }
+
     public String toSelectorString() {
         StringBuilder sb = new StringBuilder();
         if (elementName != null && !elementName.isEmpty()) {
@@ -43,6 +57,16 @@ public class CssSelector extends ASTNode {
         if (classes != null && !classes.isEmpty()) {
             for (String className : classes) {
                 sb.append(".").append(className);
+            }
+        }
+        if (pseudoClasses != null && !pseudoClasses.isEmpty()) {
+            for (String pseudo : pseudoClasses) {
+                sb.append(":").append(pseudo);
+            }
+        }
+        if (pseudoElements != null && !pseudoElements.isEmpty()) {
+            for (String pseudo : pseudoElements) {
+                sb.append("::").append(pseudo);
             }
         }
         return sb.toString();

@@ -397,6 +397,8 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
         enterReturn(rs);
         if (rs instanceof ComplexReturnStatement crs && crs.pythonExpression != null) {
             walkPythonExpression(crs.pythonExpression);
+        } else if (rs instanceof ConditionReturnStatement crs && crs.condition != null) {
+            walkCondition(crs.condition);
         }
         exitReturn(rs);
     }
@@ -417,7 +419,14 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
         } else if (ae instanceof AttributeAccess aa) {
             checkVariableReference(varName, aa.line_number);
         } else if (ae instanceof MethodAccess ma) {
-            checkVariableReference(varName, ma.line_number);
+            checkVariableReference(extractRootVar(varName), ma.line_number);
+            if (ma.getMethodCalls() != null) {
+                for (AtomExpression call : ma.getMethodCalls()) {
+                    if (call instanceof FunctionCall fc) {
+                        walkMethodCallArgs(fc);
+                    }
+                }
+            }
         } else if (ae instanceof DictionaryAccess da) {
             checkVariableReference(varName, da.line_number);
         } else if (ae instanceof ListAccess la) {
@@ -432,6 +441,23 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
             }
         }
         exitAtomExpression(ae);
+    }
+
+    private static String extractRootVar(String varName) {
+        if (varName == null) return null;
+        int dotIdx = varName.indexOf('.');
+        int bracketIdx = varName.indexOf('[');
+        int splitIdx;
+        if (dotIdx >= 0 && bracketIdx >= 0) {
+            splitIdx = Math.min(dotIdx, bracketIdx);
+        } else if (dotIdx >= 0) {
+            splitIdx = dotIdx;
+        } else if (bracketIdx >= 0) {
+            splitIdx = bracketIdx;
+        } else {
+            return varName;
+        }
+        return varName.substring(0, splitIdx);
     }
 
     protected void enterAtomExpression(AtomExpression ae) {}
@@ -458,6 +484,22 @@ public abstract class ScopeAwareDetector implements ErrorDetector {
     }
 
     protected void processFunctionCall(FunctionCall fc) {}
+
+    protected void walkMethodCallArgs(FunctionCall fc) {
+        if (fc.argumentsList instanceof AtomArguments aa && aa.getArgs() != null) {
+            for (Atom arg : aa.getArgs()) {
+                if (arg instanceof Name n) {
+                    String name = n.getValue() != null ? n.getValue().toString() : null;
+                    checkVariableReference(name, arg.line_number);
+                }
+            }
+        }
+        if (fc.argumentsList instanceof ComplexArguments ca && ca.getArguments() != null) {
+            for (Argument arg : ca.getArguments()) {
+                walkArgument(arg);
+            }
+        }
+    }
 
     protected void walkArgument(Argument arg) {
         if (arg instanceof KeywordArgument ka) {

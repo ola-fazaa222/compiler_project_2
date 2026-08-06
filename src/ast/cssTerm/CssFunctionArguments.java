@@ -6,6 +6,7 @@ import java.util.List;
 
 public class CssFunctionArguments extends ASTNode {
     public List<CssTerm> cssTerms;
+    public List<List<CssTerm>> groupedTerms;
 
     public CssFunctionArguments(int line_number) {
         super("CssFunctionArguments", line_number);
@@ -13,6 +14,10 @@ public class CssFunctionArguments extends ASTNode {
 
     public void setCssTerms(List<CssTerm> cssTerms) {
         this.cssTerms = cssTerms;
+    }
+
+    public void setGroupedTerms(List<List<CssTerm>> groupedTerms) {
+        this.groupedTerms = groupedTerms;
     }
 
     @Override

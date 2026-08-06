@@ -64,6 +64,21 @@ public class JinjaSymbolCollector {
                     traverseItem(child);
                 }
             }
+            if (jis.elifConditions != null) {
+                for (int ei = 0; ei < jis.elifConditions.size(); ei++) {
+                    collectVariablesFromExpr(jis.elifConditions.get(ei));
+                    if (ei < jis.elifBodies.size() && jis.elifBodies.get(ei) != null) {
+                        for (HtmlContentItem child : jis.elifBodies.get(ei).items) {
+                            traverseItem(child);
+                        }
+                    }
+                }
+            }
+            if (jis.elseBody != null && jis.elseBody.items != null) {
+                for (HtmlContentItem child : jis.elseBody.items) {
+                    traverseItem(child);
+                }
+            }
         } else if (item instanceof JinjaForStatement jfs) {
             if (jfs.ids != null) {
                 for (String id : jfs.ids) {
@@ -160,6 +175,10 @@ public class JinjaSymbolCollector {
 
     public Map<String, Integer> getLoopVars() {
         return loopVars;
+    }
+
+    public Map<String, Integer> getBlocks() {
+        return blocks;
     }
 
     public String getExtendsTemplate() {

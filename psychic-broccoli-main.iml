@@ -8,9 +8,13 @@
       <excludeFolder url="file://$MODULE_DIR$/samples/flask_project/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/samples/product_management/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/samples/product_manager/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/app_inline_template/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/output/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/product_management/output/.venv" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="antlr-4.13.2-complete" level="project" />
   </component>
 </module>
+

@@ -85,6 +85,25 @@ public class JinjaStatementVisitor extends HtmlParserBaseVisitor<JinjaStatement>
             HtmlContent htmlContent = (HtmlContent) universalVisitor.visit(ctx.html_content(0));
             jinjaIfStatement.setHtmlContent(htmlContent);
         }
+        int elifCount = ctx.J_ELIF().size();
+        int exprIdx = 1;
+        int htmlIdx = 1;
+        for (int i = 0; i < elifCount; i++) {
+            if (ctx.j_expression(exprIdx) != null) {
+                JinjaExpression elifCond = new JinjaExpressionVisitor().visit(ctx.j_expression(exprIdx));
+                exprIdx++;
+                HtmlContent elifBody = ctx.html_content(htmlIdx) != null
+                        ? (HtmlContent) universalVisitor.visit(ctx.html_content(htmlIdx)) : null;
+                htmlIdx++;
+                jinjaIfStatement.addElif(elifCond, elifBody);
+            }
+        }
+        if (ctx.J_ELSE() != null) {
+            if (ctx.html_content(htmlIdx) != null) {
+                HtmlContent elseBody = (HtmlContent) universalVisitor.visit(ctx.html_content(htmlIdx));
+                jinjaIfStatement.setElseBody(elseBody);
+            }
+        }
         return jinjaIfStatement;
     }
 

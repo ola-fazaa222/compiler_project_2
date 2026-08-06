@@ -13,8 +13,16 @@ class ProductManager:
         self.counter = 1
 
     def add_product(self, image, name, price, details):
-        product = Product(self.counter, image, name, price, details)
+        product = Product(
+            self.counter,
+            image,
+            name,
+            price,
+            details
+        )
+
         self.products.append(product)
+        self.counter += 1
 
     def get_all_products(self):
         return self.products
@@ -24,10 +32,8 @@ class ProductManager:
             if product.id == product_id:
                 return product
 
-
-
     def delete_product(self, product_id):
-        self.products = [product for product in self.products if product.id != product_id]
-
-
-
+        self.products = [
+            product for product in self.products
+            if product.id != product_id
+        ]
